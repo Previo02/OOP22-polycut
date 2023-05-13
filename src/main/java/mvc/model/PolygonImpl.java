@@ -6,8 +6,7 @@ import java.io.Serial;
 /**
  * {@inheritDoc}.
  */
-public class PolygonImpl extends SliceableImpl implements Polygon {
-
+public class PolygonImpl extends SliceableImpl {
     @Serial
     private static final long serialVersionUID = 0L;
 
@@ -27,10 +26,12 @@ public class PolygonImpl extends SliceableImpl implements Polygon {
      * {@inheritDoc}
      */
     @Override
-    public void cut() {
+    public boolean cut() {
         if (!this.isSliced()) {
             this.setSliced();
-            /* TODO increasePoint() */
+            /*TODO increasePoint()*/
+            return true;
         }
+        return false;
     }
 }

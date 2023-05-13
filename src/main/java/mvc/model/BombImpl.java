@@ -6,7 +6,7 @@ import java.io.Serial;
 /**
  * {@inheritDoc}.
  */
-public class BombImpl extends SliceableImpl implements Bomb {
+public class BombImpl extends SliceableImpl {
     @Serial
     private static final long serialVersionUID = 0L;
 
@@ -26,10 +26,12 @@ public class BombImpl extends SliceableImpl implements Bomb {
      * {@inheritDoc}
      */
     @Override
-    public void cut() {
+    public boolean cut() {
         if (!this.isSliced()) {
             this.setSliced();
-            /* TODO loseLife() */
+            /*TODO loseLife() */
+            return true;
         }
+        return false;
     }
 }

@@ -19,7 +19,7 @@ public class PhysicsImpl implements Physics {
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      * @param listPolygon
      */
     @Override

@@ -85,4 +85,16 @@ public class SliceableImpl extends Polygon implements Sliceable {
     public void setSliced() {
         this.isSliced = true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean cut() {
+        if (this.isSliced()) {
+            return false;
+        }
+        this.setSliced();
+        return true;
+    }
 }

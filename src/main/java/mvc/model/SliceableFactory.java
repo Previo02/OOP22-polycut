@@ -7,8 +7,15 @@ package mvc.model;
 public interface SliceableFactory {
     /**
      * The principal method of the class, the one called by the game world when in need to create
-     * a new sliceable.
+     * a new Bomb.
      * @return new Sliceable.
      */
-    Sliceable create();
+     Sliceable createBomb();
+
+    /**
+     * The principal method of the class, the one called by the game world when in need to create
+     * a new Polygon.
+     * @return new Polygon.
+     */
+    Sliceable createPolygon();
 }
