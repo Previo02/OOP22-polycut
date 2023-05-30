@@ -1,7 +1,9 @@
-package mvc.model;
+package mvc.model.impl;
 
 import java.awt.geom.Point2D;
 import java.util.Random;
+
+import mvc.model.SliceableFactory;
 
 /**
  * {@inheritDoc}.

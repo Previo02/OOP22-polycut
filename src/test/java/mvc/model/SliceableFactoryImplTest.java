@@ -1,6 +1,9 @@
 package mvc.model;
 
 import org.junit.jupiter.api.Test;
+
+import mvc.model.impl.SliceableFactoryImpl;
+
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class SliceableFactoryImplTest {

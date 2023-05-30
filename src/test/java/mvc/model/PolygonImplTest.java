@@ -2,6 +2,8 @@ package mvc.model;
 
 import org.junit.jupiter.api.Test;
 
+import mvc.model.impl.PolygonImpl;
+
 import java.awt.geom.Point2D;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

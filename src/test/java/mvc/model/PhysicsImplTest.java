@@ -1,6 +1,10 @@
 package mvc.model;
 
 import org.junit.jupiter.api.Test;
+
+import mvc.model.impl.PhysicsImpl;
+import mvc.model.impl.SliceableImpl;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;

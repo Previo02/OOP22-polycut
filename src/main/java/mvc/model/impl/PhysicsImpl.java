@@ -1,7 +1,10 @@
-package mvc.model;
+package mvc.model.impl;
 
 import java.awt.geom.Point2D;
 import java.util.List;
+
+import mvc.model.Physics;
+import mvc.model.Sliceable;
 
 /**
  * {@inheritDoc}.
@@ -40,4 +43,5 @@ public class PhysicsImpl implements Physics {
             poly.setVelocity(newVel);
         }
     }
+
 }

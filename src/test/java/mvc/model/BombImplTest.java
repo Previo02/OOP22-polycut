@@ -1,6 +1,9 @@
 package mvc.model;
 
 import org.junit.jupiter.api.Test;
+
+import mvc.model.impl.BombImpl;
+
 import java.awt.geom.Point2D;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
