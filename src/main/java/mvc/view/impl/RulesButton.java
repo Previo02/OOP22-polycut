@@ -39,6 +39,7 @@ public class RulesButton extends MenuDecorator {
             }
 
         });
+        decorateButton(rulesButton);
         buttonPanel.add(rulesButton);
         super.display(container, buttonPanel);
     }

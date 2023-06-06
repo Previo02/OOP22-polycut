@@ -34,4 +34,5 @@ public class BombImpl extends SliceableImpl {
         }
         return false;
     }
+
 }

@@ -17,9 +17,12 @@ public class SliceableImpl extends Polygon implements Sliceable {
     private Point2D velocity;
     private boolean isSliced;
 
-    /** Constructor of a regular polygon.
-     * @param nsides number of sides of the sliceable polygon.
-     * @param radius distance between the center of the sliceable and the vertices.
+    /**
+     * Constructor of a regular polygon.
+     * 
+     * @param nsides   number of sides of the sliceable polygon.
+     * @param radius   distance between the center of the sliceable and the
+     *                 vertices.
      * @param position Point2D position of the sliceable, to update every timestep.
      * @param velocity Point2D vector of the new velocity of the object.
      */
@@ -49,7 +52,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     }
 
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setPosition(final Point2D position) {
@@ -57,7 +60,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     }
 
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Point2D getVelocity() {
@@ -65,7 +68,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     }
 
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setVelocity(final Point2D velocity) {
@@ -73,7 +76,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     }
 
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public boolean isSliced() {
@@ -81,7 +84,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     }
 
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setSliced() {
@@ -99,4 +102,13 @@ public class SliceableImpl extends Polygon implements Sliceable {
         this.setSliced();
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update() {
+        /* TODO manage the logic when the polygon is sliced. */
+    }
+
 }

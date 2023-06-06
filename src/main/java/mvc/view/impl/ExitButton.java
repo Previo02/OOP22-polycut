@@ -36,6 +36,7 @@ public class ExitButton extends MenuDecorator {
             }
  
         });
+        decorateButton(exitButton);
         buttonPanel.add(exitButton);
         super.display(container, buttonPanel);
     }

@@ -37,6 +37,7 @@ public class PlayButton extends MenuDecorator {
             }
 
         });
+        decorateButton(playButton);
         buttonPanel.add(playButton);
         super.display(container, buttonPanel);
     }

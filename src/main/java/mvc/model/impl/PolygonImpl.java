@@ -34,4 +34,5 @@ public class PolygonImpl extends SliceableImpl {
         }
         return false;
     }
+
 }

@@ -1,8 +1,8 @@
 package mvc.view.impl;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,10 +17,14 @@ import mvc.view.Menu;
  */
 public class SimpleMenu implements Menu {
 
-    private static final int WIDTH = 500;
-    private static final int HEIGHT = 500;
     private static final String GAME_NAME = "Polycut";
-    private static final int BORDER_SIZE = 150;
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 300;
+    private static final int TOP_GAP = 50;
+    private static final int BUTTON_H_GAP = 50;
+    private static final int LABEL_FONT_SIZE = 40;
+    private static final int LABEL_FONT_STYLE = Font.PLAIN;
+    // private static final Color BACKGROUND_COLOR = Color.ORANGE;
 
     /**
      * Creates a simple menu interface.
@@ -29,26 +33,23 @@ public class SimpleMenu implements Menu {
      */
     private void createSimpleMenu(final JFrame container, final JPanel buttonPanel) {
         final JLabel gameTitle = new JLabel(GAME_NAME);
-        final JPanel mainPanel = new JPanel();
+        final Font font = new Font(gameTitle.getFont().getName(), LABEL_FONT_STYLE, LABEL_FONT_SIZE);
 
         gameTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        gameTitle.setFont(font);
+        gameTitle.setBorder(new EmptyBorder(TOP_GAP, 0, 0, 0));
 
-        buttonPanel.setLayout(new GridLayout(3, 1, 0, 10));
-        buttonPanel.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTON_H_GAP, 0));
 
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(gameTitle, BorderLayout.NORTH);
-        mainPanel.add(buttonPanel, BorderLayout.CENTER);
-
-        //container.setIconImage(null);
+        // container.setIconImage(null);
         container.setTitle(GAME_NAME);
         container.setSize(WIDTH, HEIGHT);
-        container.add(mainPanel, BorderLayout.CENTER);
-        container.setBackground(Color.BLACK);
+        container.setResizable(false);
+        container.setLayout(new BorderLayout(0, TOP_GAP));
+        container.add(gameTitle, BorderLayout.PAGE_START);
+        container.add(buttonPanel, BorderLayout.CENTER);
         container.setLocationRelativeTo(null);
         container.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        container.setResizable(false);
-        container.pack();
     }
 
     /**

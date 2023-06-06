@@ -49,4 +49,9 @@ public interface Sliceable {
      * @return boolean, if the sliceable was cut or not.
      */
     boolean cut();
+
+    /**
+     * Manages the logic when the object is sliced.
+     */
+    void update();
 }
