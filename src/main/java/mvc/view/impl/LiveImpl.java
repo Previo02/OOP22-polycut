@@ -5,10 +5,10 @@ import mvc.view.Live;
 import javax.swing.*;
 
 public class LiveImpl extends JLabel implements Live {//
-    private String heartPath = "src/main/java/mvc/view/GraphicElements/2hearts.png";
-    private ImageIcon livesImage = new ImageIcon(heartPath);
+    private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
 
     public LiveImpl() {
+        ImageIcon livesImage = new ImageIcon(heartPath);
         setIcon(livesImage);
     }
 

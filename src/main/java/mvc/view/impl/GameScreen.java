@@ -1,13 +1,10 @@
 package mvc.view.impl;
 
-import mvc.view.impl.LiveImpl;
-import mvc.view.impl.ScoreImpl;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
 
 public class GameScreen {//
 
@@ -20,15 +17,8 @@ public class GameScreen {//
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setResizable(false);
 
-//        // BG
+        // BG
         frame.setContentPane(new JLabel(new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg")));
-//        try {
-//            Image backgroundImage = ImageIO.read(new File("src/main/java/mvc/view/GraphicElements/Background.jpg"));
-//            JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
-//            frame.setContentPane(backgroundLabel);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         // Frame Layout
         frame.setLayout(new BorderLayout());
@@ -47,6 +37,10 @@ public class GameScreen {//
         var scoreLabel = new ScoreImpl();
         upperPanel.add(scoreLabel, BorderLayout.EAST);
         scoreLabel.printScore();
+
+        //adding GameArea
+        var middleArea = new GameArea();
+        frame.add(middleArea, BorderLayout.CENTER);
 
         frame.setVisible(true);
     }

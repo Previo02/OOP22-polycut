@@ -2,11 +2,13 @@ package mvc.view;
 
 import java.awt.geom.Point2D;
 
-public interface Sliceable {//
+public interface Sliceable {
 
     // Utilizzare GetBorder per parte controller
 
-    boolean isVisible(boolean isSliced);
+    void changeVisibility(boolean isSliced);
+
+    boolean isVisible();
 
     //the center of the image
     Point2D getPosition();
