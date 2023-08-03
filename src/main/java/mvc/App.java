@@ -1,13 +1,9 @@
 package mvc;
 
 import mvc.view.Menu;
-import mvc.view.impl.ExitButton;
-import mvc.view.impl.PlayButton;
-import mvc.view.impl.RulesButton;
-import mvc.view.impl.SimpleMenu;
+import mvc.view.impl.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Main application of the program.
@@ -22,6 +18,10 @@ public final class App {
     * @param args main arguments.
     */
     public static void main(final String[] args) {
+
+//        var game = new GameScreen();
+//        game.createAndShowGui();
+
         final Menu menu = new PlayButton(new RulesButton(new ExitButton(new SimpleMenu())));
 
         final JFrame container = new JFrame();
