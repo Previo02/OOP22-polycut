@@ -1,4 +1,4 @@
 package mvc.view.impl;
 
-public class Bomb {
+public class Bomb { //
 }

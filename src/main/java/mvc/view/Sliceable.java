@@ -2,7 +2,7 @@ package mvc.view;
 
 import java.awt.geom.Point2D;
 
-public interface Sliceable {
+public interface Sliceable {//
 
     // Utilizzare GetBorder per parte controller
 

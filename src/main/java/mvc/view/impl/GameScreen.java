@@ -9,7 +9,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class GameScreen {
+public class GameScreen {//
 
     // TODO summary
     public void createAndShowGui() {

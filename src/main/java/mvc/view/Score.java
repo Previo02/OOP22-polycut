@@ -1,6 +1,6 @@
 package mvc.view;
 
-public interface Score {
+public interface Score {//
 
     // pri
     void printScore();

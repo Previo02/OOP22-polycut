@@ -5,7 +5,7 @@ import mvc.view.Sliceable;
 import javax.swing.*;
 import java.awt.geom.Point2D;
 
-public class SliceableImpl extends JLabel implements Sliceable {
+public class SliceableImpl extends JLabel implements Sliceable {//
 
      public ImageIcon sliceableImage;
     /**

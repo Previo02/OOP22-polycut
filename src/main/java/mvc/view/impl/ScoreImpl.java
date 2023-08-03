@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class ScoreImpl extends JLabel implements Score {
+public class ScoreImpl extends JLabel implements Score {//
 
     int currentScore = 0;
     Font scoreFont;

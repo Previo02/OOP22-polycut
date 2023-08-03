@@ -19,15 +19,15 @@ public final class App {
     */
     public static void main(final String[] args) {
 
-//        var game = new GameScreen();
-//        game.createAndShowGui();
+        var game = new GameScreen();
+        game.createAndShowGui();
 
-        final Menu menu = new PlayButton(new RulesButton(new ExitButton(new SimpleMenu())));
+//        final Menu menu = new PlayButton(new RulesButton(new ExitButton(new SimpleMenu())));
+//
+//        final JFrame container = new JFrame();
+//        final JPanel buttonPanel = new JPanel();
 
-        final JFrame container = new JFrame();
-        final JPanel buttonPanel = new JPanel();
-
-        menu.display(container, buttonPanel);
+//        menu.display(container, buttonPanel);
     }
 
 }
