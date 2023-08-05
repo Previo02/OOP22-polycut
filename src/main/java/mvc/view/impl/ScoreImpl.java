@@ -2,24 +2,35 @@ package mvc.view.impl;
 
 import mvc.view.Score;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 
+import javax.swing.JLabel;
+
+/**
+ * 
+ */
 public class ScoreImpl extends JLabel implements Score {
 
-    int currentScore = 0;
-    Font scoreFont;
+    @Serial
+    private static final long serialVersionUID = 0L;
+    private static final int FONT_SIZE = 35;
 
-    public ScoreImpl(){
+    private int currentScore;
+
+    public ScoreImpl() {
+        final Font scoreFont;
+
         this.setText("Score: " + currentScore); // Imposta direttamente il testo in questa istanza di JLabel
         try {
-            scoreFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/mvc/view/GraphicElements/Orbitron/Orbitron-VariableFont_wght.ttf")).deriveFont(Font.PLAIN, 35);
+            scoreFont = Font.createFont(Font.TRUETYPE_FONT,
+                            new File("src/main/java/mvc/view/GraphicElements/Orbitron/Orbitron-VariableFont_wght.ttf"))
+                                    .deriveFont(Font.PLAIN, FONT_SIZE);
             this.setFont(scoreFont); // Imposta il font in questa istanza di JLabel
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
     }

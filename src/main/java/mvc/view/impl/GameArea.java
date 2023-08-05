@@ -1,28 +1,37 @@
 package mvc.view.impl;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.Point2D;
 
+import java.io.Serial;
+
+import javax.swing.JPanel;
+
+/**
+ * 
+ */
 public class GameArea extends JPanel {
-    final private SliceableImpl square;
 
-    public GameArea(){
-        Point2D point = new Point2D.Double(0, 0);
+    @Serial
+    private static final long serialVersionUID = 0L;
+    // private final SliceableViewImpl square;
 
-        square = new SliceableImpl(point, PolygonEnum.HEXAGON);
-        square.setSliaceablePosition(point);
-    }
+    /**
+     * 
+     */
+    // public GameArea() {
+    //     final Point2D point = new Point2D.Double(0, 0);
+    //     square = new SliceableViewImpl(point, PolygonEnum.SQUARE);
+    //     square.setSliaceablePosition(point);
+    // }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    // @Override
+    // protected void paintComponent(Graphics g) {
+    //     super.paintComponent(g);
 
-        //TEST
-        // Draw background
-//        ImageIcon backgroundImage = new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg");
-//        g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+    //     //TEST
+    //     // Draw background
+    //    ImageIcon backgroundImage = new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg");
+    //    g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
 
-        square.drawPolygon(g);
-    }
+    //     square.drawPolygon(g);
+    // }
 }

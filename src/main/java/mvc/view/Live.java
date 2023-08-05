@@ -1,9 +1,19 @@
 package mvc.view;
 
-public interface Live {//
+/**
+ * 
+ */
+public interface Live {
 
-    /// draws the correct amount of lives
-    public void getCorrectPath(int lifeCounter);
+    /**
+     * set the current amount of lives to be displayed on screen.
+     * @param lifeCounter
+    */
+    void setLivesImage(int lifeCounter);
 
-    public void drawLives();
+    /**
+     * draw the current amount of lives on screen.
+     */
+    void drawLives();
+
 }

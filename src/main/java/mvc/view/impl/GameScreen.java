@@ -6,12 +6,17 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 
-public class GameScreen {//
+/**
+ * 
+ */
+public class GameScreen {
 
-    // TODO summary
+    /**
+     * TODO summary
+     */
     public void createAndShowGui() {
 
-        JFrame frame = new JFrame("Polygon Cutter");
+        final JFrame frame = new JFrame("Polygon Cutter");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -24,24 +29,25 @@ public class GameScreen {//
         frame.setLayout(new BorderLayout());
 
         // setting-up Lives and Score
-        var upperPanel = new JPanel();
+        final var upperPanel = new JPanel();
         upperPanel.setLayout(new BorderLayout());
         upperPanel.setOpaque(false);
         frame.add(upperPanel, BorderLayout.NORTH);
 
         // Lives on the left
-        var livesLabel = new LiveImpl();
+        final var livesLabel = new LiveImpl();
         upperPanel.add(livesLabel, BorderLayout.WEST);
 
         // Score on the right
-        var scoreLabel = new ScoreImpl();
+        final var scoreLabel = new ScoreImpl();
         upperPanel.add(scoreLabel, BorderLayout.EAST);
         scoreLabel.printScore();
 
         //adding GameArea
-        var middleArea = new GameArea();
+        final var middleArea = new GameArea();
         frame.add(middleArea, BorderLayout.CENTER);
 
         frame.setVisible(true);
     }
+
 }

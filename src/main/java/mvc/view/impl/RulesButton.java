@@ -15,10 +15,10 @@ import mvc.view.Menu;
 */
 public class RulesButton extends MenuDecorator {
 
-    private static final String RULES = "REGOLE\n" +
-            "Taglia i poligoni premendo il mouse per ottenere punti\n" +
-            "Hai 3 vite a disposizione, non perderle tutte...\n" +
-            "Buona fortuna!";
+    private static final String RULES = "REGOLE\n"
+            + "Taglia i poligoni premendo il mouse per ottenere punti\n"
+            + "Hai 3 vite a disposizione, non perderle tutte...\n"
+            + "Buona fortuna!";
 
     /**
      * 
