@@ -27,7 +27,9 @@ public class PhysicsImpl implements Physics {
      */
     @Override
     public void doMaths(final List<Sliceable> listPolygon) {
-        for (final Sliceable poly : listPolygon) {
+        final var iterator = listPolygon.iterator();
+        while (iterator.hasNext()) {
+            final var poly = iterator.next();
             final var oldPos = poly.getPosition();
             final var oldVel = poly.getVelocity();
 

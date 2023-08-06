@@ -32,7 +32,8 @@ public class PlayButton extends MenuDecorator {
 
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                /* TODO starts the game. */
+                final var game = new GameScreen();
+                game.createAndShowGui();
                 container.dispose();
             }
 

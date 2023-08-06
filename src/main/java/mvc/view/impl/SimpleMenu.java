@@ -49,7 +49,8 @@ public class SimpleMenu implements Menu {
         container.add(gameTitle, BorderLayout.PAGE_START);
         container.add(buttonPanel, BorderLayout.CENTER);
         container.setLocationRelativeTo(null);
-        container.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // container.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        container.dispose();
     }
 
     /**

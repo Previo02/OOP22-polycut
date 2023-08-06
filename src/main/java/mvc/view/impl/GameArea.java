@@ -6,10 +6,15 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.Serial;
+
 public class GameArea extends JPanel {
     final private List<Polygon> polygons;
     final private List<Bomb> bombs;
 
+    @Serial
+    private static final long serialVersionUID = 0L;
+    // private final SliceableViewImpl square;
     /**
      * Constructor initiates a list of Bombs and Polygon present in the GameArea
      */

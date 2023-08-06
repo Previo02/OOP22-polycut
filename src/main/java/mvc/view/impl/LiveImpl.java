@@ -1,16 +1,20 @@
 package mvc.view.impl;
 
+import java.io.Serial;
 import javax.swing.*;
 import java.nio.file.FileSystemNotFoundException;
 
-public class Live extends JLabel implements mvc.view.Live {//
+public class LiveImpl extends JLabel implements mvc.view.Live {
+    @Serial
+    private static final long serialVersionUID = 0L;
     private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
     private int livesCounter;
+
 
     /**
      * Constructor sets the image of 3 lives
      */
-    public Live() {
+    public LiveImpl() {
         ImageIcon livesImage = new ImageIcon(heartPath);
         setIcon(livesImage);
     }
@@ -20,27 +24,22 @@ public class Live extends JLabel implements mvc.view.Live {//
      * @param lifeCounter
      */
     @Override
-    public void getCorrectPath(int lifeCounter) {
+    public void getCorrectPath(final int lifeCounter) {
         switch (lifeCounter) {
-            case 0: {
+            case 0:
                 heartPath = "";
                 break;
-            }
-            case 1: {
+            case 1:
                 heartPath = "src/main/java/mvc/view/GraphicElements/heart.png";
                 break;
-            }
-            case 2: {
+            case 2:
                 heartPath = "src/main/java/mvc/view/GraphicElements/2hearts.png";
                 break;
-            }
-            case 3: {
+            case 3:
                 heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
                 break;
-            }
-            default: {
+            default:
                 throw new FileSystemNotFoundException();
-            }
         }
         drawLives();
     }
