@@ -1,17 +1,24 @@
 package mvc.view.impl;
 
-import mvc.view.Live;
-
 import javax.swing.*;
+import java.nio.file.FileSystemNotFoundException;
 
-public class LiveImpl extends JLabel implements Live {//
+public class Live extends JLabel implements mvc.view.Live {//
     private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
+    private int livesCounter;
 
-    public LiveImpl() {
+    /**
+     * Constructor sets the image of 3 lives
+     */
+    public Live() {
         ImageIcon livesImage = new ImageIcon(heartPath);
         setIcon(livesImage);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param lifeCounter
+     */
     @Override
     public void getCorrectPath(int lifeCounter) {
         switch (lifeCounter) {
@@ -32,16 +39,35 @@ public class LiveImpl extends JLabel implements Live {//
                 break;
             }
             default: {
-                // TODO gestire eccezione
+                throw new FileSystemNotFoundException();
             }
         }
         drawLives();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawLives() {
-        setIcon(new ImageIcon(heartPath)); // Imposta la nuova immagine dell'ImageIcon
-        revalidate(); // Ricarica il layout del pannello
+        setIcon(new ImageIcon(heartPath));
+        revalidate();
         repaint();
+    }
+
+    /**
+     * Getter for livesCounter
+     * @return The number of remaining lives
+     */
+    public int getLivesCounter() {
+        return livesCounter;
+    }
+
+    /**
+     * Setter for livesCounter
+     * @param livesCounter Number of lives to set
+     */
+    public void setLivesCounter(int livesCounter) {
+        this.livesCounter = livesCounter;
     }
 }

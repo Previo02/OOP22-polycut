@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SliceableImplTest {
+class PolygonTest {
     private final SliceableImpl test = new SliceableImpl(4, 2, new Point2D.Double(0, 0), new Point2D.Double(10, 10));
     static final double TEST_VALUE = 15;
 

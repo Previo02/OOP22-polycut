@@ -1,31 +1,33 @@
 package mvc.view.impl;
 
-import mvc.view.Score;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class ScoreImpl extends JLabel implements Score {
+public class Score extends JLabel implements mvc.view.Score {
 
     int currentScore = 0;
     Font scoreFont;
 
-    public ScoreImpl(){
+    /**
+     * Constructor sets up the font and the default score of 0
+     */
+    public Score(){
         this.setText("Score: " + currentScore); // Imposta direttamente il testo in questa istanza di JLabel
         try {
             scoreFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/mvc/view/GraphicElements/Orbitron/Orbitron-VariableFont_wght.ttf")).deriveFont(Font.PLAIN, 35);
-            this.setFont(scoreFont); // Imposta il font in questa istanza di JLabel
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+            this.setFont(scoreFont);
+        } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void printScore() {
-        setText("Score: " + currentScore); // Imposta il testo nella stessa istanza di JLabel
+        setText("Score: " + currentScore);
     }
 }

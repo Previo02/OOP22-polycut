@@ -2,6 +2,8 @@ package mvc.view;
 
 public interface Score {//
 
-    // pri
+    /**
+     * Print the current player's score on the screen
+     */
     void printScore();
 }
