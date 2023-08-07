@@ -2,18 +2,15 @@ package mvc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import mvc.model.Sliceable;
 import mvc.model.SliceableFactory;
 import mvc.model.impl.SliceableFactoryImpl;
 
 /**
- * Implementation class of the GameWordl controller.
+ * Implementation class of the GameWorld controller.
  * Check GameWorldController documentation.
  */
 public class GameWorldControllerImpl implements GameWorldController {
-
     private final SliceableFactory factory;
     private List<Sliceable> sliceables;
 
@@ -26,32 +23,27 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritdoc}.
+     * {@inheritDoc}.
      */
     @Override
     public List<Sliceable> getVisibleSliceables() {
-        return this.sliceables;
+        return new ArrayList<>(this.sliceables);
     }
 
     /**
-     * {@inheritdoc}.
+     * {@inheritDoc}.
      */
     @Override
     public void setVisibleSliceables(final List<Sliceable> updatedList) {
-        this.sliceables = updatedList;
+        this.sliceables = new ArrayList<>(updatedList);
     }
 
     /**
-     * {@inheritdoc}.
+     * {@inheritDoc}.
      */
     @Override
     public void createSliceables() {
-        final Random rand = new Random();
-
-        for (int i = 0; i < rand.nextInt(10); i++) {
-            this.sliceables.add(this.factory.createPolygon());
-        }
-
+        factory.createPolygon();
     }
 
 }

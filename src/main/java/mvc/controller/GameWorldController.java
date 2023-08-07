@@ -8,7 +8,6 @@ import mvc.model.Sliceable;
  * Main controller of the game. Manages all the model and view of the game.
  */
 public interface GameWorldController {
-  
     /**
      * @return a list of the current sliceables in game.
      */
