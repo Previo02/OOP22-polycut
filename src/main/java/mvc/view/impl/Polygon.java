@@ -19,18 +19,21 @@ public class Polygon extends JLabel implements Sliceable {
     private static final String SQUARE_PATH = "src/main/java/mvc/view/GraphicElements/square.png";
     private static final String PENTAGON_PATH = "src/main/java/mvc/view/GraphicElements/pentagon.png";
     private static final String HEXAGON_PATH = "src/main/java/mvc/view/GraphicElements/hexagon.png";
-    private final Point2D position;
+    private Point2D position;
     private boolean isVisible;
     private final PolygonEnum polygonType;
+    private final int polygonId;
 
     /**
      * Constructor create a Polygon with the provided params.
      * @param position The position of the top-left corner of the polygon's image
      * @param polygonType The type of polygon
+     * @param polygonId the sliceable identifier.
      */
-    public Polygon(final Point2D position, final PolygonEnum polygonType) {
+    public Polygon(final Point2D position, final PolygonEnum polygonType, final int polygonId) {
         this.polygonType = polygonType;
         this.position = new Point2D.Double(position.getX(), position.getY());
+        this.polygonId = polygonId;
     }
 
     /**
@@ -115,4 +118,21 @@ public class Polygon extends JLabel implements Sliceable {
         final Image image = getImage(this.polygonType);
         graphics.drawImage(image, xPosition, yPosition, this);
     }
+
+    /**
+     * {@inheritdoc}.
+     */
+    @Override
+    public void setPosition(final Point2D newPos) {
+        this.position = newPos;
+    }
+
+    /**
+     * {@inheritdoc}.
+     */
+    @Override
+    public int getPolygonId() {
+        return this.polygonId;
+    }
+
 }

@@ -18,6 +18,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     private final Integer sides;
     private Point2D velocity;
     private boolean isSliced;
+    private final int sliceableId;
 
     /**
      * Constructor of a regular polygon.
@@ -27,13 +28,16 @@ public class SliceableImpl extends Polygon implements Sliceable {
      *                 vertices.
      * @param position Point2D position of the sliceable, to update every timestep.
      * @param velocity Point2D vector of the new velocity of the object.
+     * @param sliceableId the sliceable identifier.
      */
-    public SliceableImpl(final Integer nsides, final Integer radius, final Point2D position, final Point2D velocity) {
+    public SliceableImpl(final Integer nsides, final Integer radius, final Point2D position,
+                            final Point2D velocity, final int sliceableId) {
         this.velocity = new Point2D.Double(velocity.getX(), velocity.getY());
         this.position = new Point2D.Double(position.getX(), position.getY());
         this.sides = nsides;
         this.xpoints = new int[nsides];
         this.ypoints = new int[nsides];
+        this.sliceableId = sliceableId;
 
         final double theta = 2.0 * Math.PI / nsides;
 
@@ -59,6 +63,14 @@ public class SliceableImpl extends Polygon implements Sliceable {
     @Override
     public void setPosition(final Point2D position) {
         this.position = new Point2D.Double(position.getX(), position.getY());
+    }
+
+    /**
+     * {@inheritdoc}.
+     */
+    @Override
+    public int getSliceableId() {
+        return sliceableId;
     }
 
     /**

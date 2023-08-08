@@ -24,7 +24,6 @@ public class SimpleMenu implements Menu {
     private static final int BUTTON_H_GAP = 50;
     private static final int LABEL_FONT_SIZE = 40;
     private static final int LABEL_FONT_STYLE = Font.PLAIN;
-    // private static final Color BACKGROUND_COLOR = Color.ORANGE;
 
     /**
      * Creates a simple menu interface.
@@ -49,7 +48,7 @@ public class SimpleMenu implements Menu {
         container.add(gameTitle, BorderLayout.PAGE_START);
         container.add(buttonPanel, BorderLayout.CENTER);
         container.setLocationRelativeTo(null);
-        // container.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        container.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         container.dispose();
     }
 

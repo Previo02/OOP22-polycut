@@ -28,6 +28,12 @@ public interface Sliceable {
     Point2D getPosition();
 
     /**
+     * 
+     * @param newPos
+     */
+    void setPosition(Point2D newPos);
+
+    /**
      * Set position of the sliceable.
      * @param position top-left corner.
      */
@@ -37,4 +43,9 @@ public interface Sliceable {
      * Set the status sliced.
      */
     void setSliceStatus();
+
+    /**
+     * @return the identifier of the current polygon.
+     */
+    int getPolygonId();
 }

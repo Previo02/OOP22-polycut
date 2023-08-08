@@ -17,9 +17,11 @@ public class PolygonImpl extends SliceableImpl {
      * @param radius distance between the center of the sliceable and the vertices.
      * @param position Point2D position of the sliceable, to update every timestep.
      * @param velocity Point2D vector of the new velocity of the object.
+     * @param sliceableId the sliceable identifier.
      */
-    public PolygonImpl(final Integer nsides, final Integer radius, final Point2D position, final Point2D velocity) {
-        super(nsides, radius, position, velocity);
+    public PolygonImpl(final Integer nsides, final Integer radius, final Point2D position,
+                        final Point2D velocity, final int sliceableId) {
+        super(nsides, radius, position, velocity,  sliceableId);
     }
 
     /**

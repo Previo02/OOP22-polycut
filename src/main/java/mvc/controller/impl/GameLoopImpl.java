@@ -4,22 +4,21 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import mvc.controller.GameLoop;
 import mvc.model.Sliceable;
 import mvc.view.impl.GameScreen;
-//import mvc.view.impl.LiveImpl;
-//import mvc.view.impl.ScoreViewImpl;
 import mvc.view.impl.GameArea;
 
-import javax.swing.SwingUtilities;
-import java.util.List;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
 
 /**
- * {@inheritDoc}.
+ * Implementation class of GameLoop inteface.
+ * Check the relative interface for the documentation.
  */
 public class GameLoopImpl implements GameLoop {
 
     private final GameWorldControllerImpl world;
     private final PhysicControllerImpl physics;
-    //private final LiveImpl lives = new LiveImpl();
-    //private final ScoreViewImpl score = new ScoreViewImpl();
 
     /**
      * Constructor.
@@ -30,27 +29,57 @@ public class GameLoopImpl implements GameLoop {
         this.world = world;
         this.physics = new PhysicControllerImpl(1, world);
     }
+
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      */
     @Override
     public void loop(final GameScreen screen) {
         final GameArea area = screen.createAndShowGui();
-        int counter = 0;
-        for (int i = 0; i < 5; i++) {
-            world.createSliceables();
+        final int nPoly = 5;
+
+            for (int i = 0; i < nPoly; i++) {
+                final Sliceable slice = world.createPolygon(i);
+                area.addPolygon(slice.getPosition(), slice.getSides(), i);
+            }
+            final Sliceable bomb = world.createBomb(0);
+            area.addBomb(bomb.getPosition(), 0);
+            startRedrawTimer(area, 100);
         }
-        while (counter < 30) {
-            //world.createSliceables();
 
-            final List<Sliceable> listSliceable = world.getVisibleSliceables();
-            listSliceable.forEach(s -> area.addPolygon(s.getPosition(), s.getSides()));
+    /**
+     * Creates a timer for the rendering of the sliceables.
+     * @param area the game area where the polygons are displayed.
+     * @param delay
+     */
+    private void startRedrawTimer(final GameArea area, final int delay) {
+        final Timer redrawTimer = new Timer(delay, new ActionListener() {
 
-            physics.updateSliceablesPosition();
-            SwingUtilities.invokeLater(area::repaint);
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                physics.updateSliceablesPosition();
+                /* Updates the new position of the polygons model congruently to their view. */
+                for (final var polyModel : world.getPolygons()) {
+                    for (final var polyView : area.getPolygons()) {
+                        if (polyModel.getSliceableId() == polyView.getPolygonId()) {
+                            polyView.setPosition(polyModel.getPosition());
+                        }
+                    }
+                }
+                /* Now for the bombs. */
+                for (final var polyModel : world.getBombs()) {
+                    for (final var polyView : area.getBombs()) {
+                        if (polyModel.getSliceableId() == polyView.getPolygonId()) {
+                            polyView.setPosition(polyModel.getPosition());
+                        }
+                    }
+                }
+                area.repaint();
+            }
 
-            //area.getPolygons().forEach(p -> System.out.println(p.getPosition().getX() + " " + p.getPosition().getY()));
-            counter = counter + 1;
-        }
+        });
+        redrawTimer.setRepeats(true);
+        redrawTimer.start();
     }
+
 }

@@ -11,7 +11,7 @@ import mvc.model.SliceableFactory;
 public class SliceableFactoryImpl implements SliceableFactory {
     private static final Integer RADIUS = 10;
     private static final Random RANDOM = new Random();
-    private static final Integer SPAWN_X = 300;
+    private static final Integer SPAWN_X = 1000;
     private Point2D startPositionNext;
     private Point2D startVelocityNext;
 
@@ -21,7 +21,7 @@ public class SliceableFactoryImpl implements SliceableFactory {
     private void doCalc() {
         this.startVelocityNext = new Point2D.Double(RANDOM.nextDouble(25, 50),
                 RANDOM.nextDouble(50, 100));
-        this.startPositionNext = new Point2D.Double(RANDOM.nextInt(SPAWN_X), 650);
+        this.startPositionNext = new Point2D.Double(RANDOM.nextInt(SPAWN_X), 850);
     }
 
     /**
@@ -29,9 +29,9 @@ public class SliceableFactoryImpl implements SliceableFactory {
      * @return new Bomb
      */
     @Override
-    public BombImpl createBomb() {
+    public BombImpl createBomb(final int bombId) {
         this.doCalc();
-        return new BombImpl(RANDOM.nextInt(8 - 3 + 1) + 3, RADIUS, startPositionNext, startVelocityNext);
+        return new BombImpl(RANDOM.nextInt(8 - 3 + 1) + 3, RADIUS, startPositionNext, startVelocityNext, bombId);
     }
 
     /**
@@ -39,8 +39,8 @@ public class SliceableFactoryImpl implements SliceableFactory {
      * @return new Polygon
      */
     @Override
-    public PolygonImpl createPolygon() {
+    public PolygonImpl createPolygon(final int polygonId) {
         this.doCalc();
-        return new PolygonImpl(RANDOM.nextInt(8 - 3 + 1) + 3, RADIUS, startPositionNext, startVelocityNext);
+        return new PolygonImpl(RANDOM.nextInt(8 - 3 + 1) + 3, RADIUS, startPositionNext, startVelocityNext, polygonId);
     }
 }

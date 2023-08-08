@@ -33,9 +33,12 @@ public class PhysicControllerImpl implements PhysicController {
      */
     @Override
     public void updateSliceablesPosition() {
-        final List<Sliceable> currentSliceables = this.gameController.getVisibleSliceables();
-        this.physicsModel.doMaths(currentSliceables);
-        this.gameController.setVisibleSliceables(currentSliceables);
+        final List<Sliceable> currentPolygons = this.gameController.getPolygons();
+        final List<Sliceable> currentBombs = this.gameController.getBombs();
+        this.physicsModel.doMaths(currentPolygons);
+        this.physicsModel.doMaths(currentBombs);
+        this.gameController.setPolygons(currentPolygons);
+        this.gameController.setBombs(currentBombs);
     }
 
 }

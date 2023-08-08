@@ -28,9 +28,10 @@ public class GameArea extends JPanel {
      * Add a new Polygon to the list of polygons in GameArea.
      * @param drawPoint Where the polygon will be drawn.
      * @param polygonType The Type of polygon to draw.
+     * @param polygonId the polygon identifier.
      */
-    public void addPolygon(final Point2D drawPoint, final PolygonEnum polygonType) {
-        final Polygon polygon = new Polygon(drawPoint, polygonType);
+    public void addPolygon(final Point2D drawPoint, final PolygonEnum polygonType, final int polygonId) {
+        final Polygon polygon = new Polygon(drawPoint, polygonType, polygonId);
         polygon.setSliceablePosition(drawPoint);
         polygons.add(polygon);
     }
@@ -38,9 +39,10 @@ public class GameArea extends JPanel {
     /**
      * Add a new Bomb to the list of bombs in GameArea.
      * @param drawPoint Where the bomb will be drawn.
+     * @param bombId the bomb identifier.
      */
-    public void addBomb(final Point2D drawPoint) {
-        final Bomb bomb = new Bomb(drawPoint);
+    public void addBomb(final Point2D drawPoint, final int bombId) {
+        final Bomb bomb = new Bomb(drawPoint, bombId);
         bomb.setSliceablePosition(drawPoint);
         bombs.add(bomb);
     }
@@ -75,4 +77,5 @@ public class GameArea extends JPanel {
     public List<Bomb> getBombs() {
         return new ArrayList<>(this.bombs);
     }
+
 }

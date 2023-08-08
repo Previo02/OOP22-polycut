@@ -12,7 +12,7 @@ import java.io.Serial;
 /**
  *  Implementation of Bomb element.
  */
-public class Bomb  extends JLabel implements Sliceable {
+public class Bomb extends JLabel implements Sliceable {
     @Serial
     private static final long serialVersionUID = 0L;
     private static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
@@ -20,16 +20,19 @@ public class Bomb  extends JLabel implements Sliceable {
     /**
      * Refers to the top-left corner of the Image.
      */
-    private final Point2D position;
+    private Point2D position;
     private boolean isVisible;
     private boolean isExploded;
+    private final int bombId;
 
     /**
-     * Constructor set position.
+     * Constructor set position and identifier.
      * @param position top-left corner
+     * @param bombId
      */
-    public Bomb(final Point2D position) {
+    public Bomb(final Point2D position, final int bombId) {
         this.position = new Point2D.Double(position.getX(), position.getY());
+        this.bombId = bombId;
     }
 
     /**
@@ -106,4 +109,21 @@ public class Bomb  extends JLabel implements Sliceable {
         final Image image = new ImageIcon(BOMB_PATH).getImage();
         graphics.drawImage(image, xPosition, yPosition, this);
     }
+
+    /**
+     * {@inheritdoc}.
+     */
+    @Override
+    public void setPosition(final Point2D newPos) {
+        this.position = newPos;
+    }
+
+    /**
+     * {@inheritdoc}.
+     */
+    @Override
+    public int getPolygonId() {
+        return this.bombId;
+    }
+
 }

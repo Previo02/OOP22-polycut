@@ -34,7 +34,7 @@ public class PlayButton extends MenuDecorator {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final var gameWorld = new GameWorldControllerImpl();
-                gameWorld.createAndShowGui();
+                gameWorld.startLoop();
                 container.dispose();
             }
 
