@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 import java.io.Serial;
 
 import mvc.model.Sliceable;
+import mvc.view.impl.PolygonEnum;
 
 /**
  * {@inheritDoc}.
@@ -14,6 +15,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     @Serial
     private static final long serialVersionUID = 0L;
     private Point2D position;
+    private final Integer sides;
     private Point2D velocity;
     private boolean isSliced;
 
@@ -29,7 +31,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     public SliceableImpl(final Integer nsides, final Integer radius, final Point2D position, final Point2D velocity) {
         this.velocity = new Point2D.Double(velocity.getX(), velocity.getY());
         this.position = new Point2D.Double(position.getX(), position.getY());
-        this.npoints = nsides;
+        this.sides = nsides;
         this.xpoints = new int[nsides];
         this.ypoints = new int[nsides];
 
@@ -101,6 +103,22 @@ public class SliceableImpl extends Polygon implements Sliceable {
         }
         this.setSliced();
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PolygonEnum getSides() {
+        if (this.sides == 3) {
+            return PolygonEnum.TRIANGLE;
+        } else if (this.sides == 4) {
+            return PolygonEnum.SQUARE;
+        } else if (this.sides == 5) {
+            return PolygonEnum.PENTAGON;
+        } else {
+            return PolygonEnum.HEXAGON;
+        }
     }
 
     /**

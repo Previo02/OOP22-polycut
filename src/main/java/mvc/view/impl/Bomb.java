@@ -2,89 +2,93 @@ package mvc.view.impl;
 
 import mvc.view.Sliceable;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.io.Serial;
 
 /**
- *  Implementation of Bomb element
+ *  Implementation of Bomb element.
  */
 public class Bomb  extends JLabel implements Sliceable {
-
+    @Serial
+    private static final long serialVersionUID = 0L;
     private static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
 
     /**
-     * Refers to the top-left corner of the Image
+     * Refers to the top-left corner of the Image.
      */
-    Point2D position;
-    boolean isVisible;
-    boolean isExploded;
+    private final Point2D position;
+    private boolean isVisible;
+    private boolean isExploded;
 
     /**
-     * Constructor set position
+     * Constructor set position.
      * @param position top-left corner
      */
-    public Bomb(Point2D position){
-        this.position = position;
+    public Bomb(final Point2D position) {
+        this.position = new Point2D.Double(position.getX(), position.getY());
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      * @param isSliced
      */
     @Override
-    public void changeVisibility(boolean isSliced) {
+    public void changeVisibility(final boolean isSliced) {
         isVisible = !isSliced;
     }
 
-    /** FORSE INUTILE
-     * Change the status of the bomb between exploded/not exploded
-     * @param isSliced True if it's been sliced
+    /**
+     * Change the status of the bomb between exploded/not exploded.
+     * @param isSliced True if it's been sliced.
      */
-    public void changeStatus(boolean isSliced) {
+    public void changeStatus(final boolean isSliced) {
         isExploded = !isExploded;
     }
 
     /**
-     * {@inheritDoc}
-     * @return True if bomb is visible
+     * {@inheritDoc}.
+     * @return True if bomb is visible.
      */
     @Override
-    public boolean isVisible(){
+    public boolean isVisible() {
         return isVisible;
     }
 
     /**
-     * Check if bomb is exploded
-     * @return True if bomb is exploded
+     * Check if bomb is exploded.
+     * @return True if bomb is exploded.
      */
-    public boolean isExploded(){
+    public boolean isExploded() {
         return isExploded;
     }
 
     /**
-     * {@inheritDoc}
-     * @return
+     * {@inheritDoc}.
+     * @return position.
      */
     @Override
     public Point2D getPosition() {
-        return position;
+        return new Point2D.Double(this.position.getX(), this.position.getY());
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      * @param position top-left corner
      */
     @Override
-    public void setSliaceablePosition(Point2D position) {
-        double xPosition = position.getX();
-        double yPosition = position.getY();
+    public void setSliceablePosition(final Point2D position) {
+        final double xPosition = position.getX();
+        final double yPosition = position.getY();
 
-        this.setLocation((int)xPosition, (int)yPosition);
+        this.setLocation((int) xPosition, (int) yPosition);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void setSliceStatus() {
@@ -92,18 +96,14 @@ public class Bomb  extends JLabel implements Sliceable {
     }
 
     /**
-     * Draw the bomb in GameArea in the specified position
+     * Draw the bomb in GameArea in the specified position.
      * @param graphics The Graphics object used for drawing
      */
-    public void drawBomb(Graphics graphics){
+    public void drawBomb(final Graphics graphics) {
 
-        int xPosition = (int) position.getX();
-        int yPosition = (int) position.getY();
-        try {
-            Image image = new ImageIcon(BOMB_PATH).getImage();
-            graphics.drawImage(image, xPosition, yPosition, this);
-            } catch (Exception e) {
-            System.out.print("Impossible to draw Bomb!\n Image not found");
-        }
+        final int xPosition = (int) position.getX();
+        final int yPosition = (int) position.getY();
+        final Image image = new ImageIcon(BOMB_PATH).getImage();
+        graphics.drawImage(image, xPosition, yPosition, this);
     }
 }

@@ -1,30 +1,34 @@
 package mvc.view.impl;
 
 import java.io.Serial;
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import java.nio.file.FileSystemNotFoundException;
 
+/**
+ * Lives Implementation.
+ */
 public class LiveImpl extends JLabel implements mvc.view.Live {
     @Serial
     private static final long serialVersionUID = 0L;
     private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
-    private int livesCounter;
+    private Integer livesCounter;
 
 
     /**
-     * Constructor sets the image of 3 lives
+     * Constructor sets the image of 3 lives.
      */
     public LiveImpl() {
-        ImageIcon livesImage = new ImageIcon(heartPath);
+        final ImageIcon livesImage = new ImageIcon(heartPath);
         setIcon(livesImage);
     }
 
     /**
-     * {@inheritDoc}
-     * @param lifeCounter
+     * {@inheritDoc}.
+     * @param lifeCounter counter of the current lives.
      */
     @Override
-    public void getCorrectPath(final int lifeCounter) {
+    public void setCorrectPath(final Integer lifeCounter) {
         switch (lifeCounter) {
             case 0:
                 heartPath = "";
@@ -45,7 +49,7 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void drawLives() {
@@ -55,18 +59,18 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
     }
 
     /**
-     * Getter for livesCounter
-     * @return The number of remaining lives
+     * Getter for livesCounter.
+     * @return The number of remaining lives.
      */
-    public int getLivesCounter() {
+    public Integer getLivesCounter() {
         return livesCounter;
     }
 
     /**
-     * Setter for livesCounter
-     * @param livesCounter Number of lives to set
+     * Setter for livesCounter.
+     * @param livesCounter Number of lives to set.
      */
-    public void setLivesCounter(int livesCounter) {
+    public void setLivesCounter(final Integer livesCounter) {
         this.livesCounter = livesCounter;
     }
 }

@@ -29,7 +29,7 @@ public class BombImpl extends SliceableImpl {
     public boolean cut() {
         if (!this.isSliced()) {
             this.setSliced();
-            /*TODO loseLife() */
+            /*TODO loseLife()*/
             return true;
         }
         return false;

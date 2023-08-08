@@ -5,14 +5,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
-import java.awt.geom.Point2D;
 
-public class GameScreen {//
+/**
+ * GameScreen class, it represents the PlayButton generated GUI.
+ */
+public class GameScreen {
 
     /**
-     * Prepare the frame that contains all the game's elements
+     * Prepare the frame that contains all the game's elements.
+     * @return GameArea
      */
-    public void createAndShowGui() {
+    public GameArea createAndShowGui() {
 
         // Configuration of the Frame Behavior
         final JFrame frame = new JFrame("Polygon Cutter");
@@ -21,12 +24,8 @@ public class GameScreen {//
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setResizable(false);
 
-        try {
-            // setting the background
-            frame.setContentPane(new JLabel(new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg")));
-        }catch (Exception e){
-            System.out.print("Impossible to set background!\n Image not found");
-        }
+        /*Background*/
+        frame.setContentPane(new JLabel(new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg")));
 
         // Setting the main Layout of the Frame
         frame.setLayout(new BorderLayout());
@@ -42,7 +41,7 @@ public class GameScreen {//
         upperPanel.add(livesLabel, BorderLayout.WEST);
 
         // Score on the right
-        final var scoreLabel = new Score();
+        final var scoreLabel = new ScoreViewImpl();
         upperPanel.add(scoreLabel, BorderLayout.EAST);
         scoreLabel.printScore();
 
@@ -51,15 +50,7 @@ public class GameScreen {//
         frame.add(middleArea, BorderLayout.CENTER);
         middleArea.setOpaque(false);
 
-        // Some tests
-        middleArea.addPolygon(new Point2D.Double(0, 0), PolygonEnum.TRIANGLE);
-        middleArea.addPolygon(new Point2D.Double(222, 93), PolygonEnum.SQUARE);
-        middleArea.addPolygon(new Point2D.Double(500, 500), PolygonEnum.HEXAGON);
-        middleArea.addPolygon(new Point2D.Double(111, 72), PolygonEnum.PENTAGON);
-
-        middleArea.addBomb(new Point2D.Double(251, 287));
-
-
         frame.setVisible(true);
+        return middleArea;
     }
 }

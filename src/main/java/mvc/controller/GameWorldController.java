@@ -8,7 +8,6 @@ import mvc.model.Sliceable;
  * Main controller of the game. Manages all the model and view of the game.
  */
 public interface GameWorldController {
-  
     /**
      * @return a list of the current sliceables in game.
      */
@@ -16,7 +15,7 @@ public interface GameWorldController {
 
     /**
      * Update the current list of sliceables with a new one (this is used by PhysicsController).
-     * @param updatedList
+     * @param updatedList the new list.
      */
     void setVisibleSliceables(List<Sliceable> updatedList);
 

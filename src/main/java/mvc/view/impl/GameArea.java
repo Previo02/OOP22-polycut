@@ -1,22 +1,23 @@
 package mvc.view.impl;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
 import java.awt.geom.Point2D;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.io.Serial;
 
+/**
+ * GameArea class, it represents the playable area.
+ */
 public class GameArea extends JPanel {
-    final private List<Polygon> polygons;
-    final private List<Bomb> bombs;
-
     @Serial
     private static final long serialVersionUID = 0L;
-    // private final SliceableViewImpl square;
+    private final List<Polygon> polygons;
+    private final List<Bomb> bombs;
+
     /**
-     * Constructor initiates a list of Bombs and Polygon present in the GameArea
+     * Constructor initiates a list of Bombs and Polygon present in the GameArea.
      */
     public GameArea() {
         polygons = new ArrayList<>();
@@ -24,41 +25,54 @@ public class GameArea extends JPanel {
     }
 
     /**
-     * Add a new Polygon to the list of polygons in GameArea
-     * @param drawPoint Where the polygon will be drawn
-     * @param polygonType The Type of polygon to draw
+     * Add a new Polygon to the list of polygons in GameArea.
+     * @param drawPoint Where the polygon will be drawn.
+     * @param polygonType The Type of polygon to draw.
      */
-    public void addPolygon(Point2D drawPoint, PolygonEnum polygonType) {
-        Polygon polygon = new Polygon(drawPoint, polygonType);
-        polygon.setSliaceablePosition(drawPoint);
+    public void addPolygon(final Point2D drawPoint, final PolygonEnum polygonType) {
+        final Polygon polygon = new Polygon(drawPoint, polygonType);
+        polygon.setSliceablePosition(drawPoint);
         polygons.add(polygon);
     }
 
     /**
-     * Add a new Bomb to the list of bombs in GameArea
-     * @param drawPoint Where the bomb will be drawn
+     * Add a new Bomb to the list of bombs in GameArea.
+     * @param drawPoint Where the bomb will be drawn.
      */
-    public void addBomb(Point2D drawPoint) {
-        Bomb bomb = new Bomb(drawPoint);
-        bomb.setSliaceablePosition(drawPoint);
+    public void addBomb(final Point2D drawPoint) {
+        final Bomb bomb = new Bomb(drawPoint);
+        bomb.setSliceablePosition(drawPoint);
         bombs.add(bomb);
     }
-
     /**
-     * {@inheritDoc}
-     * Paints every Sliceable in the logically present in the GameArea
-     * @param g the <code>Graphics</code> object to protect
+     * {@inheritDoc}.
+     * Paints every Sliceable in the logically present in the GameArea.
+     * @param g the <code>Graphics</code> object to protect.
      */
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        for (Polygon polygon : polygons) {
+        for (final Polygon polygon : polygons) {
             polygon.drawPolygon(g);
         }
 
-        for (Bomb bomb : bombs) {
+        for (final Bomb bomb : bombs) {
             bomb.drawBomb(g);
         }
+    }
+    /**
+     * Getter.
+     * @return List<Polygon> list
+     */
+    public List<Polygon> getPolygons() {
+        return new ArrayList<>(this.polygons);
+    }
+    /**
+     * Getter.
+     * @return List<Polygon> list
+     */
+    public List<Bomb> getBombs() {
+        return new ArrayList<>(this.bombs);
     }
 }
