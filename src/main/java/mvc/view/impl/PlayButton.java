@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import mvc.controller.impl.GameWorldControllerImpl;
 import mvc.view.Menu;
 
 /**
@@ -15,15 +16,15 @@ import mvc.view.Menu;
 public class PlayButton extends MenuDecorator {
 
     /**
-     * 
-     * @param simpleMenu
+     * Play button.
+     * @param simpleMenu menu
      */
     public PlayButton(final Menu simpleMenu) {
         super(simpleMenu);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void display(final JFrame container, final JPanel buttonPanel) {
@@ -32,8 +33,8 @@ public class PlayButton extends MenuDecorator {
 
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                final var game = new GameScreen();
-                game.createAndShowGui();
+                final var gameWorld = new GameWorldControllerImpl();
+                gameWorld.createAndShowGui();
                 container.dispose();
             }
 

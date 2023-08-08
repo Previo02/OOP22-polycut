@@ -15,7 +15,7 @@ public interface GameWorldController {
 
     /**
      * Update the current list of sliceables with a new one (this is used by PhysicsController).
-     * @param updatedList
+     * @param updatedList the new list.
      */
     void setVisibleSliceables(List<Sliceable> updatedList);
 

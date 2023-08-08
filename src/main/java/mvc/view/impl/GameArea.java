@@ -5,18 +5,16 @@ import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.io.Serial;
 
 /**
  * GameArea class, it represents the playable area.
  */
 public class GameArea extends JPanel {
-    private final List<Polygon> polygons;
-    private final List<Bomb> bombs;
-
     @Serial
     private static final long serialVersionUID = 0L;
+    private final List<Polygon> polygons;
+    private final List<Bomb> bombs;
 
     /**
      * Constructor initiates a list of Bombs and Polygon present in the GameArea.
@@ -46,7 +44,6 @@ public class GameArea extends JPanel {
         bomb.setSliceablePosition(drawPoint);
         bombs.add(bomb);
     }
-
     /**
      * {@inheritDoc}.
      * Paints every Sliceable in the logically present in the GameArea.
@@ -63,5 +60,19 @@ public class GameArea extends JPanel {
         for (final Bomb bomb : bombs) {
             bomb.drawBomb(g);
         }
+    }
+    /**
+     * Getter.
+     * @return List<Polygon> list
+     */
+    public List<Polygon> getPolygons() {
+        return new ArrayList<>(this.polygons);
+    }
+    /**
+     * Getter.
+     * @return List<Polygon> list
+     */
+    public List<Bomb> getBombs() {
+        return new ArrayList<>(this.bombs);
     }
 }

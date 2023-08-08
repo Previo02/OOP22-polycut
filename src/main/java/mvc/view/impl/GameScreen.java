@@ -13,8 +13,9 @@ public class GameScreen {
 
     /**
      * Prepare the frame that contains all the game's elements.
+     * @return GameArea
      */
-    public void createAndShowGui() {
+    public GameArea createAndShowGui() {
 
         // Configuration of the Frame Behavior
         final JFrame frame = new JFrame("Polygon Cutter");
@@ -50,5 +51,6 @@ public class GameScreen {
         middleArea.setOpaque(false);
 
         frame.setVisible(true);
+        return middleArea;
     }
 }

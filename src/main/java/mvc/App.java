@@ -1,9 +1,12 @@
 package mvc;
 
-import mvc.controller.GameWorldController;
-import mvc.controller.GameWorldControllerImpl;
-import mvc.controller.PhysicController;
-import mvc.controller.PhysicControllerImpl;
+import mvc.view.Menu;
+import mvc.view.impl.ExitButton;
+import mvc.view.impl.PlayButton;
+import mvc.view.impl.RulesButton;
+import mvc.view.impl.SimpleMenu;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
 
 /**
  * Main application of the program.
@@ -18,39 +21,12 @@ public final class App {
     * @param args main arguments.
     */
     public static void main(final String[] args) {
+        final Menu menu = new PlayButton(new RulesButton(new ExitButton(new SimpleMenu())));
 
-        // var model = new SliceableImpl(4, 4, new Point2D.Double(0, 0), new Point2D.Double(10, 10));
-        // var view = new SliceableViewImpl(new Point2D.Double(0, 0), PolygonEnum.SQUARE);
-        // var controller = new Controller();
-        // var controller2 = new Controller(model, view);
-        // controller2.updatePosition();
-        // controller.createPolygons();
+        final JFrame container = new JFrame();
+        final JPanel buttonPanel = new JPanel();
 
-        // Esempio: aggiorna la posizione del poligono ogni 100 millisecondi
-        // Timer timer = new Timer(100, new ActionListener() {
-
-        //     @Override
-        //     public void actionPerformed(java.awt.event.ActionEvent arg0) {
-        //         controller.createPolygons();;
-        //     }
-
-        // });
-        // timer.start();
-
-        // Uncomment to run the application
-
-        // final Menu menu = new PlayButton(new RulesButton(new ExitButton(new SimpleMenu())));
-
-        // final JFrame container = new JFrame();
-        // final JPanel buttonPanel = new JPanel();
-
-        // menu.display(container, buttonPanel);
-
-        final GameWorldController worldController = new GameWorldControllerImpl();
-        final PhysicController physicController = new PhysicControllerImpl(1, worldController);
-
-        worldController.createSliceables();
-        physicController.updateSliceablesPosition();
+        menu.display(container, buttonPanel);
     }
 
 }

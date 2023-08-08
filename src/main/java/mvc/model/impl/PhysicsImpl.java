@@ -10,7 +10,7 @@ import mvc.model.Sliceable;
  * {@inheritDoc}.
  */
 public class PhysicsImpl implements Physics {
-    static final Point2D GRAVITY = new Point2D.Double(0, -9.81);
+    static final Point2D GRAVITY = new Point2D.Double(0, 9.81);
     private final double dt;
 
     /**
@@ -27,18 +27,16 @@ public class PhysicsImpl implements Physics {
      */
     @Override
     public void doMaths(final List<Sliceable> listPolygon) {
-        final var iterator = listPolygon.iterator();
-        while (iterator.hasNext()) {
-            final var poly = iterator.next();
+        for (final Sliceable poly : listPolygon) {
             final var oldPos = poly.getPosition();
             final var oldVel = poly.getVelocity();
 
             final double velX = oldVel.getX() + dt * GRAVITY.getX();
-            final double velY = oldVel.getY() + dt * GRAVITY.getY();
+            final double velY = oldVel.getY() - dt * GRAVITY.getY();
             final var newVel = new Point2D.Double(velX, velY);
 
             final double posX = oldPos.getX() + dt * oldVel.getX();
-            final double posY = oldPos.getY() + dt * oldVel.getY();
+            final double posY = oldPos.getY() - dt * oldVel.getY();
             final var newPos = new Point2D.Double(posX, posY);
 
             poly.setPosition(newPos);

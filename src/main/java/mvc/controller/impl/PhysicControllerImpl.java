@@ -1,8 +1,10 @@
-package mvc.controller;
+package mvc.controller.impl;
 
 import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import mvc.controller.GameWorldController;
+import mvc.controller.PhysicController;
 import mvc.model.Physics;
 import mvc.model.Sliceable;
 import mvc.model.impl.PhysicsImpl;
@@ -16,7 +18,7 @@ public class PhysicControllerImpl implements PhysicController {
     private final GameWorldController gameController;
 
     /**
-     * Consctructor of the Physics Controller.
+     * Constructor of the Physics Controller.
      * @param dt delta time
      * @param gameController game controller
      */
@@ -32,7 +34,6 @@ public class PhysicControllerImpl implements PhysicController {
     @Override
     public void updateSliceablesPosition() {
         final List<Sliceable> currentSliceables = this.gameController.getVisibleSliceables();
-
         this.physicsModel.doMaths(currentSliceables);
         this.gameController.setVisibleSliceables(currentSliceables);
     }
