@@ -3,7 +3,6 @@ package mvc.controller.impl;
 import java.util.ArrayList;
 import java.util.List;
 import mvc.view.impl.GameScreen;
-import mvc.controller.GameLoop;
 import mvc.controller.GameWorldController;
 import mvc.model.Sliceable;
 import mvc.model.SliceableFactory;
@@ -17,7 +16,6 @@ public class GameWorldControllerImpl implements GameWorldController {
     private final SliceableFactory factory;
     private List<Sliceable> polygons;
     private List<Sliceable> bombs;
-    // private static final double PERCENTAGE = 0.3;
 
     /**
      * Constructor of the game world.
@@ -45,7 +43,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public List<Sliceable> getBombs() {
@@ -53,7 +51,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public void setBombs(final List<Sliceable> updatedList) {
@@ -71,7 +69,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public Sliceable createBomb(final int bombId) {
@@ -81,13 +79,12 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public void startLoop() {
-        final GameLoop gameLoop = new GameLoopImpl(this);
         final GameScreen screen = new GameScreen();
-        gameLoop.loop(screen);
+        new GameLoopImpl(this, screen);
     }
 
 }

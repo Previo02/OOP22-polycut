@@ -33,14 +33,14 @@ public interface GameWorldController {
 
     /**
      * Creates a single polygon.
-     * @param polygonId
+     * @param polygonId the polygon identifier.
      * @return the newly created polygon.
      */
     Sliceable createPolygon(int polygonId);
 
     /**
      * Creates a single bomb.
-     * @param bombId
+     * @param bombId the bomb identifier.
      * @return the newly created bomb.
      */
     Sliceable createBomb(int bombId);

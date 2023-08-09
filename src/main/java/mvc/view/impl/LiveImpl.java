@@ -21,6 +21,7 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
     public LiveImpl() {
         final ImageIcon livesImage = new ImageIcon(heartPath);
         setIcon(livesImage);
+        this.setLivesCounter(3);
     }
 
     /**

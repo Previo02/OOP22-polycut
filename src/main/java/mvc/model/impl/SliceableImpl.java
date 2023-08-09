@@ -3,6 +3,7 @@ package mvc.model.impl;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
 import java.io.Serial;
+import java.util.Objects;
 
 import mvc.model.Sliceable;
 import mvc.view.impl.PolygonEnum;
@@ -14,6 +15,10 @@ public class SliceableImpl extends Polygon implements Sliceable {
 
     @Serial
     private static final long serialVersionUID = 0L;
+    private static final Integer THREE = 3;
+    private static final Integer FOUR = 4;
+    private static final Integer FIVE = 5;
+
     private Point2D position;
     private final Integer sides;
     private Point2D velocity;
@@ -66,7 +71,7 @@ public class SliceableImpl extends Polygon implements Sliceable {
     }
 
     /**
-     * {@inheritdoc}.
+     * {@inheritDoc}.
      */
     @Override
     public int getSliceableId() {
@@ -122,11 +127,11 @@ public class SliceableImpl extends Polygon implements Sliceable {
      */
     @Override
     public PolygonEnum getSides() {
-        if (this.sides == 3) {
+        if (Objects.equals(this.sides, THREE)) {
             return PolygonEnum.TRIANGLE;
-        } else if (this.sides == 4) {
+        } else if (Objects.equals(this.sides, FOUR)) {
             return PolygonEnum.SQUARE;
-        } else if (this.sides == 5) {
+        } else if (Objects.equals(this.sides, FIVE)) {
             return PolygonEnum.PENTAGON;
         } else {
             return PolygonEnum.HEXAGON;

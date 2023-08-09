@@ -1,6 +1,6 @@
 package mvc.controller;
 
-import mvc.view.impl.GameScreen;
+import mvc.view.impl.GameArea;
 
 /**
  * GameLoop class, it controls the flow of the game.
@@ -8,7 +8,13 @@ import mvc.view.impl.GameScreen;
 public interface GameLoop {
     /**
      * Loop method.
-     * @param screen the GameScreen that creates the GameArea.
+     * @param area the GameScreen that creates the GameArea.
      */
-    void loop(GameScreen screen);
+    void loop(GameArea area);
+
+    /*/**
+     * Setting up the game loop to be repeated every 2.5 seconds.
+     * @param area GameArea to be painted.
+     */
+    /*void setupGameLoop(GameArea area);*/
 }

@@ -111,15 +111,15 @@ public class Bomb extends JLabel implements Sliceable {
     }
 
     /**
-     * {@inheritdoc}.
+     * {@inheritDoc}.
      */
     @Override
     public void setPosition(final Point2D newPos) {
-        this.position = newPos;
+        this.position = new Point2D.Double(newPos.getX(), newPos.getY());
     }
 
     /**
-     * {@inheritdoc}.
+     * {@inheritDoc}.
      */
     @Override
     public int getPolygonId() {
