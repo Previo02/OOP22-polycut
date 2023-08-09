@@ -53,6 +53,7 @@ public class GameScreen {
 
         // Testing
         middleArea.addPolygon(new Point2D.Double(500,500), PolygonEnum.HEXAGON, 0);
+        middleArea.addPolygon(new Point2D.Double(666,666), PolygonEnum.SQUARE, 0);
         middleArea.addBomb(new Point2D.Double(100,500), 0);
         middleArea.addPolygonsOnScreen(middleArea.getPolygons());
         middleArea.addBombsOnScreen(middleArea.getBombs());
