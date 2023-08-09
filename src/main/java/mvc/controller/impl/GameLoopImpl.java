@@ -14,7 +14,8 @@ import java.util.Random;
  * Check the relative interface for the documentation.
  */
 public class GameLoopImpl implements GameLoop {
-    private static final Integer DELAY = 3000;
+    private static final Double DT = 0.1;
+    private static final Integer DELAY = (int) (1000 * DT);
     private final GameWorldControllerImpl world;
     private final PhysicControllerImpl physics;
     private static final Random RANDOM = new Random();
@@ -28,7 +29,7 @@ public class GameLoopImpl implements GameLoop {
     @SuppressFBWarnings
     public GameLoopImpl(final GameWorldControllerImpl world, final GameScreen screen) {
         this.world = world;
-        this.physics = new PhysicControllerImpl(1, world);
+        this.physics = new PhysicControllerImpl(DT, world);
         final GameArea area = screen.createAndShowGui();
         setupGameLoop(area);
     }
@@ -48,8 +49,24 @@ public class GameLoopImpl implements GameLoop {
             final Sliceable slice = world.createPolygon(id);
             area.addPolygon(slice.getPosition(), slice.getSides(), id);
         }
-        //area.getPolygons().forEach(p -> System.out.println(p.getPosition().getX()+" "+p.getPosition().getY()));
-        startRedrawTimer(area);
+
+        final Timer redrawTimer = new Timer(DELAY, e -> {
+            startRedrawTimer(area);
+            for (final var sliceable : world.getSliceables()) {
+                if (sliceable.isOutOfBound()) {
+                    final int sliceableId = sliceable.getSliceableId();
+                    world.outOfBoundDelete(sliceableId, world.getSliceables(), area.getSliceables());
+                    System.out.println(sliceableId + " " + world.getSliceables().contains(sliceable));
+                }
+            }
+            System.out.println("Model " + world.getSliceables().size());
+            System.out.println("View " + area.getSliceables().size());
+            area.repaint();
+        });
+        redrawTimer.setRepeats(true);
+        redrawTimer.start();
+
+        // startRedrawTimer(area);
     }
 
     /**
@@ -67,13 +84,12 @@ public class GameLoopImpl implements GameLoop {
      * @param area the game area where the polygons are displayed.
      */
     private void startRedrawTimer(final GameArea area) {
-        final Timer redrawTimer = new Timer(50, e -> {
-
+        // final Timer redrawTimer = new Timer(DELAY, e -> {
             physics.updateSliceablesPosition();
             /* Updates the new position of the polygons model congruently to their view. */
             for (final var polyModel : world.getPolygons()) {
                 for (final var polyView : area.getPolygons()) {
-                    if (polyModel.getSliceableId() == polyView.getPolygonId()) {
+                    if (polyModel.getSliceableId() == polyView.getSliceableId()) {
                         polyView.setPosition(polyModel.getPosition());
                     }
                 }
@@ -81,14 +97,14 @@ public class GameLoopImpl implements GameLoop {
             /* Now for the bombs. */
             for (final var bombModel : world.getBombs()) {
                 for (final var bombView : area.getBombs()) {
-                    if (bombModel.getSliceableId() == bombView.getPolygonId()) {
+                    if (bombModel.getSliceableId() == bombView.getSliceableId()) {
                         bombView.setPosition(bombModel.getPosition());
                     }
                 }
             }
-            area.repaint();
-        });
-        redrawTimer.setRepeats(true);
-        redrawTimer.start();
+            // area.repaint();
+        // });
+        // redrawTimer.setRepeats(true);
+        // redrawTimer.start();
     }
 }

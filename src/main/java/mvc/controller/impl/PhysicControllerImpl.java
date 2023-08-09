@@ -23,7 +23,7 @@ public class PhysicControllerImpl implements PhysicController {
      * @param gameController game controller
      */
     @SuppressFBWarnings
-    public PhysicControllerImpl(final int dt, final GameWorldController gameController) {
+    public PhysicControllerImpl(final double dt, final GameWorldController gameController) {
         this.physicsModel = new PhysicsImpl(dt);
         this.gameController = gameController;
     }

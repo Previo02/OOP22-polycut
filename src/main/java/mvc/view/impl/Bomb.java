@@ -1,6 +1,6 @@
 package mvc.view.impl;
 
-import mvc.view.Sliceable;
+import mvc.view.SliceableView;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -12,7 +12,7 @@ import java.io.Serial;
 /**
  *  Implementation of Bomb element.
  */
-public class Bomb extends JLabel implements Sliceable {
+public class Bomb extends JLabel implements SliceableView {
     @Serial
     private static final long serialVersionUID = 0L;
     private static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
@@ -122,7 +122,7 @@ public class Bomb extends JLabel implements Sliceable {
      * {@inheritDoc}.
      */
     @Override
-    public int getPolygonId() {
+    public int getSliceableId() {
         return this.bombId;
     }
 
