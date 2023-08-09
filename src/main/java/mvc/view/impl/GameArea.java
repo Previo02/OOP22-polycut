@@ -1,11 +1,12 @@
 package mvc.view.impl;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import mvc.view.SliceableView;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serial;
@@ -27,6 +28,7 @@ public class GameArea extends JPanel {
         this.polygons = new ArrayList<>();
         this.bombs = new ArrayList<>();
         this.lives = new LiveImpl();
+        this.setLayout(null);
     }
 
     /**
@@ -39,6 +41,37 @@ public class GameArea extends JPanel {
         final Polygon polygon = new Polygon(drawPoint, polygonType, polygonId);
         polygon.setSliceablePosition(drawPoint);
         polygons.add(polygon);
+    }
+    public void addPolygonsOnScreen(List<Polygon> polygons){
+        for (Polygon polygon: polygons) {
+            JLabel newSliceable = new JLabel(new ImageIcon(polygon.getImage(polygon.getPolygonType())));
+            newSliceable.setBounds((int)polygon.getPosition().getX(),(int)polygon.getPosition().getY(),Polygon.POLYGON_WIDTH,polygon.getPolygonDimension(polygon.getPolygonType()));
+            this.add(newSliceable);
+            newSliceable.addMouseListener(new MouseAdapter() {
+                     @Override
+                     public void mouseEntered(MouseEvent e) {
+                         polygon.setSliceStatus();
+                     }
+                 }
+            );
+        }
+    }
+    public void addBombsOnScreen(List<Bomb> bombs){
+        for (Bomb bomb : bombs) {
+            JLabel newSliceable = new JLabel(new ImageIcon(Bomb.BOMB_PATH));
+            newSliceable.setBounds((int)bomb.getPosition().getX(),(int)bomb.getPosition().getY(),Bomb.BOMB_WIDTH,Bomb.BOMB_HEIGHT);
+            this.add(newSliceable);
+            newSliceable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    bomb.setSliceStatus();
+                }
+          });
+        }
+    }
+
+    public void sliceableToRemove(){
+
     }
 
     /**
@@ -56,18 +89,18 @@ public class GameArea extends JPanel {
      * Paints every Sliceable in the logically present in the GameArea.
      * @param g the <code>Graphics</code> object to protect.
      */
-    @Override
-    protected void paintComponent(final Graphics g) {
-        super.paintComponent(g);
-
-        for (final Polygon polygon : polygons) {
-            polygon.drawPolygon(g);
-        }
-
-        for (final Bomb bomb : bombs) {
-            bomb.drawBomb(g);
-        }
-    }
+//    @Override
+//    protected void paintComponent(final Graphics g) {
+//        super.paintComponent(g);
+//
+//        for (final Polygon polygon : polygons) {
+//            polygon.drawPolygon(g);
+//        }
+//
+//        for (final Bomb bomb : bombs) {
+//            bomb.drawBomb(g);
+//        }
+//    }
     /**
      * Getter.
      * @return List<Polygon> list

@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
+import java.awt.geom.Point2D;
 
 /**
  * GameScreen class, it represents the PlayButton generated GUI.
@@ -25,7 +26,7 @@ public class GameScreen {
         frame.setResizable(false);
 
         /*Background*/
-        frame.setContentPane(new JLabel(new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg")));
+        frame.setContentPane(new JLabel(new ImageIcon("src\\main\\java\\mvc\\view\\GraphicElements\\background.jpg")));
 
         // Setting the main Layout of the Frame
         frame.setLayout(new BorderLayout());
@@ -49,6 +50,12 @@ public class GameScreen {
         final var middleArea = new GameArea();
         frame.add(middleArea, BorderLayout.CENTER);
         middleArea.setOpaque(false);
+
+        // Testing
+        middleArea.addPolygon(new Point2D.Double(500,500), PolygonEnum.HEXAGON, 0);
+        middleArea.addBomb(new Point2D.Double(100,500), 0);
+        middleArea.addPolygonsOnScreen(middleArea.getPolygons());
+        middleArea.addBombsOnScreen(middleArea.getBombs());
 
         frame.setVisible(true);
         return middleArea;

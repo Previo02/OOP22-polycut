@@ -15,10 +15,15 @@ import java.io.Serial;
 public class Polygon extends JLabel implements SliceableView {
     @Serial
     private static final long serialVersionUID = 0L;
-    private static final String TRIANGLE_PATH = "src/main/java/mvc/view/GraphicElements/triangle.png";
-    private static final String SQUARE_PATH = "src/main/java/mvc/view/GraphicElements/square.png";
-    private static final String PENTAGON_PATH = "src/main/java/mvc/view/GraphicElements/pentagon.png";
-    private static final String HEXAGON_PATH = "src/main/java/mvc/view/GraphicElements/hexagon.png";
+    private static final String TRIANGLE_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\triangle.png";
+    private static final String SQUARE_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\square.png";
+    private static final String PENTAGON_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\pentagon.png";
+    private static final String HEXAGON_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\hexagon.png";
+    public static final int POLYGON_WIDTH = 100;
+    private static final int HEXAGON_HEIGHT = 113;
+    private static final int PENTAGON_HEIGHT = 97;
+    private static final int SQUARE_HEIGHT = 98;
+    private static final int TRIANGLE_HEIGHT = 88;
     private Point2D position;
     private boolean isVisible;
     private final PolygonEnum polygonType;
@@ -116,6 +121,7 @@ public class Polygon extends JLabel implements SliceableView {
         final int xPosition = (int) position.getX();
         final int yPosition = (int) position.getY();
         final Image image = getImage(this.polygonType);
+        // TODO controllo se da ridisegnare
         graphics.drawImage(image, xPosition, yPosition, this);
     }
 
@@ -135,4 +141,25 @@ public class Polygon extends JLabel implements SliceableView {
         return this.polygonId;
     }
 
+    public PolygonEnum getPolygonType(){
+        return this.polygonType;
+    }
+
+    public int getPolygonDimension(PolygonEnum polygon){
+        switch (polygon) {
+            case TRIANGLE -> {
+                return TRIANGLE_HEIGHT;
+            }
+            case SQUARE -> {
+                return SQUARE_HEIGHT;
+            }
+            case PENTAGON -> {
+                return PENTAGON_HEIGHT;
+            }
+            case HEXAGON -> {
+                return HEXAGON_HEIGHT;
+            }
+        }
+        return -1;
+    }
 }

@@ -15,7 +15,9 @@ import java.io.Serial;
 public class Bomb extends JLabel implements SliceableView {
     @Serial
     private static final long serialVersionUID = 0L;
-    private static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
+    public static final String BOMB_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\bomb.png";
+    public static final int BOMB_WIDTH = 100;
+    public static final int BOMB_HEIGHT = 98;
 
     /**
      * Refers to the top-left corner of the Image.
@@ -46,7 +48,7 @@ public class Bomb extends JLabel implements SliceableView {
 
     /**
      * Change the status of the bomb between exploded/not exploded.
-     * @param isSliced True if it's been sliced.
+     * @param isSliced True if it's been sliced .
      */
     public void changeStatus(final boolean isSliced) {
         isExploded = !isExploded;
