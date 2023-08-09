@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class BombImplTest {
 
-    private final BombImpl testBomb = new BombImpl(4, 2, new Point2D.Double(0, 0), new Point2D.Double(7, 7));
+    private final BombImpl testBomb = new BombImpl(4, 2, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 0);
 
     /**
      * Test method of the BombImpl class, used to test the cut method, it loses a life

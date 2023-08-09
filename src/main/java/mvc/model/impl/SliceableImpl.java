@@ -3,6 +3,7 @@ package mvc.model.impl;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
 import java.io.Serial;
+import java.util.Objects;
 
 import mvc.model.Sliceable;
 import mvc.view.impl.PolygonEnum;
@@ -14,10 +15,15 @@ public class SliceableImpl extends Polygon implements Sliceable {
 
     @Serial
     private static final long serialVersionUID = 0L;
+    private static final Integer THREE = 3;
+    private static final Integer FOUR = 4;
+    private static final Integer FIVE = 5;
+
     private Point2D position;
     private final Integer sides;
     private Point2D velocity;
     private boolean isSliced;
+    private final int sliceableId;
 
     /**
      * Constructor of a regular polygon.
@@ -27,13 +33,16 @@ public class SliceableImpl extends Polygon implements Sliceable {
      *                 vertices.
      * @param position Point2D position of the sliceable, to update every timestep.
      * @param velocity Point2D vector of the new velocity of the object.
+     * @param sliceableId the sliceable identifier.
      */
-    public SliceableImpl(final Integer nsides, final Integer radius, final Point2D position, final Point2D velocity) {
+    public SliceableImpl(final Integer nsides, final Integer radius, final Point2D position,
+                            final Point2D velocity, final int sliceableId) {
         this.velocity = new Point2D.Double(velocity.getX(), velocity.getY());
         this.position = new Point2D.Double(position.getX(), position.getY());
         this.sides = nsides;
         this.xpoints = new int[nsides];
         this.ypoints = new int[nsides];
+        this.sliceableId = sliceableId;
 
         final double theta = 2.0 * Math.PI / nsides;
 
@@ -59,6 +68,14 @@ public class SliceableImpl extends Polygon implements Sliceable {
     @Override
     public void setPosition(final Point2D position) {
         this.position = new Point2D.Double(position.getX(), position.getY());
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public int getSliceableId() {
+        return sliceableId;
     }
 
     /**
@@ -110,11 +127,11 @@ public class SliceableImpl extends Polygon implements Sliceable {
      */
     @Override
     public PolygonEnum getSides() {
-        if (this.sides == 3) {
+        if (Objects.equals(this.sides, THREE)) {
             return PolygonEnum.TRIANGLE;
-        } else if (this.sides == 4) {
+        } else if (Objects.equals(this.sides, FOUR)) {
             return PolygonEnum.SQUARE;
-        } else if (this.sides == 5) {
+        } else if (Objects.equals(this.sides, FIVE)) {
             return PolygonEnum.PENTAGON;
         } else {
             return PolygonEnum.HEXAGON;

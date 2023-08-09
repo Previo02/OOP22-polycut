@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PolygonImplTest {
 
-    private final PolygonImpl testPoly = new PolygonImpl(4, 2, new Point2D.Double(0, 0), new Point2D.Double(7, 7));
+    private final PolygonImpl testPoly = new PolygonImpl(4, 2, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 0);
 
 
     /**

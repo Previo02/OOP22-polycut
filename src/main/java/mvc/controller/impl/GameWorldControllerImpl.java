@@ -2,10 +2,7 @@ package mvc.controller.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import mvc.view.impl.GameScreen;
-import mvc.controller.GameLoop;
 import mvc.controller.GameWorldController;
 import mvc.model.Sliceable;
 import mvc.model.SliceableFactory;
@@ -17,56 +14,77 @@ import mvc.model.impl.SliceableFactoryImpl;
  */
 public class GameWorldControllerImpl implements GameWorldController {
     private final SliceableFactory factory;
-    private List<Sliceable> sliceables;
-    private static final double PERCENTAGE = 0.3;
-    private static final Random RANDOM = new Random();
+    private List<Sliceable> polygons;
+    private List<Sliceable> bombs;
 
     /**
      * Constructor of the game world.
      */
     public GameWorldControllerImpl() {
         this.factory = new SliceableFactoryImpl();
-        this.sliceables = new ArrayList<>();
+        this.polygons = new ArrayList<>();
+        this.bombs = new ArrayList<>();
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      */
     @Override
-    public List<Sliceable> getVisibleSliceables() {
-        return new ArrayList<>(this.sliceables);
+    public List<Sliceable> getPolygons() {
+        return new ArrayList<>(this.polygons);
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      */
     @Override
-    public void setVisibleSliceables(final List<Sliceable> updatedList) {
-        this.sliceables = new ArrayList<>(updatedList);
+    public void setPolygons(final List<Sliceable> updatedList) {
+        this.polygons = new ArrayList<>(updatedList);
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      */
     @Override
-    public void createSliceables() {
-        final double randVal = RANDOM.nextDouble(0, 1);
-        if (randVal >= PERCENTAGE) {
-            final Sliceable polygon = factory.createPolygon();
-            sliceables.add(polygon);
-
-        } else {
-            final Sliceable bomb = factory.createBomb();
-            sliceables.add(bomb);
-        }
+    public List<Sliceable> getBombs() {
+        return new ArrayList<>(this.bombs); 
     }
 
     /**
-     * Creating the GUI.
+     * {@inheritDoc}
      */
-    public void createAndShowGui() {
-        final GameLoop gameLoop = new GameLoopImpl(this);
+    @Override
+    public void setBombs(final List<Sliceable> updatedList) {
+        this.bombs = new ArrayList<>(updatedList);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sliceable createPolygon(final int sliceableId) {
+        final Sliceable polygon = factory.createPolygon(sliceableId);
+        polygons.add(polygon);
+        return polygon;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sliceable createBomb(final int bombId) {
+        final Sliceable bomb = factory.createBomb(bombId);
+        bombs.add(bomb);
+        return bomb;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startLoop() {
         final GameScreen screen = new GameScreen();
-        gameLoop.loop(screen);
+        new GameLoopImpl(this, screen);
     }
+
 }

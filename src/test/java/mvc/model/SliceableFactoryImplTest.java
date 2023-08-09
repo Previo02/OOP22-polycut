@@ -15,8 +15,8 @@ class SliceableFactoryImplTest {
     @Test
     void createBombTest() {
         /*Creating the first two bombs and controlling their position and velocity being different*/
-        final Sliceable bomb1 = factory.createPolygon();
-        final Sliceable bomb2 = factory.createPolygon();
+        final Sliceable bomb1 = factory.createPolygon(0);
+        final Sliceable bomb2 = factory.createPolygon(1);
         assertNotEquals(bomb1.getPosition(), bomb2.getPosition());
         assertNotEquals(bomb1.getVelocity(), bomb2.getVelocity());
     }
@@ -28,8 +28,8 @@ class SliceableFactoryImplTest {
     @Test
     void createPolygonTest() {
         /*Creating the first two polygons and controlling their position and velocity being different*/
-        final Sliceable poly1 = factory.createBomb();
-        final Sliceable poly2 = factory.createBomb();
+        final Sliceable poly1 = factory.createBomb(0);
+        final Sliceable poly2 = factory.createBomb(1);
         assertNotEquals(poly1.getPosition(), poly2.getPosition());
         assertNotEquals(poly1.getVelocity(), poly2.getVelocity());
     }

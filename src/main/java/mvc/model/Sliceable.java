@@ -63,4 +63,9 @@ public interface Sliceable {
      * @return sides
      */
     PolygonEnum getSides();
+
+    /**
+     * @return the id of the current sliceable.
+     */
+    int getSliceableId();
 }

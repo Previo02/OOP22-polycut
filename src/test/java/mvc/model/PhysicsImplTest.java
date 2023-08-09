@@ -21,7 +21,7 @@ class PhysicsImplTest {
     @Test
     void doMathsTest() {
         /*Creating a new test polygon and PhysicsImpl.*/
-        final Sliceable test = new SliceableImpl(3, 1, new Point2D.Double(0, 0), new Point2D.Double(10, 10));
+        final Sliceable test = new SliceableImpl(3, 1, new Point2D.Double(100, 100), new Point2D.Double(10, 10), 0);
         final Physics physics = new PhysicsImpl(DT);
 
         /*Creating the list and executing the correct math on the polygons*/
@@ -30,7 +30,7 @@ class PhysicsImplTest {
         physics.doMaths(list);
 
         /*Asserting the result obtained with the correct result polygon created*/
-        final Sliceable result = new SliceableImpl(3, 1, new Point2D.Double(1, 1), new Point2D.Double(10, 9.019));
+        final Sliceable result = new SliceableImpl(3, 1, new Point2D.Double(101, 99), new Point2D.Double(10, 9.019), 0);
         assertEquals(result.getPosition(),  test.getPosition());
         assertEquals(result.getVelocity(),  test.getVelocity());
     }

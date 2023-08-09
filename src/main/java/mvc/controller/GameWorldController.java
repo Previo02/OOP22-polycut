@@ -9,18 +9,45 @@ import mvc.model.Sliceable;
  */
 public interface GameWorldController {
     /**
-     * @return a list of the current sliceables in game.
+     * @return a list of the polygons in game.
      */
-    List<Sliceable> getVisibleSliceables();
+    List<Sliceable> getPolygons();
 
     /**
-     * Update the current list of sliceables with a new one (this is used by PhysicsController).
+     * Update the current list of polygons with a new one.
      * @param updatedList the new list.
      */
-    void setVisibleSliceables(List<Sliceable> updatedList);
+    void setPolygons(List<Sliceable> updatedList);
 
     /**
-     * Creates a random amount of sliceables.
+     * Getter of the bombs.
+     * @return a list of the bombs in game.
      */
-    void createSliceables();
+    List<Sliceable> getBombs();
+
+    /**
+     * Update the current list of bombs with a new one.
+     * @param updatedList the new list.
+     */
+    void setBombs(List<Sliceable> updatedList);
+
+    /**
+     * Creates a single polygon.
+     * @param polygonId the polygon identifier.
+     * @return the newly created polygon.
+     */
+    Sliceable createPolygon(int polygonId);
+
+    /**
+     * Creates a single bomb.
+     * @param bombId the bomb identifier.
+     * @return the newly created bomb.
+     */
+    Sliceable createBomb(int bombId);
+
+    /**
+     * Initialize the game screen and starts the game loop.
+     */
+    void startLoop();
+
 }
