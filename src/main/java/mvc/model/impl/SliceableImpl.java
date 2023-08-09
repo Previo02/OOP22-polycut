@@ -146,4 +146,9 @@ public class SliceableImpl extends Polygon implements Sliceable {
         /* TODO manage the logic when the polygon is sliced. */
     }
 
+    @Override
+    public boolean isOutOfBound() {
+        return getPosition().getY() >= SliceableFactoryImpl.SPAWN_Y;
+    }
+
 }

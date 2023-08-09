@@ -1,6 +1,9 @@
 package mvc.view.impl;
 
 import javax.swing.JPanel;
+
+import mvc.view.SliceableView;
+
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -95,4 +98,11 @@ public class GameArea extends JPanel {
     public void setLivesCounter(final Integer livesCounter) {
         this.lives.setLivesCounter(livesCounter);
     }
+
+    public List<SliceableView> getSliceables() {
+        List<SliceableView> sliceableList = new ArrayList<>(getPolygons());
+        sliceableList.addAll(getBombs());
+        return sliceableList;
+    }
+
 }

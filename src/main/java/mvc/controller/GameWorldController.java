@@ -3,6 +3,7 @@ package mvc.controller;
 import java.util.List;
 
 import mvc.model.Sliceable;
+import mvc.view.SliceableView;
 
 /**
  * Main controller of the game. Manages all the model and view of the game.
@@ -49,5 +50,7 @@ public interface GameWorldController {
      * Initialize the game screen and starts the game loop.
      */
     void startLoop();
+
+    void outOfBoundDelete(int sliceableId, List<Sliceable> sliceablesModel, List<SliceableView> sliceableView);
 
 }

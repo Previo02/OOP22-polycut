@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 /**
  * Interface that represent a sliceable (polygons/bombs).
  */
-public interface Sliceable {
+public interface SliceableView {
 
     // Utilizzare GetBorder per parte controller
 
@@ -47,5 +47,5 @@ public interface Sliceable {
     /**
      * @return the identifier of the current polygon.
      */
-    int getPolygonId();
+    int getSliceableId();
 }

@@ -2,6 +2,8 @@ package mvc.controller.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import mvc.view.SliceableView;
 import mvc.view.impl.GameScreen;
 import mvc.controller.GameWorldController;
 import mvc.model.Sliceable;
@@ -85,6 +87,33 @@ public class GameWorldControllerImpl implements GameWorldController {
     public void startLoop() {
         final GameScreen screen = new GameScreen();
         new GameLoopImpl(this, screen);
+    }
+
+    @Override
+    public void outOfBoundDelete(final int sliceableId, final List<Sliceable> sliceablesModel, final List<SliceableView> sliceablesView) {
+        final var viewIterator = sliceablesView.iterator();
+        final var modelIterator = getSliceables().iterator();
+
+        while (modelIterator.hasNext()) {
+            final Sliceable sliceable = modelIterator.next();
+            if (sliceable.getSliceableId() == sliceableId) {
+                modelIterator.remove();
+            }
+        }
+
+        while (viewIterator.hasNext()) {
+            final SliceableView sliceable = viewIterator.next();
+            if (sliceable.getSliceableId() == sliceableId) {
+                viewIterator.remove();
+            }
+        }
+
+    }
+
+    public List<Sliceable> getSliceables() {
+        List<Sliceable> sliceableList = new ArrayList<>(getPolygons());
+        sliceableList.addAll(getBombs());
+        return sliceableList;
     }
 
 }

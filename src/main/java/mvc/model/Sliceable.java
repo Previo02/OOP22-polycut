@@ -68,4 +68,6 @@ public interface Sliceable {
      * @return the id of the current sliceable.
      */
     int getSliceableId();
+
+    boolean isOutOfBound();
 }
