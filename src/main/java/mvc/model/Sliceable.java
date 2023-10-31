@@ -1,6 +1,6 @@
 package mvc.model;
 
-import mvc.view.impl.PolygonEnum;
+import mvc.controller.impl.SliceableEnum;
 
 import java.awt.geom.Point2D;
 
@@ -62,7 +62,7 @@ public interface Sliceable {
      *
      * @return sides
      */
-    PolygonEnum getSides();
+    SliceableEnum getSides();
 
     /**
      * @return the id of the current sliceable.

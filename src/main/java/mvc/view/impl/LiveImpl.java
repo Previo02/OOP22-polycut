@@ -11,50 +11,52 @@ import java.nio.file.FileSystemNotFoundException;
 public class LiveImpl extends JLabel implements mvc.view.Live {
     @Serial
     private static final long serialVersionUID = 0L;
-    private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
+    private static String heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\3hearts.png";
     private Integer livesCounter;
+
+    private ImageIcon livesImage;
 
 
     /**
      * Constructor sets the image of 3 lives.
      */
     public LiveImpl() {
-        final ImageIcon livesImage = new ImageIcon(heartPath);
+        this.livesImage = new ImageIcon(heartPath);
         setIcon(livesImage);
         this.setLivesCounter(3);
     }
 
     /**
-     * {@inheritDoc}.
+     * Get the file Path for the correct amount of lives.
      * @param lifeCounter counter of the current lives.
      */
-    @Override
-    public void setCorrectPath(final Integer lifeCounter) {
+
+    public static void setCorrectPath(final Integer lifeCounter) {
         switch (lifeCounter) {
             case 0:
                 heartPath = "";
                 break;
             case 1:
-                heartPath = "src/main/java/mvc/view/GraphicElements/heart.png";
+                heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\heart.png";
                 break;
             case 2:
-                heartPath = "src/main/java/mvc/view/GraphicElements/2hearts.png";
+                heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\2hearts.png";
                 break;
             case 3:
-                heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
+                heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\3hearts.png";
                 break;
             default:
                 throw new FileSystemNotFoundException();
         }
-        drawLives();
     }
 
     /**
      * {@inheritDoc}.
      */
     @Override
-    public void drawLives() {
-        setIcon(new ImageIcon(heartPath));
+    public void drawLives(int lives) {
+        LiveImpl.setCorrectPath(lives);
+        livesImage = new ImageIcon(heartPath);
         revalidate();
         repaint();
     }

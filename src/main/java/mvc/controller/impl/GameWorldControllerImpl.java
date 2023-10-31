@@ -1,9 +1,12 @@
 package mvc.controller.impl;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
 import mvc.view.SliceableView;
+import mvc.view.impl.GameArea;
 import mvc.view.impl.GameScreen;
 import mvc.controller.GameWorldController;
 import mvc.model.Sliceable;
@@ -86,7 +89,11 @@ public class GameWorldControllerImpl implements GameWorldController {
     @Override
     public void startLoop() {
         final GameScreen screen = new GameScreen();
-        new GameLoopImpl(this, screen);
+        GameArea testArea = screen.createAndShowGui();
+        this.polygons.add(factory.createPolygon(0));
+        Sliceable poliTest = this.polygons.get(0);
+        testArea.drawSliceable( new Point2D.Double(150, 150), poliTest.getSides());
+        //new GameLoopImpl(this, screen);
     }
 
     @Override

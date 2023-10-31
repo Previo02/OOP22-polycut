@@ -10,28 +10,9 @@ public interface SliceableView {
     // Utilizzare GetBorder per parte controller
 
     /**
-     * Change slice status.
-     * @param isSliced True if has been sliced.
-     */
-
-    void changeVisibility(boolean isSliced);
-
-    /**
-     * Get visibility.
-     * @return True if it's visible on screen.
-     */
-    boolean isVisible();
-
-    /**
      * @return the top-left corner of the image.
      */
     Point2D getPosition();
-
-    /**
-     * 
-     * @param newPos
-     */
-    void setPosition(Point2D newPos);
 
     /**
      * Set position of the sliceable.

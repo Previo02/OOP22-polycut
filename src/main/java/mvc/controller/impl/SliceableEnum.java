@@ -1,9 +1,9 @@
-package mvc.view.impl;
+package mvc.controller.impl;
 
 /**
  * Enum For the Polygon's Type.
  */
-public enum PolygonEnum {
+public enum SliceableEnum {
     /**
      * 3 sides.
      */
@@ -19,5 +19,9 @@ public enum PolygonEnum {
     /**
      * 6 sides.
      */
-    HEXAGON
+    HEXAGON,
+    /**
+     * Bomb.
+     */
+    BOMB
 }

@@ -1,11 +1,16 @@
 package mvc.view.impl;
 
+import mvc.controller.impl.SliceableEnum;
+
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
+import java.util.Random;
 
 /**
  * GameScreen class, it represents the PlayButton generated GUI.
@@ -23,7 +28,28 @@ public class GameScreen {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
         frame.setResizable(false);
+
+        // Adding control to close the frame
+        frame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                    frame.dispose();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         /*Background*/
         frame.setContentPane(new JLabel(new ImageIcon("src\\main\\java\\mvc\\view\\GraphicElements\\background.jpg")));
@@ -51,12 +77,22 @@ public class GameScreen {
         frame.add(middleArea, BorderLayout.CENTER);
         middleArea.setOpaque(false);
 
-        // Testing
-        middleArea.addPolygon(new Point2D.Double(500,500), PolygonEnum.HEXAGON, 0);
-        middleArea.addPolygon(new Point2D.Double(666,666), PolygonEnum.SQUARE, 0);
-        middleArea.addBomb(new Point2D.Double(100,500), 0);
-        middleArea.addPolygonsOnScreen(middleArea.getPolygons());
-        middleArea.addBombsOnScreen(middleArea.getBombs());
+//        // Testing
+//        middleArea.addPolygon(new Point2D.Double(500,500), SliceableEnum.HEXAGON, 0);
+//        middleArea.addPolygon(new Point2D.Double(666,666), SliceableEnum.SQUARE, 0);
+//        middleArea.addBomb(new Point2D.Double(100,500), 0);
+//        var lables = middleArea.addPolygonsOnScreen(middleArea.getPolygons());
+//        middleArea.addBombsOnScreen(middleArea.getBombs());
+//        for (var label: lables) {
+//            middleArea.remove(label);
+//        }
+//        middleArea.revalidate();
+//
+//        var polyList = middleArea.getPolygons();
+//        for (var poly : polyList) {
+//            poly.setPosition(new Point2D.Double(new Random().nextInt(900),new Random().nextInt(900)));
+//        }
+//        lables = middleArea.addPolygonsOnScreen(middleArea.getPolygons());
 
         frame.setVisible(true);
         return middleArea;

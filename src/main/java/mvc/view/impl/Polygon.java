@@ -1,165 +1,132 @@
-package mvc.view.impl;
-
-import mvc.view.SliceableView;
-
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.geom.Point2D;
-import java.io.Serial;
-
-/**
- * Polygon view class.
- */
-public class Polygon extends JLabel implements SliceableView {
-    @Serial
-    private static final long serialVersionUID = 0L;
-    private static final String TRIANGLE_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\triangle.png";
-    private static final String SQUARE_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\square.png";
-    private static final String PENTAGON_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\pentagon.png";
-    private static final String HEXAGON_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\hexagon.png";
-    public static final int POLYGON_WIDTH = 100;
-    private static final int HEXAGON_HEIGHT = 113;
-    private static final int PENTAGON_HEIGHT = 97;
-    private static final int SQUARE_HEIGHT = 98;
-    private static final int TRIANGLE_HEIGHT = 88;
-    private Point2D position;
-    private boolean isVisible;
-    private final PolygonEnum polygonType;
-    private final int polygonId;
-
-    /**
-     * Constructor create a Polygon with the provided params.
-     * @param position The position of the top-left corner of the polygon's image
-     * @param polygonType The type of polygon
-     * @param polygonId the sliceable identifier.
-     */
-    public Polygon(final Point2D position, final PolygonEnum polygonType, final int polygonId) {
-        this.polygonType = polygonType;
-        this.position = new Point2D.Double(position.getX(), position.getY());
-        this.polygonId = polygonId;
-    }
-
-    /**
-     * {@inheritDoc}.
-     * @param isSliced
-     */
-    @Override
-    public void changeVisibility(final boolean isSliced) {
-        isVisible = !isSliced;
-    }
-
-    /**
-     * {@inheritDoc}.
-     * @return isVisible, boolean
-     */
-    @Override
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return position of the polygon.
-     */
-    @Override
-    public Point2D getPosition() {
-        return new Point2D.Double(this.position.getX(), this.position.getY());
-    }
-
-    /**
-     * {@inheritDoc}.
-     * @param position top-left corner
-     */
-    @Override
-    public void setSliceablePosition(final Point2D position) {
-        final double xPosition = position.getX();
-        final double yPosition = position.getY();
-
-        this.setLocation((int) xPosition, (int) yPosition);
-    }
-
-    /**
-     * Get the correct image for the requested polygon type.
-     * @param polygonType The type of polygon of witch to get the image
-     * @return The Image of the Polygon
-     */
-    public Image getImage(final PolygonEnum polygonType) {
-        switch (polygonType) {
-            case TRIANGLE -> {
-                return new ImageIcon(TRIANGLE_PATH).getImage();
-            }
-            case SQUARE -> {
-                return new ImageIcon(SQUARE_PATH).getImage();
-            }
-            case PENTAGON -> {
-                return new ImageIcon(PENTAGON_PATH).getImage();
-            }
-            case HEXAGON -> {
-                return new ImageIcon(HEXAGON_PATH).getImage();
-            }
-            default -> {
-                return null;
-            }
-        }
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public void setSliceStatus() {
-        isVisible = !isVisible;
-    }
-
-    /**
-     * Draw the Polygon in GameArea in the specified position.
-     * @param graphics The Graphics object used for drawing
-     */
-    public void drawPolygon(final Graphics graphics) {
-        final int xPosition = (int) position.getX();
-        final int yPosition = (int) position.getY();
-        final Image image = getImage(this.polygonType);
-        // TODO controllo se da ridisegnare
-        graphics.drawImage(image, xPosition, yPosition, this);
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public void setPosition(final Point2D newPos) {
-        this.position = new Point2D.Double(newPos.getX(), newPos.getY());
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public int getSliceableId() {
-        return this.polygonId;
-    }
-
-    public PolygonEnum getPolygonType(){
-        return this.polygonType;
-    }
-
-    public int getPolygonDimension(PolygonEnum polygon){
-        switch (polygon) {
-            case TRIANGLE -> {
-                return TRIANGLE_HEIGHT;
-            }
-            case SQUARE -> {
-                return SQUARE_HEIGHT;
-            }
-            case PENTAGON -> {
-                return PENTAGON_HEIGHT;
-            }
-            case HEXAGON -> {
-                return HEXAGON_HEIGHT;
-            }
-        }
-        return -1;
-    }
-}
+//package mvc.view.impl;
+//
+//import mvc.controller.impl.SliceableEnum;
+//import mvc.view.SliceableView;
+//
+//import javax.swing.JLabel;
+//import javax.swing.ImageIcon;
+//import java.awt.Graphics;
+//import java.awt.Image;
+//import java.awt.geom.Point2D;
+//import java.io.Serial;
+//
+///**
+// * Polygon view class.
+// */
+//public class Polygon extends JLabel implements SliceableView {
+//    @Serial
+//    private static final long serialVersionUID = 0L;
+//    private static final String TRIANGLE_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\triangle.png";
+//    private static final String SQUARE_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\square.png";
+//    private static final String PENTAGON_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\pentagon.png";
+//    private static final String HEXAGON_PATH = "src\\main\\java\\mvc\\view\\GraphicElements\\hexagon.png";
+//    public static final int POLYGON_WIDTH = 100;
+//    private static final int HEXAGON_HEIGHT = 113;
+//    private static final int PENTAGON_HEIGHT = 97;
+//    private static final int SQUARE_HEIGHT = 98;
+//    private static final int TRIANGLE_HEIGHT = 88;
+//    private Point2D position;
+//    private boolean isVisible;
+//    private final SliceableEnum polygonType;
+//    private final int polygonId;
+//
+//    /**
+//     * Constructor create a Polygon with the provided params.
+//     * @param position The position of the top-left corner of the polygon's image
+//     * @param polygonType The type of polygon
+//     * @param polygonId the sliceable identifier.
+//     */
+//    public Polygon(final Point2D position, final SliceableEnum polygonType, final int polygonId) {
+//        this.polygonType = polygonType;
+//        this.position = new Point2D.Double(position.getX(), position.getY());
+//        this.polygonId = polygonId;
+//    }
+//
+//    /**
+//     * {@inheritDoc}.
+//     * @param isSliced
+//     */
+//    @Override
+//    public void changeVisibility(final boolean isSliced) {
+//        isVisible = !isSliced;
+//    }
+//
+//    /**
+//     * {@inheritDoc}.
+//     * @return isVisible, boolean
+//     */
+//    @Override
+//    public boolean isVisible() {
+//        return isVisible;
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     * @return position of the polygon.
+//     */
+//    @Override
+//    public Point2D getPosition() {
+//        return new Point2D.Double(this.position.getX(), this.position.getY());
+//    }
+//
+//    /**
+//     * {@inheritDoc}.
+//     * @param position top-left corner
+//     */
+//    @Override
+//    public void setSliceablePosition(final Point2D position) {
+//        final double xPosition = position.getX();
+//        final double yPosition = position.getY();
+//
+//        this.setLocation((int) xPosition, (int) yPosition);
+//    }
+//
+//    /**
+//     * Get the correct image for the requested polygon type.
+//     * @param polygonType The type of polygon of witch to get the image
+//     * @return The Image of the Polygon
+//     */
+//
+//
+//    /**
+//     * {@inheritDoc}.
+//     */
+//    @Override
+//    public void setSliceStatus() {
+//        isVisible = !isVisible;
+//    }
+//
+//    /**
+//     * Draw the Polygon in GameArea in the specified position.
+//     * @param graphics The Graphics object used for drawing
+//     */
+//    public void drawPolygon(final Graphics graphics) {
+//        final int xPosition = (int) position.getX();
+//        final int yPosition = (int) position.getY();
+//        final Image image = getImage(this.polygonType);
+//        // TODO controllo se da ridisegnare
+//        graphics.drawImage(image, xPosition, yPosition, this);
+//    }
+//
+//    /**
+//     * {@inheritDoc}.
+//     */
+//    @Override
+//    public void setPosition(final Point2D newPos) {
+//        this.position = new Point2D.Double(newPos.getX(), newPos.getY());
+//    }
+//
+//    /**
+//     * {@inheritDoc}.
+//     */
+//    @Override
+//    public int getSliceableId() {
+//        return this.polygonId;
+//    }
+//
+//    public SliceableEnum getPolygonType(){
+//        return this.polygonType;
+//    }
+//
+//
+//}

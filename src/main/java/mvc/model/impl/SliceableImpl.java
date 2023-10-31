@@ -6,7 +6,7 @@ import java.io.Serial;
 import java.util.Objects;
 
 import mvc.model.Sliceable;
-import mvc.view.impl.PolygonEnum;
+import mvc.controller.impl.SliceableEnum;
 
 /**
  * {@inheritDoc}.
@@ -126,15 +126,15 @@ public class SliceableImpl extends Polygon implements Sliceable {
      * {@inheritDoc}
      */
     @Override
-    public PolygonEnum getSides() {
+    public SliceableEnum getSides() {
         if (Objects.equals(this.sides, THREE)) {
-            return PolygonEnum.TRIANGLE;
+            return SliceableEnum.TRIANGLE;
         } else if (Objects.equals(this.sides, FOUR)) {
-            return PolygonEnum.SQUARE;
+            return SliceableEnum.SQUARE;
         } else if (Objects.equals(this.sides, FIVE)) {
-            return PolygonEnum.PENTAGON;
+            return SliceableEnum.PENTAGON;
         } else {
-            return PolygonEnum.HEXAGON;
+            return SliceableEnum.HEXAGON;
         }
     }
 
