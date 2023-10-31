@@ -15,7 +15,6 @@ public class GameArea extends JPanel {
     private static final long serialVersionUID = 0L;
     private final List<Polygon> polygons;
     private final List<Bomb> bombs;
-    private final LiveImpl lives;
 
     /**
      * Constructor initiates a list of Bombs and Polygon present in the GameArea.
@@ -23,14 +22,14 @@ public class GameArea extends JPanel {
     public GameArea() {
         this.polygons = new ArrayList<>();
         this.bombs = new ArrayList<>();
-        this.lives = new LiveImpl();
     }
 
     /**
      * Add a new Polygon to the list of polygons in GameArea.
-     * @param drawPoint Where the polygon will be drawn.
+     *
+     * @param drawPoint   Where the polygon will be drawn.
      * @param polygonType The Type of polygon to draw.
-     * @param polygonId the polygon identifier.
+     * @param polygonId   the polygon identifier.
      */
     public void addPolygon(final Point2D drawPoint, final PolygonEnum polygonType, final int polygonId) {
         final Polygon polygon = new Polygon(drawPoint, polygonType, polygonId);
@@ -40,17 +39,20 @@ public class GameArea extends JPanel {
 
     /**
      * Add a new Bomb to the list of bombs in GameArea.
+     *
      * @param drawPoint Where the bomb will be drawn.
-     * @param bombId the bomb identifier.
+     * @param bombId    the bomb identifier.
      */
     public void addBomb(final Point2D drawPoint, final int bombId) {
         final Bomb bomb = new Bomb(drawPoint, bombId);
         bomb.setSliceablePosition(drawPoint);
         bombs.add(bomb);
     }
+
     /**
      * {@inheritDoc}.
      * Paints every Sliceable in the logically present in the GameArea.
+     *
      * @param g the <code>Graphics</code> object to protect.
      */
     @Override
@@ -65,15 +67,19 @@ public class GameArea extends JPanel {
             bomb.drawBomb(g);
         }
     }
+
     /**
      * Getter.
+     *
      * @return List<Polygon> list
      */
     public List<Polygon> getPolygons() {
         return new ArrayList<>(this.polygons);
     }
+
     /**
      * Getter.
+     *
      * @return List<Polygon> list
      */
     public List<Bomb> getBombs() {
@@ -81,18 +87,20 @@ public class GameArea extends JPanel {
     }
 
     /**
-     * Getter for livesCounter.
-     * @return The number of remaining lives.
+     * TODO.
+     *
+     * @param polyDelete .
      */
-    public Integer getLivesCounter() {
-        return lives.getLivesCounter();
+    public void deletePolygon(final Polygon polyDelete) {
+        this.polygons.remove(polyDelete);
     }
 
     /**
-     * Setter for livesCounter.
-     * @param livesCounter Number of lives to set.
+     * TODO.
+     *
+     * @param bombDelete .
      */
-    public void setLivesCounter(final Integer livesCounter) {
-        this.lives.setLivesCounter(livesCounter);
+    public void deleteBomb(final Bomb bombDelete) {
+        this.bombs.remove(bombDelete);
     }
 }

@@ -2,6 +2,7 @@ package mvc.controller.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mvc.view.impl.GameScreen;
 import mvc.controller.GameWorldController;
 import mvc.model.Sliceable;
@@ -64,7 +65,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     @Override
     public Sliceable createPolygon(final int sliceableId) {
         final Sliceable polygon = factory.createPolygon(sliceableId);
-        polygons.add(polygon);
+        this.polygons.add(polygon);
         return polygon;
     }
 
@@ -79,6 +80,22 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
+     * TODO.
+     * @param polyDelete .
+     */
+    public void deletePolygon(final Sliceable polyDelete) {
+        this.polygons.remove(polyDelete);
+    }
+
+    /**
+     * TODO.
+     * @param bombDelete .
+     */
+    public void deleteBomb(final Sliceable bombDelete) {
+        this.bombs.remove(bombDelete);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -86,5 +103,4 @@ public class GameWorldControllerImpl implements GameWorldController {
         final GameScreen screen = new GameScreen();
         new GameLoopImpl(this, screen);
     }
-
 }

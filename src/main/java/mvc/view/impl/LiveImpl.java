@@ -14,14 +14,14 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
     private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
     private Integer livesCounter;
 
-
     /**
      * Constructor sets the image of 3 lives.
      */
     public LiveImpl() {
         final ImageIcon livesImage = new ImageIcon(heartPath);
-        setIcon(livesImage);
+        this.setIcon(livesImage);
         this.setLivesCounter(3);
+        this.drawLives();
     }
 
     /**
@@ -46,7 +46,6 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
             default:
                 throw new FileSystemNotFoundException();
         }
-        drawLives();
     }
 
     /**
@@ -54,24 +53,18 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
      */
     @Override
     public void drawLives() {
-        setIcon(new ImageIcon(heartPath));
+        this.setCorrectPath(this.livesCounter);
+        this.setIcon(new ImageIcon(heartPath));
         revalidate();
         repaint();
     }
 
     /**
-     * Getter for livesCounter.
-     * @return The number of remaining lives.
-     */
-    public Integer getLivesCounter() {
-        return livesCounter;
-    }
-
-    /**
      * Setter for livesCounter.
-     * @param livesCounter Number of lives to set.
+     * @param setLives Number of lives to set.
      */
-    public void setLivesCounter(final Integer livesCounter) {
-        this.livesCounter = livesCounter;
+    public void setLivesCounter(final Integer setLives) {
+        this.livesCounter = setLives;
+        this.drawLives();
     }
 }

@@ -5,6 +5,7 @@ import mvc.controller.GameLoop;
 import mvc.model.Sliceable;
 import mvc.view.impl.GameScreen;
 import mvc.view.impl.GameArea;
+import mvc.view.impl.ScoreViewImpl;
 
 import javax.swing.Timer;
 import java.util.Random;
@@ -14,11 +15,12 @@ import java.util.Random;
  * Check the relative interface for the documentation.
  */
 public class GameLoopImpl implements GameLoop {
-    private static final Integer DELAY = 3000;
+    private static final Integer DELAY = 1500;
     private final GameWorldControllerImpl world;
     private final PhysicControllerImpl physics;
     private static final Random RANDOM = new Random();
     private static final Double PERCENTAGE = 0.3;
+    private final GameScreen screen;
 
     /**
      * Constructor.
@@ -28,7 +30,8 @@ public class GameLoopImpl implements GameLoop {
     @SuppressFBWarnings
     public GameLoopImpl(final GameWorldControllerImpl world, final GameScreen screen) {
         this.world = world;
-        this.physics = new PhysicControllerImpl(1, world);
+        this.screen = screen;
+        this.physics = new PhysicControllerImpl(0.5, world);
         final GameArea area = screen.createAndShowGui();
         setupGameLoop(area);
     }
@@ -48,8 +51,6 @@ public class GameLoopImpl implements GameLoop {
             final Sliceable slice = world.createPolygon(id);
             area.addPolygon(slice.getPosition(), slice.getSides(), id);
         }
-        //area.getPolygons().forEach(p -> System.out.println(p.getPosition().getX()+" "+p.getPosition().getY()));
-        startRedrawTimer(area);
     }
 
     /**
@@ -58,6 +59,9 @@ public class GameLoopImpl implements GameLoop {
      */
     private void setupGameLoop(final GameArea area) {
         final Timer gameTimer = new Timer(DELAY, e -> loop(area));
+        final Timer redrawTimer = new Timer(30, e -> startRedrawTimer(area));
+        redrawTimer.setRepeats(true);
+        redrawTimer.start();
         gameTimer.setRepeats(true);
         gameTimer.start();
     }
@@ -67,28 +71,32 @@ public class GameLoopImpl implements GameLoop {
      * @param area the game area where the polygons are displayed.
      */
     private void startRedrawTimer(final GameArea area) {
-        final Timer redrawTimer = new Timer(50, e -> {
-
-            physics.updateSliceablesPosition();
-            /* Updates the new position of the polygons model congruently to their view. */
-            for (final var polyModel : world.getPolygons()) {
-                for (final var polyView : area.getPolygons()) {
-                    if (polyModel.getSliceableId() == polyView.getPolygonId()) {
-                        polyView.setPosition(polyModel.getPosition());
+        physics.updateSliceablesPosition();
+        /* Updates the new position of the polygons model congruently to their view. */
+        for (final var polyModel : world.getPolygons()) {
+            for (final var polyView : area.getPolygons()) {
+                if (polyModel.getSliceableId() == polyView.getPolygonId()) {
+                    polyView.setPosition(polyModel.getPosition());
+                    if (polyModel.getPosition().getY() >= 1000) {
+                        area.deletePolygon(polyView);
+                        world.deletePolygon(polyModel);
                     }
                 }
             }
-            /* Now for the bombs. */
-            for (final var bombModel : world.getBombs()) {
-                for (final var bombView : area.getBombs()) {
-                    if (bombModel.getSliceableId() == bombView.getPolygonId()) {
-                        bombView.setPosition(bombModel.getPosition());
+        }
+        /* Now for the bombs. */
+        for (final var bombModel : world.getBombs()) {
+            for (final var bombView : area.getBombs()) {
+                if (bombModel.getSliceableId() == bombView.getPolygonId()) {
+                    bombView.setPosition(bombModel.getPosition());
+                    if (bombModel.getPosition().getY() >= 1000) {
+                        area.deleteBomb(bombView);
+                        world.deleteBomb(bombModel);
                     }
                 }
             }
-            area.repaint();
-        });
-        redrawTimer.setRepeats(true);
-        redrawTimer.start();
+        }
+        area.repaint();
     }
 }
+
