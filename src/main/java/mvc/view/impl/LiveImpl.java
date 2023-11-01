@@ -11,39 +11,36 @@ import java.nio.file.FileSystemNotFoundException;
 public class LiveImpl extends JLabel implements mvc.view.Live {
     @Serial
     private static final long serialVersionUID = 0L;
-    private static String heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\3hearts.png";
+    private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
     private Integer livesCounter;
-
-    private ImageIcon livesImage;
-
 
     /**
      * Constructor sets the image of 3 lives.
      */
     public LiveImpl() {
-        this.livesImage = new ImageIcon(heartPath);
-        setIcon(livesImage);
+        final ImageIcon livesImage = new ImageIcon(heartPath);
+        this.setIcon(livesImage);
         this.setLivesCounter(3);
+        this.drawLives();
     }
 
     /**
-     * Get the file Path for the correct amount of lives.
-     * @param lifeCounter counter of the current lives.
+     * {@inheritDoc}.
      */
-
-    public static void setCorrectPath(final Integer lifeCounter) {
+    @Override
+    public void setCorrectPath(final Integer lifeCounter) {
         switch (lifeCounter) {
             case 0:
                 heartPath = "";
                 break;
             case 1:
-                heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\heart.png";
+                heartPath = "src/main/java/mvc/view/GraphicElements/heart.png";
                 break;
             case 2:
-                heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\2hearts.png";
+                heartPath = "src/main/java/mvc/view/GraphicElements/2hearts.png";
                 break;
             case 3:
-                heartPath = "src\\main\\java\\mvc\\view\\GraphicElements\\3hearts.png";
+                heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
                 break;
             default:
                 throw new FileSystemNotFoundException();
@@ -54,9 +51,9 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
      * {@inheritDoc}.
      */
     @Override
-    public void drawLives(int lives) {
-        LiveImpl.setCorrectPath(lives);
-        livesImage = new ImageIcon(heartPath);
+    public void drawLives() {
+        this.setCorrectPath(this.livesCounter);
+        this.setIcon(new ImageIcon(heartPath));
         revalidate();
         repaint();
     }
@@ -71,9 +68,10 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
 
     /**
      * Setter for livesCounter.
-     * @param livesCounter Number of lives to set.
+     * @param setLives Number of lives to set.
      */
-    public void setLivesCounter(final Integer livesCounter) {
-        this.livesCounter = livesCounter;
+    public void setLivesCounter(final Integer setLives) {
+        this.livesCounter = setLives;
+        this.drawLives();
     }
 }

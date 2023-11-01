@@ -16,6 +16,8 @@ import java.util.Random;
  * GameScreen class, it represents the PlayButton generated GUI.
  */
 public class GameScreen {
+    public final ScoreViewImpl score = new ScoreViewImpl();
+    public final LiveImpl lives = new LiveImpl();
 
     /**
      * Prepare the frame that contains all the game's elements.
@@ -64,13 +66,11 @@ public class GameScreen {
         frame.add(upperPanel, BorderLayout.NORTH);
 
         // Lives on the left
-        final var livesLabel = new LiveImpl();
-        upperPanel.add(livesLabel, BorderLayout.WEST);
+        upperPanel.add(lives, BorderLayout.WEST);
 
         // Score on the right
-        final var scoreLabel = new ScoreViewImpl();
-        upperPanel.add(scoreLabel, BorderLayout.EAST);
-        scoreLabel.printScore();
+        upperPanel.add(score, BorderLayout.EAST);
+        score.printScore();
 
         //Adding the GameArea where Sliceable will be drawn
         final var middleArea = new GameArea();

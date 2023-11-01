@@ -10,6 +10,7 @@ import mvc.view.SliceableView;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serial;

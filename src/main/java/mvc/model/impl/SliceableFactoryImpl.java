@@ -12,11 +12,11 @@ public class SliceableFactoryImpl implements SliceableFactory {
     private static final Integer RADIUS = 10;
     private static final Random RANDOM = new Random();
     private static final Integer SPAWN_X = 400;
-    public static final Integer SPAWN_Y = 750;
-    private static final Integer VEL_X_ORIGIN = 25; // 25
-    private static final Integer VEL_X_BOUND = 100; // 50
-    private static final Integer VEL_Y_ORIGIN = 75; // 75
-    private static final Integer VEL_Y_BOUND = 125; //125
+    private static final Integer SPAWN_Y = 750;
+    private static final Integer VEL_X_ORIGIN = 35;
+    private static final Integer VEL_X_BOUND = 40;
+    private static final Integer VEL_Y_ORIGIN = 85;
+    private static final Integer VEL_Y_BOUND = 115;
     private Point2D startPositionNext;
     private Point2D startVelocityNext;
 

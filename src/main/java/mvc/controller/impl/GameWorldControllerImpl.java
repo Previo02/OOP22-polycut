@@ -1,7 +1,5 @@
 package mvc.controller.impl;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +67,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     @Override
     public Sliceable createPolygon(final int sliceableId) {
         final Sliceable polygon = factory.createPolygon(sliceableId);
-        polygons.add(polygon);
+        this.polygons.add(polygon);
         return polygon;
     }
 

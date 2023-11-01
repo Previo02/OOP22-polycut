@@ -11,7 +11,6 @@ import mvc.model.Sliceable;
  * Implementation of the user input.
  */
 public class BladeImpl implements Blade {
-
     private final List<Sliceable> activeSliceables;
 
     /**
@@ -56,7 +55,7 @@ public class BladeImpl implements Blade {
     }
 
     /**
-     * @param object
+     * @param object sliceable object.
      * @return the specified object (if present) from the list.
      */
     private Sliceable getSliceable(final Sliceable object) {
