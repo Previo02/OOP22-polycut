@@ -1,4 +1,4 @@
-package mvc.view.impl;
+package mvc.view.menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import mvc.controller.impl.GameWorldControllerImpl;
-import mvc.view.Menu;
 
 /**
  * Creates the play button and adds it to the menu.
@@ -34,9 +33,8 @@ public class PlayButton extends MenuDecorator {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 final var gameWorld = new GameWorldControllerImpl();
-                gameWorld.startLoop();
-                new GameScreen().createAndShowGui();
                 container.dispose();
+                gameWorld.startLoop();
             }
 
         });

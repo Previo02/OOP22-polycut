@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Objects;
 
 import mvc.model.Blade;
-import mvc.model.Sliceable;
+import mvc.model.SliceableModel;
 
 /**
  * Implementation of the user input.
  */
 public class BladeImpl implements Blade {
-    private final List<Sliceable> activeSliceables;
+    private final List<SliceableModel> activeSliceables;
 
     /**
      * Initialize the list of actives sliceable objects.
@@ -24,7 +24,7 @@ public class BladeImpl implements Blade {
      * {@inheritDoc}
      */
     @Override
-    public void addSliceable(final Sliceable object) {
+    public void addSliceable(final SliceableModel object) {
         this.activeSliceables.add(Objects.requireNonNull(object));
     }
 
@@ -32,7 +32,7 @@ public class BladeImpl implements Blade {
      * {@inheritDoc}
      */
     @Override
-    public void deleteSliceable(final Sliceable object) {
+    public void deleteSliceable(final SliceableModel object) {
         this.activeSliceables.remove(Objects.requireNonNull(object));
     }
 
@@ -40,7 +40,7 @@ public class BladeImpl implements Blade {
      * {@inheritDoc}
      */
     @Override
-    public void notifySliceable(final Sliceable slicedObject) {
+    public void notifySliceable(final SliceableModel slicedObject) {
         if (this.getSliceable(slicedObject) != null) {
             slicedObject.update();
         }
@@ -50,7 +50,7 @@ public class BladeImpl implements Blade {
      * {@inheritDoc}
      */
     @Override
-    public List<Sliceable> getActiveSliceables() {
+    public List<SliceableModel> getActiveSliceables() {
         return new ArrayList<>(this.activeSliceables);
     }
 
@@ -58,7 +58,7 @@ public class BladeImpl implements Blade {
      * @param object sliceable object.
      * @return the specified object (if present) from the list.
      */
-    private Sliceable getSliceable(final Sliceable object) {
+    private SliceableModel getSliceable(final SliceableModel object) {
         Objects.requireNonNull(object);
         if (this.activeSliceables.contains(object)) {
             return object;

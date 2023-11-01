@@ -1,9 +1,9 @@
-package mvc.controller.impl;
+package mvc.model;
 
 /**
  * Enum For the Polygon's Type.
  */
-public enum SliceableEnum {
+public enum SliceableTypeEnum {
     /**
      * 3 sides.
      */

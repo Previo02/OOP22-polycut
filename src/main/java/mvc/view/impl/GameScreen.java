@@ -1,23 +1,22 @@
 package mvc.view.impl;
 
-import mvc.controller.impl.SliceableEnum;
-
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
+import mvc.view.GameArea;
+
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.Point2D;
-import java.util.Random;
 
 /**
  * GameScreen class, it represents the PlayButton generated GUI.
  */
 public class GameScreen {
-    public final ScoreViewImpl score = new ScoreViewImpl();
-    public final LiveImpl lives = new LiveImpl();
+    private final ScoreViewImpl score = new ScoreViewImpl();
+    private final LiveImpl lives = new LiveImpl();
 
     /**
      * Prepare the frame that contains all the game's elements.
@@ -36,19 +35,19 @@ public class GameScreen {
         // Adding control to close the frame
         frame.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyTyped(final KeyEvent e) {
 
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     frame.dispose();
                 }
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(final KeyEvent e) {
 
             }
         });
@@ -73,7 +72,7 @@ public class GameScreen {
         score.printScore();
 
         //Adding the GameArea where Sliceable will be drawn
-        final var middleArea = new GameArea();
+        final var middleArea = new GameAreaImpl();
         frame.add(middleArea, BorderLayout.CENTER);
         middleArea.setOpaque(false);
 

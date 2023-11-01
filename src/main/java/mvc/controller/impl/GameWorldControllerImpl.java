@@ -3,11 +3,8 @@ package mvc.controller.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import mvc.view.SliceableView;
-import mvc.view.impl.GameArea;
-import mvc.view.impl.GameScreen;
 import mvc.controller.GameWorldController;
-import mvc.model.Sliceable;
+import mvc.model.SliceableModel;
 import mvc.model.SliceableFactory;
 import mvc.model.impl.SliceableFactoryImpl;
 
@@ -16,9 +13,12 @@ import mvc.model.impl.SliceableFactoryImpl;
  * Check GameWorldController documentation.
  */
 public class GameWorldControllerImpl implements GameWorldController {
+
     private final SliceableFactory factory;
-    private List<Sliceable> polygons;
-    private List<Sliceable> bombs;
+    private List<SliceableModel> polygons;
+    private List<SliceableModel> bombs;
+    // private final PhysicController physicController;
+    // private static final Double DT = 1.0;
 
     /**
      * Constructor of the game world.
@@ -27,13 +27,14 @@ public class GameWorldControllerImpl implements GameWorldController {
         this.factory = new SliceableFactoryImpl();
         this.polygons = new ArrayList<>();
         this.bombs = new ArrayList<>();
+        // this.physicController = new PhysicControllerImpl(0.1, this);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Sliceable> getPolygons() {
+    public List<SliceableModel> getPolygons() {
         return new ArrayList<>(this.polygons);
     }
 
@@ -41,7 +42,7 @@ public class GameWorldControllerImpl implements GameWorldController {
      * {@inheritDoc}
      */
     @Override
-    public void setPolygons(final List<Sliceable> updatedList) {
+    public void setPolygons(final List<SliceableModel> updatedList) {
         this.polygons = new ArrayList<>(updatedList);
     }
 
@@ -49,15 +50,15 @@ public class GameWorldControllerImpl implements GameWorldController {
      * {@inheritDoc}
      */
     @Override
-    public List<Sliceable> getBombs() {
-        return new ArrayList<>(this.bombs); 
+    public List<SliceableModel> getBombs() {
+        return new ArrayList<>(this.bombs);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setBombs(final List<Sliceable> updatedList) {
+    public void setBombs(final List<SliceableModel> updatedList) {
         this.bombs = new ArrayList<>(updatedList);
     }
 
@@ -65,8 +66,8 @@ public class GameWorldControllerImpl implements GameWorldController {
      * {@inheritDoc}
      */
     @Override
-    public Sliceable createPolygon(final int sliceableId) {
-        final Sliceable polygon = factory.createPolygon(sliceableId);
+    public SliceableModel createPolygon(final int sliceableId) {
+        final SliceableModel polygon = factory.createPolygon(sliceableId);
         this.polygons.add(polygon);
         return polygon;
     }
@@ -75,9 +76,9 @@ public class GameWorldControllerImpl implements GameWorldController {
      * {@inheritDoc}
      */
     @Override
-    public Sliceable createBomb(final int bombId) {
-        final Sliceable bomb = factory.createBomb(bombId);
-        bombs.add(bomb);
+    public SliceableModel createBomb(final int bombId) {
+        final SliceableModel bomb = factory.createBomb(bombId);
+        this.bombs.add(bomb);
         return bomb;
     }
 
@@ -86,37 +87,66 @@ public class GameWorldControllerImpl implements GameWorldController {
      */
     @Override
     public void startLoop() {
-        final GameScreen screen = new GameScreen();
-        GameArea testArea = screen.createAndShowGui();
-        this.polygons.add(factory.createPolygon(0));
-        Sliceable poliTest = this.polygons.get(0);
-        testArea.drawSliceable( new Point2D.Double(150, 150), poliTest.getSides());
-        //new GameLoopImpl(this, screen);
+        // final int coordinates = 0;
+        // final GameScreen screen = new GameScreen();
+        // final GameArea testArea = screen.createAndShowGui();
+        // this.polygons.add(factory.createPolygon(0));
+        // final SliceableModel poliTest1 = this.polygons.get(0);
+        // final var label1 = testArea.drawSliceable(new Point2D.Double(coordinates, coordinates), poliTest1.getSides());
+
+        // for (int i = 0; i < 10; i++) {
+        //     physicController.updateSliceablesPosition();
+        //     testArea.updatePosition(label1, this.polygons.get(0).getPosition(), this.polygons.get(0).getSides());
+        //     System.out.println(this.polygons.get(0).getPosition());
+        // }
+
+        // final GameScreen screen = new GameScreen();
+        // new GameLoopImpl(this, screen);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void outOfBoundDelete(final int sliceableId, final List<Sliceable> sliceablesModel, final List<SliceableView> sliceablesView) {
-        final var viewIterator = sliceablesView.iterator();
-        final var modelIterator = getSliceables().iterator();
-
-        while (modelIterator.hasNext()) {
-            final Sliceable sliceable = modelIterator.next();
-            if (sliceable.getSliceableId() == sliceableId) {
-                modelIterator.remove();
+    public void outOfBoundDelete(final int sliceableId) {
+        final var polyIterator = this.polygons.iterator();
+        while (polyIterator.hasNext()) {
+            final var poly = polyIterator.next();
+            if (poly.getSliceableId() == sliceableId) {
+                polyIterator.remove();
             }
         }
-
-        while (viewIterator.hasNext()) {
-            final SliceableView sliceable = viewIterator.next();
-            if (sliceable.getSliceableId() == sliceableId) {
-                viewIterator.remove();
+        final var bombIterator = this.bombs.iterator();
+        while (bombIterator.hasNext()) {
+            final var bomb = bombIterator.next();
+            if (bomb.getSliceableId() == sliceableId) {
+                bombIterator.remove();
             }
         }
-
     }
 
-    public List<Sliceable> getSliceables() {
-        List<Sliceable> sliceableList = new ArrayList<>(getPolygons());
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addBomb(final SliceableModel bomb) {
+        this.bombs.add(bomb);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addPolygon(final SliceableModel polygon) {
+        this.polygons.add(polygon);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SliceableModel> getSliceables() {
+        final List<SliceableModel> sliceableList = new ArrayList<>(getPolygons());
         sliceableList.addAll(getBombs());
         return sliceableList;
     }

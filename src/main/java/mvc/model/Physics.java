@@ -12,5 +12,5 @@ public interface Physics {
      * position in a trajectory.
      * @param listPolygon the list of all the polygons present, in this precise moment, in the game world.
      */
-    void doMaths(List<Sliceable> listPolygon);
+    void doMaths(List<SliceableModel> listPolygon);
 }

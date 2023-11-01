@@ -11,7 +11,7 @@ public interface SliceableFactory {
      * @param bombId
      * @return new Sliceable.
      */
-     Sliceable createBomb(int bombId);
+     SliceableModel createBomb(int bombId);
 
     /**
      * The principal method of the class, the one called by the game world when in need to create
@@ -19,5 +19,10 @@ public interface SliceableFactory {
      * @param polygonId
      * @return new Polygon.
      */
-    Sliceable createPolygon(int polygonId);
+    SliceableModel createPolygon(int polygonId);
+
+    /**
+     * @return the y coordinate of the lower game area.
+     */
+    int getLowerBound();
 }

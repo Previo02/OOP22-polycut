@@ -9,7 +9,7 @@ import mvc.model.SliceableFactory;
  * {@inheritDoc}.
  */
 public class SliceableFactoryImpl implements SliceableFactory {
-    private static final Integer RADIUS = 10;
+//    private static final Integer RADIUS = 10;
     private static final Random RANDOM = new Random();
     private static final Integer SPAWN_X = 400;
     private static final Integer SPAWN_Y = 750;
@@ -36,7 +36,7 @@ public class SliceableFactoryImpl implements SliceableFactory {
     @Override
     public BombImpl createBomb(final int bombId) {
         this.doCalc();
-        return new BombImpl(RANDOM.nextInt(8 - 3 + 1) + 3, RADIUS, startPositionNext, startVelocityNext, bombId);
+        return new BombImpl(RANDOM.nextInt(8 - 3 + 1) + 3, startPositionNext, startVelocityNext, bombId);
     }
 
     /**
@@ -46,6 +46,14 @@ public class SliceableFactoryImpl implements SliceableFactory {
     @Override
     public PolygonImpl createPolygon(final int polygonId) {
         this.doCalc();
-        return new PolygonImpl(RANDOM.nextInt(8 - 3 + 1) + 3, RADIUS, startPositionNext, startVelocityNext, polygonId);
+        return new PolygonImpl(RANDOM.nextInt(8 - 3 + 1) + 3, startPositionNext, startVelocityNext, polygonId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getLowerBound() {
+        return SPAWN_Y;
     }
 }

@@ -12,23 +12,23 @@ public interface Blade {
      * Adds an active sliceable object.
      * @param object
      */
-    void addSliceable(Sliceable object);
+    void addSliceable(SliceableModel object);
 
     /**
      * Deletes a sliceable object from the list of active sliceable objects.
      * @param object
      */
-    void deleteSliceable(Sliceable object);
+    void deleteSliceable(SliceableModel object);
 
     /**
      * Notifies the specified sliceable object when is cut.
      * @param slicedObject
      */
-    void notifySliceable(Sliceable slicedObject);
+    void notifySliceable(SliceableModel slicedObject);
 
     /**
      * @return a list of active sliceable objects.
      */
-    List<Sliceable> getActiveSliceables();
+    List<SliceableModel> getActiveSliceables();
 
 }

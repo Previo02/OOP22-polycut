@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 import mvc.model.Physics;
-import mvc.model.Sliceable;
+import mvc.model.SliceableModel;
 
 /**
  * {@inheritDoc}.
@@ -26,8 +26,8 @@ public class PhysicsImpl implements Physics {
      * @param listPolygon
      */
     @Override
-    public void doMaths(final List<Sliceable> listPolygon) {
-        for (final Sliceable poly : listPolygon) {
+    public void doMaths(final List<SliceableModel> listPolygon) {
+        for (final SliceableModel poly : listPolygon) {
             final var oldPos = poly.getPosition();
             final var oldVel = poly.getVelocity();
 

@@ -1,32 +1,23 @@
 package mvc.view;
 
-import java.awt.geom.Point2D;
+import javax.swing.ImageIcon;
+
+import mvc.model.SliceableTypeEnum;
 
 /**
- * Interface that represent a sliceable (polygons/bombs).
+ * SliceableView interface, contains methods to handle the graphical sliceable object.
  */
 public interface SliceableView {
 
-    // Utilizzare GetBorder per parte controller
+    /**
+     * @param sliceableType
+     * @return the image associated with the polygon
+     */
+    ImageIcon getImage(SliceableTypeEnum sliceableType);
 
     /**
-     * @return the top-left corner of the image.
+     * @param sliceableType
+     * @return the height associated with the polygon
      */
-    Point2D getPosition();
-
-    /**
-     * Set position of the sliceable.
-     * @param position top-left corner.
-     */
-    void setSliceablePosition(Point2D position);
-
-    /**
-     * Set the status sliced.
-     */
-    void setSliceStatus();
-
-    /**
-     * @return the identifier of the current polygon.
-     */
-    int getSliceableId();
+    int getSliceableHeight(SliceableTypeEnum sliceableType);
 }

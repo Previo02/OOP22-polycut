@@ -1,5 +1,7 @@
 package mvc.view.impl;
 
+import mvc.view.Live;
+
 import java.io.Serial;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -8,7 +10,7 @@ import java.nio.file.FileSystemNotFoundException;
 /**
  * Lives Implementation.
  */
-public class LiveImpl extends JLabel implements mvc.view.Live {
+public class LiveImpl extends JLabel implements Live {
     @Serial
     private static final long serialVersionUID = 0L;
     private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
@@ -21,14 +23,14 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
         final ImageIcon livesImage = new ImageIcon(heartPath);
         this.setIcon(livesImage);
         this.setLivesCounter(3);
-        this.drawLives();
+        // drawLives();
     }
 
     /**
-     * {@inheritDoc}.
+     * Sets the correct image based on the number of lives.
+     * @param lifeCounter the number of lives.
      */
-    @Override
-    public void setCorrectPath(final Integer lifeCounter) {
+    private void setCorrectPath(final int lifeCounter) {
         switch (lifeCounter) {
             case 0:
                 heartPath = "";
@@ -48,10 +50,9 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
     }
 
     /**
-     * {@inheritDoc}.
+     * Draws the correct amount of lives on screen.
      */
-    @Override
-    public void drawLives() {
+    private void drawLives() {
         this.setCorrectPath(this.livesCounter);
         this.setIcon(new ImageIcon(heartPath));
         revalidate();
@@ -59,10 +60,10 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
     }
 
     /**
-     * Getter for livesCounter.
-     * @return The number of remaining lives.
+     * {@inheritDoc}
      */
-    public Integer getLivesCounter() {
+    @Override
+    public int getLivesCounter() {
         return livesCounter;
     }
 
@@ -70,7 +71,7 @@ public class LiveImpl extends JLabel implements mvc.view.Live {
      * Setter for livesCounter.
      * @param setLives Number of lives to set.
      */
-    public void setLivesCounter(final Integer setLives) {
+    private void setLivesCounter(final int setLives) {
         this.livesCounter = setLives;
         this.drawLives();
     }

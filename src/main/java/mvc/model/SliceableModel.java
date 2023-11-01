@@ -1,13 +1,11 @@
 package mvc.model;
 
-import mvc.controller.impl.SliceableEnum;
-
 import java.awt.geom.Point2D;
 
 /**
  * SliceableImpl class, creates the bombs and the polygon for the game.
  */
-public interface Sliceable {
+public interface SliceableModel {
 
     /**
      * Position getter.
@@ -62,12 +60,16 @@ public interface Sliceable {
      *
      * @return sides
      */
-    SliceableEnum getSides();
+    SliceableTypeEnum getSides();
 
     /**
      * @return the id of the current sliceable.
      */
     int getSliceableId();
 
+    /**
+     * @return true if the sliceable is out of the game area lower bound, false otherwise.
+     */
     boolean isOutOfBound();
+
 }

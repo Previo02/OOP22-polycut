@@ -14,9 +14,9 @@ import mvc.model.impl.BombImpl;
 class BladeImplTest {
 
     private final Blade blade = new BladeImpl();
-    private final BombImpl b1 = new BombImpl(4, 2, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 0);
-    private final BombImpl b2 = new BombImpl(7, 4, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 1);
-    private final BombImpl b3 = new BombImpl(7, 4, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 2);
+    private final BombImpl b1 = new BombImpl(4, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 0);
+    private final BombImpl b2 = new BombImpl(7, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 1);
+    private final BombImpl b3 = new BombImpl(7, new Point2D.Double(0, 0), new Point2D.Double(7, 7), 2);
 
     @Test
     void addSliceableTest() {

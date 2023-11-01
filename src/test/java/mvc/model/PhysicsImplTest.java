@@ -3,7 +3,7 @@ package mvc.model;
 import org.junit.jupiter.api.Test;
 
 import mvc.model.impl.PhysicsImpl;
-import mvc.model.impl.SliceableImpl;
+import mvc.model.impl.SliceableModelImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.awt.geom.Point2D;
@@ -21,16 +21,16 @@ class PhysicsImplTest {
     @Test
     void doMathsTest() {
         /*Creating a new test polygon and PhysicsImpl.*/
-        final Sliceable test = new SliceableImpl(3, 1, new Point2D.Double(100, 100), new Point2D.Double(10, 10), 0);
+        final SliceableModel test = new SliceableModelImpl(3, new Point2D.Double(100, 100), new Point2D.Double(10, 10), 0);
         final Physics physics = new PhysicsImpl(DT);
 
         /*Creating the list and executing the correct math on the polygons*/
-        final List<Sliceable> list = new ArrayList<>();
+        final List<SliceableModel> list = new ArrayList<>();
         list.add(test);
         physics.doMaths(list);
 
         /*Asserting the result obtained with the correct result polygon created*/
-        final Sliceable result = new SliceableImpl(3, 1, new Point2D.Double(101, 99), new Point2D.Double(10, 9.019), 0);
+        final SliceableModel result = new SliceableModelImpl(3, new Point2D.Double(101, 99), new Point2D.Double(10, 9.019), 0);
         assertEquals(result.getPosition(),  test.getPosition());
         assertEquals(result.getVelocity(),  test.getVelocity());
     }

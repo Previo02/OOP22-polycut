@@ -2,7 +2,7 @@ package mvc.model;
 
 import org.junit.jupiter.api.Test;
 
-import mvc.model.impl.SliceableImpl;
+import mvc.model.impl.SliceableModelImpl;
 
 import java.awt.geom.Point2D;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PolygonTest {
-    private final SliceableImpl test = new SliceableImpl(4, 2, new Point2D.Double(0, 0), new Point2D.Double(10, 10), 0);
+    private final SliceableModelImpl test = new SliceableModelImpl(4, new Point2D.Double(0, 0), new Point2D.Double(10, 10), 0);
     static final double TEST_VALUE = 15;
 
     /**

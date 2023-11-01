@@ -1,12 +1,13 @@
 package mvc.view;
 
 /**
- * Live class.
+ * Interface that defines the player's life.
  */
 public interface Live {
 
     /**
-     * Draws the correct amount of lives on screen.
+     * Getter for livesCounter.
+     * @return The number of remaining lives.
      */
-    void drawLives(int livesNumber);
+    int getLivesCounter();
 }

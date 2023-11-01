@@ -1,10 +1,17 @@
-package mvc.controller.impl;
+package mvc.view.impl;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.Serial;
 
-public class SliceableImpl {
+import javax.swing.ImageIcon;
+
+import mvc.model.SliceableTypeEnum;
+import mvc.view.SliceableView;
+
+/**
+ * SliceableView interface implementation.
+ * Read the relative javadoc for the documentation.
+ */
+public class SliceableViewImpl implements SliceableView {
 
     @Serial
     private static final long serialVersionUID = 0L;
@@ -12,23 +19,23 @@ public class SliceableImpl {
     private static final String SQUARE_PATH = "src/main/java/mvc/view/GraphicElements/square.png";
     private static final String PENTAGON_PATH = "src/main/java/mvc/view/GraphicElements/pentagon.png";
     private static final String HEXAGON_PATH = "src/main/java/mvc/view/GraphicElements/hexagon.png";
-    public static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
-    // The same for every Sliceable
-    public static final int SLICEABLE_WIDTH = 100;
+    private static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
 
     private static final int HEXAGON_HEIGHT = 113;
     private static final int PENTAGON_HEIGHT = 97;
     private static final int SQUARE_HEIGHT = 98;
     private static final int TRIANGLE_HEIGHT = 88;
-    public static final int BOMB_HEIGHT = 98;
+    private static final int BOMB_HEIGHT = 98;
 
-    private SliceableEnum sliceableType;
-//    //potenzialmente inutili
-//     private boolean isVisible;
-//     private Point2D position;
+    // private boolean isVisible;
+    // private Point2D position;
 
-    public static ImageIcon getImage(final SliceableEnum SliceableType) {
-        switch (SliceableType) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ImageIcon getImage(final SliceableTypeEnum sliceableType) {
+        switch (sliceableType) {
             case TRIANGLE:
                 return new ImageIcon(TRIANGLE_PATH);
             case SQUARE:
@@ -44,7 +51,11 @@ public class SliceableImpl {
         }
     }
 
-    public static int getPolygonHeight(SliceableEnum sliceableType){
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getSliceableHeight(final SliceableTypeEnum sliceableType) {
         switch (sliceableType) {
             case TRIANGLE:
                 return TRIANGLE_HEIGHT;
@@ -56,7 +67,8 @@ public class SliceableImpl {
                 return HEXAGON_HEIGHT;
             case BOMB :
                 return BOMB_HEIGHT;
+            default:
+                return -1;
         }
-        return -1;
     }
 }

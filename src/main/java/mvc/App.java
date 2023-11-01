@@ -1,10 +1,11 @@
 package mvc;
 
-import mvc.view.Menu;
-import mvc.view.impl.ExitButton;
-import mvc.view.impl.PlayButton;
-import mvc.view.impl.RulesButton;
-import mvc.view.impl.SimpleMenu;
+import mvc.view.menu.ExitButton;
+import mvc.view.menu.Menu;
+import mvc.view.menu.PlayButton;
+import mvc.view.menu.RulesButton;
+import mvc.view.menu.SimpleMenu;
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 

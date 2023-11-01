@@ -6,11 +6,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import mvc.controller.GameWorldController;
 import mvc.controller.PhysicController;
 import mvc.model.Physics;
-import mvc.model.Sliceable;
+import mvc.model.SliceableModel;
 import mvc.model.impl.PhysicsImpl;
 
 /**
- * 
+ * Implementation class of the physics controller.
  */
 public class PhysicControllerImpl implements PhysicController {
 
@@ -33,8 +33,9 @@ public class PhysicControllerImpl implements PhysicController {
      */
     @Override
     public void updateSliceablesPosition() {
-        final List<Sliceable> currentPolygons = this.gameController.getPolygons();
-        final List<Sliceable> currentBombs = this.gameController.getBombs();
+        // System.out.println("Posizioni aggiornate");
+        final List<SliceableModel> currentPolygons = this.gameController.getPolygons();
+        final List<SliceableModel> currentBombs = this.gameController.getBombs();
         this.physicsModel.doMaths(currentPolygons);
         this.physicsModel.doMaths(currentBombs);
         this.gameController.setPolygons(currentPolygons);
