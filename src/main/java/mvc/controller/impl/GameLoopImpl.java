@@ -5,12 +5,7 @@ import mvc.controller.GameLoop;
 import mvc.model.SliceableModel;
 import mvc.view.impl.GameScreen;
 import mvc.view.GameArea;
-
-import javax.swing.JLabel;
 import javax.swing.Timer;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -26,8 +21,6 @@ public class GameLoopImpl implements GameLoop {
 
     private final GameWorldControllerImpl world;
     private final PhysicControllerImpl physics;
-    private final List<JLabel> labelList;
-
     /**
     * Constructor.
     * @param world game world controller.
@@ -37,7 +30,6 @@ public class GameLoopImpl implements GameLoop {
     public GameLoopImpl(final GameWorldControllerImpl world, final GameScreen screen) {
         this.world = world;
         this.physics = new PhysicControllerImpl(DT, world);
-        this.labelList = new ArrayList<>();
         final GameArea area = screen.createAndShowGui();
 
         // settings up the 2 timers, 1 for the object spawn and the other for the redrawing process
@@ -45,9 +37,7 @@ public class GameLoopImpl implements GameLoop {
         final Timer redrawTimer = new Timer(30, e -> {
             physics.updateSliceablesPosition();
             for (final var sliceable : this.world.getSliceables()) {
-                for (final var label : this.labelList) {
-                    area.updatePosition(label, sliceable.getPosition(), sliceable.getSides());
-                }
+                area.updatePosition(sliceable.getPosition(), sliceable.getSides());
             }
         });
         redrawTimer.setRepeats(true);
@@ -63,7 +53,7 @@ public class GameLoopImpl implements GameLoop {
    public void loop(final GameArea area) {
         final var polygons = this.world.getPolygons();
         final var bombs = this.world.getBombs();
-        final double choice = RANDOM.nextDouble(1);
+        final double choice = RANDOM.nextDouble();
 
         if (choice < PERCENTAGE) {
             int id;
@@ -89,8 +79,7 @@ public class GameLoopImpl implements GameLoop {
                     final int sliceableId = sliceable.getSliceableId();
                     world.outOfBoundDelete(sliceableId);
                 }
-                final var sliceLabel = area.drawSliceable(sliceable.getPosition(), sliceable.getSides());
-                this.labelList.add(sliceLabel);
+                area.drawSliceable(sliceable.getPosition(), sliceable.getSides());
             }
         });
         redrawTimer.setRepeats(true);

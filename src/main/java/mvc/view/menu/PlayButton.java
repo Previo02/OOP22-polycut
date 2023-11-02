@@ -1,12 +1,8 @@
 package mvc.view.menu;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import mvc.controller.impl.GameWorldControllerImpl;
 
 /**
@@ -28,15 +24,10 @@ public class PlayButton extends MenuDecorator {
     @Override
     public void display(final JFrame container, final JPanel buttonPanel) {
         final JButton playButton = new JButton("Play");
-        playButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                final var gameWorld = new GameWorldControllerImpl();
-                container.dispose();
-                gameWorld.startLoop();
-            }
-
+        playButton.addActionListener(arg0 -> {
+            final var gameWorld = new GameWorldControllerImpl();
+            container.dispose();
+            gameWorld.startLoop();
         });
         decorateButton(playButton);
         buttonPanel.add(playButton);

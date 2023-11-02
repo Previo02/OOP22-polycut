@@ -9,14 +9,13 @@ import mvc.model.SliceableFactory;
  * {@inheritDoc}.
  */
 public class SliceableFactoryImpl implements SliceableFactory {
-//    private static final Integer RADIUS = 10;
     private static final Random RANDOM = new Random();
     private static final Integer SPAWN_X = 400;
     private static final Integer SPAWN_Y = 750;
-    private static final Integer VEL_X_ORIGIN = 35;
-    private static final Integer VEL_X_BOUND = 40;
-    private static final Integer VEL_Y_ORIGIN = 85;
-    private static final Integer VEL_Y_BOUND = 115;
+    private static final double VEL_X_ORIGIN = 35.0;
+    private static final double VEL_X_BOUND = 40.0;
+    private static final double VEL_Y_ORIGIN = 85.0;
+    private static final double VEL_Y_BOUND = 115.0;
     private Point2D startPositionNext;
     private Point2D startVelocityNext;
 
@@ -24,8 +23,10 @@ public class SliceableFactoryImpl implements SliceableFactory {
      * Calculates all the different information regarding the spawn of new sliceable (position, velocity).
      */
     private void doCalc() {
-        this.startVelocityNext = new Point2D.Double(RANDOM.nextDouble(VEL_X_ORIGIN, VEL_X_BOUND),
-                RANDOM.nextDouble(VEL_Y_ORIGIN, VEL_Y_BOUND));
+        final double randomX = VEL_X_ORIGIN + (VEL_X_BOUND - VEL_X_ORIGIN) * RANDOM.nextDouble();
+        final double randomY = VEL_Y_ORIGIN + (VEL_Y_BOUND - VEL_Y_ORIGIN) * RANDOM.nextDouble();
+
+        this.startVelocityNext = new Point2D.Double(randomX, randomY);
         this.startPositionNext = new Point2D.Double(RANDOM.nextInt(SPAWN_X), SPAWN_Y);
     }
 

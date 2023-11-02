@@ -1,40 +1,42 @@
 package mvc.view.impl;
 
-import java.io.Serial;
-
 import javax.swing.ImageIcon;
 
 import mvc.model.SliceableTypeEnum;
-import mvc.view.SliceableView;
 
 /**
  * SliceableView interface implementation.
  * Read the relative javadoc for the documentation.
  */
-public class SliceableViewImpl implements SliceableView {
-
-    @Serial
-    private static final long serialVersionUID = 0L;
+public final class SliceableView {
+    private static final double serialVersionUID = 0L;
     private static final String TRIANGLE_PATH = "src/main/java/mvc/view/GraphicElements/triangle.png";
     private static final String SQUARE_PATH = "src/main/java/mvc/view/GraphicElements/square.png";
     private static final String PENTAGON_PATH = "src/main/java/mvc/view/GraphicElements/pentagon.png";
     private static final String HEXAGON_PATH = "src/main/java/mvc/view/GraphicElements/hexagon.png";
     private static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
 
+    /**
+     * Public width, same for every sliceable.
+     */
+    public static final int SLICEABLE_WIDTH = 100;
     private static final int HEXAGON_HEIGHT = 113;
     private static final int PENTAGON_HEIGHT = 97;
     private static final int SQUARE_HEIGHT = 98;
     private static final int TRIANGLE_HEIGHT = 88;
     private static final int BOMB_HEIGHT = 98;
 
-    // private boolean isVisible;
-    // private Point2D position;
+
+    private SliceableView() {
+
+    }
 
     /**
-     * {@inheritDoc}
+     * Getting the imageIcon.
+     * @param sliceableType number of sides
+     * @return the image associated with the polygon
      */
-    @Override
-    public ImageIcon getImage(final SliceableTypeEnum sliceableType) {
+    public static ImageIcon getImage(final SliceableTypeEnum sliceableType) {
         switch (sliceableType) {
             case TRIANGLE:
                 return new ImageIcon(TRIANGLE_PATH);
@@ -52,10 +54,10 @@ public class SliceableViewImpl implements SliceableView {
     }
 
     /**
-     * {@inheritDoc}
+     * @param sliceableType
+     * @return the height associated with the polygon
      */
-    @Override
-    public int getSliceableHeight(final SliceableTypeEnum sliceableType) {
+    public static int getSliceableHeight(final SliceableTypeEnum sliceableType) {
         switch (sliceableType) {
             case TRIANGLE:
                 return TRIANGLE_HEIGHT;

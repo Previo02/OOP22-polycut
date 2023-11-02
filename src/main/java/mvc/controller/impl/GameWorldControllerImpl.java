@@ -7,6 +7,7 @@ import mvc.controller.GameWorldController;
 import mvc.model.SliceableModel;
 import mvc.model.SliceableFactory;
 import mvc.model.impl.SliceableFactoryImpl;
+import mvc.view.impl.GameScreen;
 
 /**
  * Implementation class of the GameWorld controller.
@@ -87,21 +88,8 @@ public class GameWorldControllerImpl implements GameWorldController {
      */
     @Override
     public void startLoop() {
-        // final int coordinates = 0;
-        // final GameScreen screen = new GameScreen();
-        // final GameArea testArea = screen.createAndShowGui();
-        // this.polygons.add(factory.createPolygon(0));
-        // final SliceableModel poliTest1 = this.polygons.get(0);
-        // final var label1 = testArea.drawSliceable(new Point2D.Double(coordinates, coordinates), poliTest1.getSides());
-
-        // for (int i = 0; i < 10; i++) {
-        //     physicController.updateSliceablesPosition();
-        //     testArea.updatePosition(label1, this.polygons.get(0).getPosition(), this.polygons.get(0).getSides());
-        //     System.out.println(this.polygons.get(0).getPosition());
-        // }
-
-        // final GameScreen screen = new GameScreen();
-        // new GameLoopImpl(this, screen);
+        final GameScreen screen = new GameScreen();
+        new GameLoopImpl(this, screen);
     }
 
     /**

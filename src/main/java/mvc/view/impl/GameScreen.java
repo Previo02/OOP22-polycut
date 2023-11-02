@@ -3,9 +3,6 @@ package mvc.view.impl;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
-import mvc.view.GameArea;
-
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
@@ -15,14 +12,12 @@ import java.awt.event.KeyListener;
  * GameScreen class, it represents the PlayButton generated GUI.
  */
 public class GameScreen {
-    private final ScoreViewImpl score = new ScoreViewImpl();
-    private final LiveImpl lives = new LiveImpl();
 
     /**
      * Prepare the frame that contains all the game's elements.
      * @return GameArea
      */
-    public GameArea createAndShowGui() {
+    public GameAreaImpl createAndShowGui() {
 
         // Configuration of the Frame Behavior
         final JFrame frame = new JFrame("Polygon Cutter");
@@ -65,33 +60,18 @@ public class GameScreen {
         frame.add(upperPanel, BorderLayout.NORTH);
 
         // Lives on the left
-        upperPanel.add(lives, BorderLayout.WEST);
+        final var livesLabel = new LiveImpl();
+        upperPanel.add(livesLabel, BorderLayout.WEST);
 
         // Score on the right
-        upperPanel.add(score, BorderLayout.EAST);
-        score.printScore();
+        final var scoreLabel = new ScoreViewImpl();
+        upperPanel.add(scoreLabel, BorderLayout.EAST);
+        scoreLabel.printScore();
 
         //Adding the GameArea where Sliceable will be drawn
         final var middleArea = new GameAreaImpl();
         frame.add(middleArea, BorderLayout.CENTER);
         middleArea.setOpaque(false);
-
-//        // Testing
-//        middleArea.addPolygon(new Point2D.Double(500,500), SliceableEnum.HEXAGON, 0);
-//        middleArea.addPolygon(new Point2D.Double(666,666), SliceableEnum.SQUARE, 0);
-//        middleArea.addBomb(new Point2D.Double(100,500), 0);
-//        var lables = middleArea.addPolygonsOnScreen(middleArea.getPolygons());
-//        middleArea.addBombsOnScreen(middleArea.getBombs());
-//        for (var label: lables) {
-//            middleArea.remove(label);
-//        }
-//        middleArea.revalidate();
-//
-//        var polyList = middleArea.getPolygons();
-//        for (var poly : polyList) {
-//            poly.setPosition(new Point2D.Double(new Random().nextInt(900),new Random().nextInt(900)));
-//        }
-//        lables = middleArea.addPolygonsOnScreen(middleArea.getPolygons());
 
         frame.setVisible(true);
         return middleArea;

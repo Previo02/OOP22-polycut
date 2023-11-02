@@ -1,8 +1,6 @@
 package mvc.view.impl;
 
 import mvc.view.Live;
-
-import java.io.Serial;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.nio.file.FileSystemNotFoundException;
@@ -11,8 +9,8 @@ import java.nio.file.FileSystemNotFoundException;
  * Lives Implementation.
  */
 public class LiveImpl extends JLabel implements Live {
-    @Serial
-    private static final long serialVersionUID = 0L;
+
+    private static final double serialVersionUID = 0L;
     private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
     private Integer livesCounter;
 

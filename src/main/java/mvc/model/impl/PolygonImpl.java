@@ -1,14 +1,11 @@
 package mvc.model.impl;
 
 import java.awt.geom.Point2D;
-import java.io.Serial;
 
 /**
  * {@inheritDoc}.
  */
 public class PolygonImpl extends SliceableModelImpl {
-    @Serial
-    private static final long serialVersionUID = 0L;
 
     /**
      * Constructor of a polygon.

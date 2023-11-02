@@ -5,7 +5,6 @@ import mvc.view.menu.Menu;
 import mvc.view.menu.PlayButton;
 import mvc.view.menu.RulesButton;
 import mvc.view.menu.SimpleMenu;
-
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 

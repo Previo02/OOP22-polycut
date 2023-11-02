@@ -6,16 +6,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serial;
 import java.awt.FontFormatException;
 
 /**
  * Score class. Count the score of the game.
  */
 public class ScoreViewImpl extends JLabel implements ScoreView {
-
-    @Serial
-    private static final long serialVersionUID = 0L;
+    private static final double serialVersionUID = 0L;
     private static final int FONT_SIZE = 35;
     private Integer currentScore = 0;
 
