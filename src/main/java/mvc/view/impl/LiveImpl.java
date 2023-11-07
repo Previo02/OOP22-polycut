@@ -11,8 +11,9 @@ import java.nio.file.FileSystemNotFoundException;
 public class LiveImpl extends JLabel implements Live {
 
     private static final double serialVersionUID = 0L;
-    private String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
-    private Integer livesCounter;
+    //TODO cambia dimensione label delle vite
+    private static String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
+    private Integer livesCounter = 3;
 
     /**
      * Constructor sets the image of 3 lives.
@@ -20,16 +21,14 @@ public class LiveImpl extends JLabel implements Live {
     public LiveImpl() {
         final ImageIcon livesImage = new ImageIcon(heartPath);
         this.setIcon(livesImage);
-        this.setLivesCounter(3);
-        // drawLives();
     }
 
     /**
      * Sets the correct image based on the number of lives.
-     * @param lifeCounter the number of lives.
+     * @param livesCounter current lives
      */
-    private void setCorrectPath(final int lifeCounter) {
-        switch (lifeCounter) {
+    private static void setCorrectPath(final Integer livesCounter) {
+        switch (livesCounter) {
             case 0:
                 heartPath = "";
                 break;
@@ -48,10 +47,11 @@ public class LiveImpl extends JLabel implements Live {
     }
 
     /**
-     * Draws the correct amount of lives on screen.
+     * Draw the currents lives.
      */
     private void drawLives() {
-        this.setCorrectPath(this.livesCounter);
+        System.out.println("drawing lives...");
+        setCorrectPath(this.livesCounter);
         this.setIcon(new ImageIcon(heartPath));
         revalidate();
         repaint();
@@ -66,11 +66,11 @@ public class LiveImpl extends JLabel implements Live {
     }
 
     /**
-     * Setter for livesCounter.
-     * @param setLives Number of lives to set.
+     *{@inheritDoc}.
      */
-    private void setLivesCounter(final int setLives) {
-        this.livesCounter = setLives;
-        this.drawLives();
+    @Override
+    public void decreaseLives() {
+        livesCounter = livesCounter - 1;
+        drawLives();
     }
 }

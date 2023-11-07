@@ -9,15 +9,15 @@ public interface ScoreView {
      * Gets the shown player's score.
      * @return The score of the Player.
      */
-    Integer getScore();
+    int getScore();
 
     /**
-     * Sets the player's score.
-     * @param score To set in the label.
+     * Draw the new score.
      */
-    void setScore(Integer score);
+    void drawScore();
+
     /**
-     * Print the current player's score on the screen.
+     * Increease the player's score.
      */
-    void printScore();
+    void increaseScore();
 }

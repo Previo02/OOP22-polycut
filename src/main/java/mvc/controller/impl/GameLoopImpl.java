@@ -57,14 +57,12 @@ public class GameLoopImpl implements GameLoop {
             id = RANDOM.nextInt();
             bomb = this.world.createBomb(id);
             area.drawSliceable(bomb.getSliceableId(), bomb.getPosition(), bomb.getSides());
-            // System.out.println("Bomba creata");
         } else {
             int id;
             SliceableModel polygon;
             id = RANDOM.nextInt();
             polygon = this.world.createPolygon(id);
             area.drawSliceable(polygon.getSliceableId(), polygon.getPosition(), polygon.getSides());
-            // System.out.println("Poligono creato");
         }
     }
 

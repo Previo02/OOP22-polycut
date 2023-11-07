@@ -3,23 +3,36 @@ package mvc.view.impl;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import mvc.model.SliceableTypeEnum;
 import mvc.view.GameArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * GameArea class, it represents the playable area.
  */
 public class GameAreaImpl extends JPanel implements GameArea {
-    private static final double serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
     private static Map<Integer, JLabel> labelMap = new HashMap<>();
+    private final LiveImpl lives;
+    private final ScoreViewImpl score;
+
 
     /**
      * Constructor initiates a list of Bombs and Polygon present in the GameArea.
+     * @param lives current lives
+     * @param score current score
      */
-    public GameAreaImpl() {
+    @SuppressFBWarnings
+    public GameAreaImpl(final LiveImpl lives, final ScoreViewImpl score) {
+        this.lives = lives;
+        this.score = score;
         this.setLayout(null);
     }
 
@@ -38,19 +51,38 @@ public class GameAreaImpl extends JPanel implements GameArea {
 
         final JLabel newSliceableLabel = new JLabel(image);
         newSliceableLabel.setBounds(posX, posY, sliceableWidth, sliceableHeight);
-        /*TODO aggiungere evento*/
-//        newSliceable.addMouseMotionListener(new MouseAdapter() {
-//            @Override
-//            public void mouseEntered(final MouseEvent e) {
-//                if (type.equals(SliceableTypeEnum.BOMB)) {
-//                    // gestione bomba: -1 vita
-//                } else {
-//                    // gestione poligoni: +1 punto
-//                }
-//            }
-//        });
+        newSliceableLabel.setEnabled(true);
+        newSliceableLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                if (type.equals(SliceableTypeEnum.BOMB)) {
+                   mapIterator(newSliceableLabel);
+                   lives.decreaseLives();
+
+                } else {
+                   mapIterator(newSliceableLabel);
+                   score.increaseScore();
+
+                }
+                revalidate();
+                repaint();
+            }
+        });
         labelMap.put(sliceableID, newSliceableLabel);
         this.add(newSliceableLabel);
+    }
+
+    /**
+     * utility method.
+     * @param newSliceableLabel label to remove
+     */
+    private static void mapIterator(final JLabel newSliceableLabel) {
+        for (final Map.Entry<Integer, JLabel> entry : labelMap.entrySet()) {
+            if (entry.getValue().equals(newSliceableLabel)) {
+                labelMap.remove(entry.getKey());
+                break;
+            }
+        }
     }
 
     /**
@@ -78,7 +110,9 @@ public class GameAreaImpl extends JPanel implements GameArea {
     @Override
     public void clean(final Integer sliceableID) {
         final var currLabel = labelMap.get(sliceableID);
-        this.remove(currLabel);
+        if (Objects.nonNull(currLabel)) {
+            this.remove(currLabel);
+        }
         labelMap.remove(sliceableID);
     }
 }

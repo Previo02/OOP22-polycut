@@ -14,14 +14,14 @@ import java.awt.FontFormatException;
 public class ScoreViewImpl extends JLabel implements ScoreView {
     private static final double serialVersionUID = 0L;
     private static final int FONT_SIZE = 35;
-    private Integer currentScore = 0;
+    private static int currentScore;
 
     /**
      * Constructor sets up the font and the default score of 0.
      */
     public ScoreViewImpl() {
         final Font scoreFont;
-        this.setText("Score: " + this.currentScore);
+        this.setText("Score: " + currentScore);
         try {
             scoreFont = Font.createFont(Font.TRUETYPE_FONT, new File(
                     "src/main/java/mvc/view/GraphicElements/Orbitron/Orbitron-VariableFont_wght.ttf"))
@@ -37,24 +37,24 @@ public class ScoreViewImpl extends JLabel implements ScoreView {
      * @return current score.
      */
     @Override
-    public Integer getScore() {
+    public int getScore() {
         return currentScore;
-    }
-
-    /**
-     * Score setter.
-     * @param score To set in the label
-     */
-    @Override
-    public void setScore(final Integer score) {
-        this.currentScore = score;
     }
 
     /**
      * {@inheritDoc}.
      */
     @Override
-    public void printScore() {
-        setText("Score: " + currentScore);
+    public void increaseScore() {
+        currentScore = currentScore + 1;
+        this.drawScore();
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public void drawScore() {
+        this.setText("Score: " + currentScore);
     }
 }

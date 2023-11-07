@@ -13,7 +13,7 @@ public class SliceableModelImpl implements SliceableModel {
     private static final Integer FOUR = 4;
     private static final Integer FIVE = 5;
     private static final Integer BOMB = -1;
-    private static final Integer LOWER_BOUND = 800;
+    private static final Integer LOWER_BOUND = 1000;
     private Point2D position;
     private final Integer sides;
     private Point2D velocity;

@@ -12,6 +12,9 @@ import java.awt.event.KeyListener;
  * GameScreen class, it represents the PlayButton generated GUI.
  */
 public class GameScreen {
+    private final LiveImpl livesLabel = new LiveImpl();
+
+    private final ScoreViewImpl scoreLabel = new ScoreViewImpl();
 
     /**
      * Prepare the frame that contains all the game's elements.
@@ -61,16 +64,13 @@ public class GameScreen {
         frame.add(upperPanel, BorderLayout.NORTH);
 
         // Lives on the left
-        final var livesLabel = new LiveImpl();
         upperPanel.add(livesLabel, BorderLayout.WEST);
 
         // Score on the right
-        final var scoreLabel = new ScoreViewImpl();
         upperPanel.add(scoreLabel, BorderLayout.EAST);
-        scoreLabel.printScore();
 
         //Adding the GameArea where Sliceable will be drawn
-        final var middleArea = new GameAreaImpl();
+        final var middleArea = new GameAreaImpl(this.livesLabel, this.scoreLabel);
         frame.add(middleArea, BorderLayout.CENTER);
         middleArea.setOpaque(false);
 
