@@ -16,8 +16,8 @@ public class PolygonImpl extends SliceableModelImpl {
      * @param sliceableId the sliceable identifier.
      */
     public PolygonImpl(final Integer nsides, final Point2D position,
-                        final Point2D velocity, final int sliceableId) {
-        super(nsides, position, velocity,  sliceableId);
+                       final Point2D velocity, final int sliceableId) {
+        super(nsides, position, velocity, sliceableId);
     }
 
     /**

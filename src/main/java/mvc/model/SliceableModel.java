@@ -51,11 +51,6 @@ public interface SliceableModel {
     boolean cut();
 
     /**
-     * Manages the logic when the object is sliced.
-     */
-    void update();
-
-    /**
      * Sides getter.
      *
      * @return sides

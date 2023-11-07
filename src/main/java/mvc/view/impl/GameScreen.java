@@ -38,6 +38,7 @@ public class GameScreen {
             public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     frame.dispose();
+                    Runtime.getRuntime().exit(0);
                 }
             }
 
@@ -47,8 +48,8 @@ public class GameScreen {
             }
         });
 
-        /*Background*/
-        frame.setContentPane(new JLabel(new ImageIcon("src\\main\\java\\mvc\\view\\GraphicElements\\background.jpg")));
+        //Background
+        frame.setContentPane(new JLabel(new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg")));
 
         // Setting the main Layout of the Frame
         frame.setLayout(new BorderLayout());

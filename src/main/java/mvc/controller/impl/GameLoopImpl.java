@@ -5,41 +5,39 @@ import mvc.controller.GameLoop;
 import mvc.model.SliceableModel;
 import mvc.view.impl.GameScreen;
 import mvc.view.GameArea;
+
 import javax.swing.Timer;
 import java.util.Random;
 
 /**
-* Implementation class of GameLoop interface.
-* Check the relative interface for the documentation.
-*/
+ *Implementation class of GameLoop interface.
+ *Check the relative interface for the documentation.
+ */
 public class GameLoopImpl implements GameLoop {
 
-    private static final Double DT = 1.0;
-    private static final Integer DELAY = (int) (1000 * DT);
-    private static final Double PERCENTAGE = 0.3;
+    private static final Double DT = 0.5;
+    private static final Integer DELAY = 3000;
+    private static final Integer REDRAW_DELAY = 30;
+    private static final double PERCENTAGE = 0.35;
     private static final Random RANDOM = new Random();
 
     private final GameWorldControllerImpl world;
     private final PhysicControllerImpl physics;
+
     /**
-    * Constructor.
-    * @param world game world controller.
-    * @param screen the GameScreen.
-    */
+     * Constructor.
+     * @param world game world controller.
+     * @param screen the GameScreen.
+     */
     @SuppressFBWarnings
     public GameLoopImpl(final GameWorldControllerImpl world, final GameScreen screen) {
         this.world = world;
         this.physics = new PhysicControllerImpl(DT, world);
         final GameArea area = screen.createAndShowGui();
 
-        // settings up the 2 timers, 1 for the object spawn and the other for the redrawing process
-        final Timer gameTimer = new Timer(DELAY, e -> loop(area));
-        final Timer redrawTimer = new Timer(30, e -> {
-            physics.updateSliceablesPosition();
-            for (final var sliceable : this.world.getSliceables()) {
-                area.updatePosition(sliceable.getPosition(), sliceable.getSides());
-            }
-        });
+        /*settings up the 2 timers, 1 for the object spawn and the other for the redrawing process*/
+        final Timer gameTimer = new Timer(DELAY, e -> this.loop(area));
+        final Timer redrawTimer = new Timer(REDRAW_DELAY, e -> this.redraw(area));
         redrawTimer.setRepeats(true);
         redrawTimer.start();
         gameTimer.setRepeats(true);
@@ -47,43 +45,39 @@ public class GameLoopImpl implements GameLoop {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
-   public void loop(final GameArea area) {
-        final var polygons = this.world.getPolygons();
-        final var bombs = this.world.getBombs();
+    public void loop(final GameArea area) {
         final double choice = RANDOM.nextDouble();
 
         if (choice < PERCENTAGE) {
             int id;
             SliceableModel bomb;
-            do {
-                id = RANDOM.nextInt();
-                bomb = world.createBomb(id);
-            } while (bombs.contains(bomb));
-            // System.out.println("Bomba creata");
+            id = RANDOM.nextInt();
+            bomb = this.world.createBomb(id);
+            area.drawSliceable(bomb.getSliceableId(), bomb.getPosition(), bomb.getSides());
         } else {
             int id;
             SliceableModel polygon;
-            do {
-                id = RANDOM.nextInt();
-                polygon = world.createPolygon(id);
-            } while (polygons.contains(polygon));
-            // System.out.println("Poligono creato");
+            id = RANDOM.nextInt();
+            polygon = this.world.createPolygon(id);
+            area.drawSliceable(polygon.getSliceableId(), polygon.getPosition(), polygon.getSides());
         }
-
-         final Timer redrawTimer = new Timer(DELAY, e -> {
-            for (final var sliceable : this.world.getSliceables()) {
-                if (sliceable.isOutOfBound()) {
-                    final int sliceableId = sliceable.getSliceableId();
-                    world.outOfBoundDelete(sliceableId);
-                }
-                area.drawSliceable(sliceable.getPosition(), sliceable.getSides());
-            }
-        });
-        redrawTimer.setRepeats(true);
-        redrawTimer.start();
     }
 
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public void redraw(final GameArea area) {
+        physics.updateSliceablesPosition();
+        for (final var sliceable : this.world.getSliceables()) {
+            if (sliceable.isOutOfBound()) {
+                world.outOfBoundDelete(sliceable.getSliceableId());
+                area.clean(sliceable.getSliceableId());
+            }
+            area.updatePosition(sliceable.getPosition(), sliceable.getSides());
+        }
+    }
 }

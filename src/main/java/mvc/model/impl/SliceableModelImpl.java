@@ -2,9 +2,7 @@ package mvc.model.impl;
 
 import java.awt.geom.Point2D;
 import java.util.Objects;
-
 import mvc.model.SliceableModel;
-import mvc.model.SliceableFactory;
 import mvc.model.SliceableTypeEnum;
 
 /**
@@ -14,7 +12,8 @@ public class SliceableModelImpl implements SliceableModel {
     private static final Integer THREE = 3;
     private static final Integer FOUR = 4;
     private static final Integer FIVE = 5;
-
+    private static final Integer BOMB = -1;
+    private static final Integer LOWER_BOUND = 800;
     private Point2D position;
     private final Integer sides;
     private Point2D velocity;
@@ -30,26 +29,15 @@ public class SliceableModelImpl implements SliceableModel {
      * @param sliceableId the sliceable identifier.
      */
     public SliceableModelImpl(final Integer nsides, final Point2D position,
-                            final Point2D velocity, final int sliceableId) {
+                              final Point2D velocity, final int sliceableId) {
         this.velocity = new Point2D.Double(velocity.getX(), velocity.getY());
         this.position = new Point2D.Double(position.getX(), position.getY());
         this.sides = nsides;
-//        this.xpoints = new int[nsides];
-//        this.ypoints = new int[nsides];
         this.sliceableId = sliceableId;
-
-//        final double theta = 2.0 * Math.PI / nsides;
-//
-//        for (int i = 0; i < nsides; i++) {
-//            final double x = radius * Math.cos(i * theta);
-//            final double y = radius * Math.sin(i * theta);
-//            xpoints[i] = (int) Math.round(x);
-//            ypoints[i] = (int) Math.round(y);
-//        }
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public Point2D getPosition() {
@@ -57,7 +45,7 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void setPosition(final Point2D position) {
@@ -73,7 +61,7 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public Point2D getVelocity() {
@@ -81,7 +69,7 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void setVelocity(final Point2D velocity) {
@@ -89,7 +77,7 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public boolean isSliced() {
@@ -97,7 +85,7 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void setSliced() {
@@ -105,7 +93,7 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public boolean cut() {
@@ -117,11 +105,13 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public SliceableTypeEnum getSides() {
-        if (Objects.equals(this.sides, THREE)) {
+        if (Objects.equals(this.sides, BOMB)) {
+            return SliceableTypeEnum.BOMB;
+        } else if (Objects.equals(this.sides, THREE)) {
             return SliceableTypeEnum.TRIANGLE;
         } else if (Objects.equals(this.sides, FOUR)) {
             return SliceableTypeEnum.SQUARE;
@@ -133,20 +123,10 @@ public class SliceableModelImpl implements SliceableModel {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update() {
-        /* TODO manage the logic when the polygon is sliced. */
-    }
-
-    /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public boolean isOutOfBound() {
-        final SliceableFactory sliceableFactory = new SliceableFactoryImpl();
-        return getPosition().getY() >= sliceableFactory.getLowerBound();
+        return this.getPosition().getY() > LOWER_BOUND;
     }
-
 }

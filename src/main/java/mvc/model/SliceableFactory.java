@@ -20,9 +20,4 @@ public interface SliceableFactory {
      * @return new Polygon.
      */
     SliceableModel createPolygon(int polygonId);
-
-    /**
-     * @return the y coordinate of the lower game area.
-     */
-    int getLowerBound();
 }

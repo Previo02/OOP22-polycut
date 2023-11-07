@@ -8,7 +8,12 @@ import mvc.view.GameArea;
 public interface GameLoop {
     /**
      * Loop method.
-     * @param area the GameScreen that creates the GameArea.
+     * @param area the GameArea.
      */
     void loop(GameArea area);
+    /**
+     * Redraw the game area method.
+     * @param area the middle area to redraw.
+     */
+    void redraw(GameArea area);
 }

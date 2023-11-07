@@ -33,7 +33,6 @@ public class PhysicControllerImpl implements PhysicController {
      */
     @Override
     public void updateSliceablesPosition() {
-        // System.out.println("Posizioni aggiornate");
         final List<SliceableModel> currentPolygons = this.gameController.getPolygons();
         final List<SliceableModel> currentBombs = this.gameController.getBombs();
         this.physicsModel.doMaths(currentPolygons);

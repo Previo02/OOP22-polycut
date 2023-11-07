@@ -18,8 +18,6 @@ public class GameWorldControllerImpl implements GameWorldController {
     private final SliceableFactory factory;
     private List<SliceableModel> polygons;
     private List<SliceableModel> bombs;
-    // private final PhysicController physicController;
-    // private static final Double DT = 1.0;
 
     /**
      * Constructor of the game world.
@@ -28,11 +26,10 @@ public class GameWorldControllerImpl implements GameWorldController {
         this.factory = new SliceableFactoryImpl();
         this.polygons = new ArrayList<>();
         this.bombs = new ArrayList<>();
-        // this.physicController = new PhysicControllerImpl(0.1, this);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public List<SliceableModel> getPolygons() {
@@ -40,7 +37,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void setPolygons(final List<SliceableModel> updatedList) {
@@ -48,7 +45,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public List<SliceableModel> getBombs() {
@@ -56,7 +53,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void setBombs(final List<SliceableModel> updatedList) {
@@ -64,7 +61,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public SliceableModel createPolygon(final int sliceableId) {
@@ -74,7 +71,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public SliceableModel createBomb(final int bombId) {
@@ -84,7 +81,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void startLoop() {
@@ -93,28 +90,29 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void outOfBoundDelete(final int sliceableId) {
-        final var polyIterator = this.polygons.iterator();
-        while (polyIterator.hasNext()) {
-            final var poly = polyIterator.next();
-            if (poly.getSliceableId() == sliceableId) {
-                polyIterator.remove();
+        final var polyIter = this.getPolygons().iterator();
+        while (polyIter.hasNext()) {
+            final var slice = polyIter.next();
+            if (slice.getSliceableId() == sliceableId) {
+                polyIter.remove();
             }
         }
-        final var bombIterator = this.bombs.iterator();
-        while (bombIterator.hasNext()) {
-            final var bomb = bombIterator.next();
-            if (bomb.getSliceableId() == sliceableId) {
-                bombIterator.remove();
+
+        final var bombIter = this.getSliceables().iterator();
+        while (bombIter.hasNext()) {
+            final var slice = bombIter.next();
+            if (slice.getSliceableId() == sliceableId) {
+                bombIter.remove();
             }
         }
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void addBomb(final SliceableModel bomb) {
@@ -122,7 +120,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public void addPolygon(final SliceableModel polygon) {
@@ -130,7 +128,7 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public List<SliceableModel> getSliceables() {
@@ -138,5 +136,4 @@ public class GameWorldControllerImpl implements GameWorldController {
         sliceableList.addAll(getBombs());
         return sliceableList;
     }
-
 }

@@ -9,7 +9,6 @@ import mvc.model.SliceableTypeEnum;
  * Read the relative javadoc for the documentation.
  */
 public final class SliceableView {
-    private static final double serialVersionUID = 0L;
     private static final String TRIANGLE_PATH = "src/main/java/mvc/view/GraphicElements/triangle.png";
     private static final String SQUARE_PATH = "src/main/java/mvc/view/GraphicElements/square.png";
     private static final String PENTAGON_PATH = "src/main/java/mvc/view/GraphicElements/pentagon.png";
@@ -28,7 +27,6 @@ public final class SliceableView {
 
 
     private SliceableView() {
-
     }
 
     /**
