@@ -49,7 +49,7 @@ public class GameAreaImpl extends JPanel implements GameArea {
 //                }
 //            }
 //        });
-        this.labelMap.put(sliceableID, newSliceableLabel);
+        labelMap.put(sliceableID, newSliceableLabel);
         this.add(newSliceableLabel);
     }
 
@@ -63,10 +63,13 @@ public class GameAreaImpl extends JPanel implements GameArea {
         final int sliceableHeight = SliceableView.getSliceableHeight(type);
         final int sliceableWidth = SliceableView.SLICEABLE_WIDTH;
 
-        for (final var entry : this.labelMap.entrySet()) {
+        for (final var entry : labelMap.entrySet()) {
             final JLabel label = entry.getValue();
             label.setBounds((int) newPosition.getX(), (int) newPosition.getY(), sliceableWidth, sliceableHeight);
         }
+        /* Repaint the game area, otherwise the labels remain attached to the panel */
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -74,6 +77,8 @@ public class GameAreaImpl extends JPanel implements GameArea {
      */
     @Override
     public void clean(final Integer sliceableID) {
+        final var currLabel = labelMap.get(sliceableID);
+        this.remove(currLabel);
         labelMap.remove(sliceableID);
     }
 }

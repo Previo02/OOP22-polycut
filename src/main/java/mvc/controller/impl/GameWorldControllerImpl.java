@@ -94,21 +94,23 @@ public class GameWorldControllerImpl implements GameWorldController {
      */
     @Override
     public void outOfBoundDelete(final int sliceableId) {
-        final var polyIter = this.getPolygons().iterator();
-        while (polyIter.hasNext()) {
-            final var slice = polyIter.next();
-            if (slice.getSliceableId() == sliceableId) {
-                polyIter.remove();
+
+        for (int i = 0; i < getPolygons().size(); i++) {
+            final var poly = getPolygons().get(i);
+            if (poly.getSliceableId() == sliceableId) {
+                polygons.remove(i);
+                break;
             }
         }
 
-        final var bombIter = this.getSliceables().iterator();
-        while (bombIter.hasNext()) {
-            final var slice = bombIter.next();
-            if (slice.getSliceableId() == sliceableId) {
-                bombIter.remove();
+        for (int i = 0; i < getBombs().size(); i++) {
+            final var bomb = getBombs().get(i);
+            if (bomb.getSliceableId() == sliceableId) {
+                bombs.remove(i);
+                break;
             }
         }
+
     }
 
     /**
