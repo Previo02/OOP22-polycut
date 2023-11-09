@@ -25,7 +25,7 @@ public class ScoreViewImpl extends JLabel implements ScoreView {
         this.setText("Score: " + currentScore);
         try {
             scoreFont = Font.createFont(Font.TRUETYPE_FONT, new File(
-                    "src/main/java/mvc/view/GraphicElements/Orbitron/Orbitron-VariableFont_wght.ttf"))
+                            "src/main/java/mvc/view/GraphicElements/Orbitron/Orbitron-VariableFont_wght.ttf"))
                     .deriveFont(Font.PLAIN, FONT_SIZE);
             this.setFont(scoreFont);
         } catch (FontFormatException | IOException e) {

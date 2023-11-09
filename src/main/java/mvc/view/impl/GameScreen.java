@@ -15,7 +15,6 @@ import java.awt.event.KeyListener;
  */
 public class GameScreen {
     private final LiveImpl livesLabel = new LiveImpl();
-
     private final ScoreViewImpl scoreLabel = new ScoreViewImpl();
     private final JFrame frame;
 
@@ -91,6 +90,13 @@ public class GameScreen {
      */
     public LiveImpl getCurrentLives() {
         return this.livesLabel.getCurrLiveImpl();
+    }
+
+    /**
+     * @return the score
+     */
+    public int getScoreValue() {
+        return this.scoreLabel.getScore();
     }
 
     /**

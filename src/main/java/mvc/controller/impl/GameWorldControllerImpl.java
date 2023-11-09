@@ -94,7 +94,6 @@ public class GameWorldControllerImpl implements GameWorldController {
      */
     @Override
     public void outOfBoundDelete(final int sliceableId) {
-
         for (int i = 0; i < getPolygons().size(); i++) {
             final var poly = getPolygons().get(i);
             if (poly.getSliceableId() == sliceableId) {

@@ -20,10 +20,11 @@ public interface GameArea {
 
     /**
      * Update the position of the sliceable.
+     * @param sliceableID of the sliceable
      * @param newPosition of the sliceable
      * @param type of the sliceable to manage dimensions
      */
-    void updatePosition(Point2D newPosition, SliceableTypeEnum type);
+    void updatePosition(Integer sliceableID, Point2D newPosition, SliceableTypeEnum type);
 
     /**
      * Clean the area.

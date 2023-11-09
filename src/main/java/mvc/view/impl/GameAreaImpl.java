@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import mvc.model.SliceableTypeEnum;
 import mvc.view.GameArea;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -21,7 +22,7 @@ import java.util.Objects;
  */
 public class GameAreaImpl extends JPanel implements GameArea {
     private static final long serialVersionUID = 0L;
-    private static Map<Integer, JLabel> labelMap = new HashMap<>();
+    private final Map<Integer, JLabel> labelMap = new HashMap<>();
     private final LiveImpl lives;
     private final ScoreViewImpl score;
     private final List<Integer> sliceablesID;
@@ -59,7 +60,7 @@ public class GameAreaImpl extends JPanel implements GameArea {
             @Override
             public void mouseEntered(final MouseEvent e) {
                 if (type.equals(SliceableTypeEnum.BOMB)) {
-                   lives.decreaseLives();
+                    lives.decreaseLives();
                 } else {
                     score.increaseScore();
                 }
@@ -75,17 +76,20 @@ public class GameAreaImpl extends JPanel implements GameArea {
 
     /**
      * Update the position of the sliceable.
+     * @param sliceableID of the sliceable
      * @param newPosition of the sliceable
      * @param type of the sliceable to manage dimensions
      */
     @Override
-    public void updatePosition(final Point2D newPosition, final SliceableTypeEnum type) {
+    public void updatePosition(final Integer sliceableID, final Point2D newPosition, final SliceableTypeEnum type) {
         final int sliceableHeight = SliceableView.getSliceableHeight(type);
         final int sliceableWidth = SliceableView.SLICEABLE_WIDTH;
 
         for (final var entry : labelMap.entrySet()) {
-            final JLabel label = entry.getValue();
-            label.setBounds((int) newPosition.getX(), (int) newPosition.getY(), sliceableWidth, sliceableHeight);
+            if (entry.getKey().equals(sliceableID)) {
+                final JLabel label = entry.getValue();
+                label.setBounds((int) newPosition.getX(), (int) newPosition.getY(), sliceableWidth, sliceableHeight);
+            }
         }
         /* Repaint the game area, otherwise the labels remain attached to the panel */
         this.revalidate();
