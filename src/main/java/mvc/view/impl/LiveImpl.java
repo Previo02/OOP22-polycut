@@ -11,14 +11,14 @@ import java.nio.file.FileSystemNotFoundException;
 public class LiveImpl extends JLabel implements Live {
 
     private static final double serialVersionUID = 0L;
-    //TODO cambia dimensione label delle vite
-    private static String heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
+    private String heartPath;
     private Integer livesCounter = 3;
 
     /**
      * Constructor sets the image of 3 lives.
      */
     public LiveImpl() {
+        heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
         final ImageIcon livesImage = new ImageIcon(heartPath);
         this.setIcon(livesImage);
     }
@@ -27,7 +27,7 @@ public class LiveImpl extends JLabel implements Live {
      * Sets the correct image based on the number of lives.
      * @param livesCounter current lives
      */
-    private static void setCorrectPath(final Integer livesCounter) {
+    private void setCorrectPath(final Integer livesCounter) {
         switch (livesCounter) {
             case 0:
                 heartPath = "";
@@ -50,7 +50,6 @@ public class LiveImpl extends JLabel implements Live {
      * Draw the currents lives.
      */
     private void drawLives() {
-        System.out.println("drawing lives...");
         setCorrectPath(this.livesCounter);
         this.setIcon(new ImageIcon(heartPath));
         revalidate();
@@ -72,5 +71,13 @@ public class LiveImpl extends JLabel implements Live {
     public void decreaseLives() {
         livesCounter = livesCounter - 1;
         drawLives();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LiveImpl getCurrLiveImpl() {
+        return this;
     }
 }

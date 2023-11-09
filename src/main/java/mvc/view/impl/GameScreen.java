@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -15,15 +17,21 @@ public class GameScreen {
     private final LiveImpl livesLabel = new LiveImpl();
 
     private final ScoreViewImpl scoreLabel = new ScoreViewImpl();
+    private final JFrame frame;
+
+    /**
+     * GameScreen constructor.
+     */
+    public GameScreen() {
+        frame = new JFrame("Polygon Cutter");
+    }
 
     /**
      * Prepare the frame that contains all the game's elements.
      * @return GameArea
      */
     public GameAreaImpl createAndShowGui() {
-
         // Configuration of the Frame Behavior
-        final JFrame frame = new JFrame("Polygon Cutter");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -76,5 +84,20 @@ public class GameScreen {
 
         frame.setVisible(true);
         return middleArea;
+    }
+
+    /**
+     * @return the istance of the lives label.
+     */
+    public LiveImpl getCurrentLives() {
+        return this.livesLabel.getCurrLiveImpl();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void gameOverPanel() {
+        JOptionPane.showMessageDialog(this.frame, "Game Over!\nPunteggio: " + this.scoreLabel.getScore());
+        this.frame.dispose();
     }
 }

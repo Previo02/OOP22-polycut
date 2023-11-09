@@ -17,16 +17,22 @@ public final class App {
     }
 
     /**
-    * Main method of the program.
-    * @param args main arguments.
-    */
-    public static void main(final String[] args) {
+     * Initialize the basic menu.
+     */
+    public static void initializeGame() {
         final Menu menu = new PlayButton(new RulesButton(new ExitButton(new SimpleMenu())));
 
         final JFrame container = new JFrame();
         final JPanel buttonPanel = new JPanel();
-
         menu.display(container, buttonPanel);
+    }
+
+    /**
+    * Main method of the program.
+    * @param args main arguments.
+    */
+    public static void main(final String[] args) {
+        initializeGame();
     }
 
 }

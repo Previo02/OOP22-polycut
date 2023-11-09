@@ -1,6 +1,7 @@
 package mvc.view;
 
 import java.awt.geom.Point2D;
+import java.util.List;
 
 import mvc.model.SliceableTypeEnum;
 
@@ -29,4 +30,9 @@ public interface GameArea {
      * @param sliceableID the object to remove
      */
     void clean(Integer sliceableID);
+
+    /**
+     * @return a list of ID of sliced elements.
+     */
+    List<Integer> getSliced();
 }

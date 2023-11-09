@@ -14,13 +14,14 @@ import java.awt.FontFormatException;
 public class ScoreViewImpl extends JLabel implements ScoreView {
     private static final double serialVersionUID = 0L;
     private static final int FONT_SIZE = 35;
-    private static int currentScore;
+    private int currentScore;
 
     /**
      * Constructor sets up the font and the default score of 0.
      */
     public ScoreViewImpl() {
         final Font scoreFont;
+        this.currentScore = 0;
         this.setText("Score: " + currentScore);
         try {
             scoreFont = Font.createFont(Font.TRUETYPE_FONT, new File(

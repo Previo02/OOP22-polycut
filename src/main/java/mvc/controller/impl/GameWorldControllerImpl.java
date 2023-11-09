@@ -110,7 +110,6 @@ public class GameWorldControllerImpl implements GameWorldController {
                 break;
             }
         }
-
     }
 
     /**

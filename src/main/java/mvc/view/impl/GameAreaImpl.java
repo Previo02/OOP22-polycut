@@ -10,7 +10,9 @@ import mvc.view.GameArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -22,7 +24,7 @@ public class GameAreaImpl extends JPanel implements GameArea {
     private static Map<Integer, JLabel> labelMap = new HashMap<>();
     private final LiveImpl lives;
     private final ScoreViewImpl score;
-
+    private final List<Integer> sliceablesID;
 
     /**
      * Constructor initiates a list of Bombs and Polygon present in the GameArea.
@@ -33,6 +35,7 @@ public class GameAreaImpl extends JPanel implements GameArea {
     public GameAreaImpl(final LiveImpl lives, final ScoreViewImpl score) {
         this.lives = lives;
         this.score = score;
+        this.sliceablesID = new ArrayList<>();
         this.setLayout(null);
     }
 
@@ -56,33 +59,18 @@ public class GameAreaImpl extends JPanel implements GameArea {
             @Override
             public void mouseEntered(final MouseEvent e) {
                 if (type.equals(SliceableTypeEnum.BOMB)) {
-                   mapIterator(newSliceableLabel);
                    lives.decreaseLives();
-
                 } else {
-                   mapIterator(newSliceableLabel);
-                   score.increaseScore();
-
+                    score.increaseScore();
                 }
+                sliceablesID.add(sliceableID);
+                clean(sliceableID);
                 revalidate();
                 repaint();
             }
         });
         labelMap.put(sliceableID, newSliceableLabel);
         this.add(newSliceableLabel);
-    }
-
-    /**
-     * utility method.
-     * @param newSliceableLabel label to remove
-     */
-    private static void mapIterator(final JLabel newSliceableLabel) {
-        for (final Map.Entry<Integer, JLabel> entry : labelMap.entrySet()) {
-            if (entry.getValue().equals(newSliceableLabel)) {
-                labelMap.remove(entry.getKey());
-                break;
-            }
-        }
     }
 
     /**
@@ -114,5 +102,13 @@ public class GameAreaImpl extends JPanel implements GameArea {
             this.remove(currLabel);
         }
         labelMap.remove(sliceableID);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Integer> getSliced() {
+        return new ArrayList<>(this.sliceablesID);
     }
 }

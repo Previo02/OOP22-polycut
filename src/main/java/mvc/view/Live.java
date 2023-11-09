@@ -1,5 +1,7 @@
 package mvc.view;
 
+import mvc.view.impl.LiveImpl;
+
 /**
  * Interface that defines the player's life.
  */
@@ -15,4 +17,9 @@ public interface Live {
      * @return The number of remaining lives.
      */
     int getLivesCounter();
+
+    /**
+     * @return the istance of the class. Used to resolve spotbugs errors.
+     */
+    LiveImpl getCurrLiveImpl();
 }
