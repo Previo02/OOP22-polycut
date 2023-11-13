@@ -5,7 +5,7 @@ import mvc.App;
 import mvc.controller.GameLoop;
 import mvc.model.SliceableModel;
 import mvc.model.impl.PolygonImpl;
-import mvc.view.impl.GameScreen;
+import mvc.view.impl.GameScreenImpl;
 import mvc.view.impl.LiveImpl;
 import mvc.view.GameArea;
 
@@ -32,7 +32,7 @@ public class GameLoopImpl implements GameLoop {
 
     private final GameWorldControllerImpl world;
     private final PhysicControllerImpl physics;
-    private final GameScreen screen;
+    private final GameScreenImpl screen;
     private final LiveImpl lives;
     private Timer gameTimer;
     private final Timer redrawTimer;
@@ -43,7 +43,7 @@ public class GameLoopImpl implements GameLoop {
      * @param screen the GameScreen.
      */
     @SuppressFBWarnings
-    public GameLoopImpl(final GameWorldControllerImpl world, final GameScreen screen) {
+    public GameLoopImpl(final GameWorldControllerImpl world, final GameScreenImpl screen) {
         this.lives = screen.getCurrentLives();
         this.screen = screen;
         this.world = world;
@@ -112,6 +112,7 @@ public class GameLoopImpl implements GameLoop {
         gameTimer.stop();
         redrawTimer.stop();
         screen.gameOverPanel();
+        screen.setNewBestScore(screen.getCurrentBestScore());
         App.initializeGame();
     }
 

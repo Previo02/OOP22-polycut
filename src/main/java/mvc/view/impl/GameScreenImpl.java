@@ -1,5 +1,7 @@
 package mvc.view.impl;
 
+import mvc.view.GameScreen;
+
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -9,11 +11,16 @@ import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
 
 /**
  * GameScreen class, it represents the PlayButton generated GUI.
  */
-public class GameScreen {
+public class GameScreenImpl implements GameScreen {
     private final LiveImpl livesLabel = new LiveImpl();
     private final ScoreViewImpl scoreLabel = new ScoreViewImpl();
     private final JFrame frame;
@@ -21,14 +28,14 @@ public class GameScreen {
     /**
      * GameScreen constructor.
      */
-    public GameScreen() {
+    public GameScreenImpl() {
         frame = new JFrame("Polygon Cutter");
     }
 
     /**
-     * Prepare the frame that contains all the game's elements.
-     * @return GameArea
+     * {@inheritDoc}
      */
+    @Override
     public GameAreaImpl createAndShowGui() {
         // Configuration of the Frame Behavior
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,15 +93,17 @@ public class GameScreen {
     }
 
     /**
-     * @return the istance of the lives label.
+     * {@inheritDoc}
      */
+    @Override
     public LiveImpl getCurrentLives() {
         return this.livesLabel.getCurrLiveImpl();
     }
 
     /**
-     * @return the score
+     * {@inheritDoc}
      */
+    @Override
     public int getScoreValue() {
         return this.scoreLabel.getScore();
     }
@@ -102,8 +111,42 @@ public class GameScreen {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void gameOverPanel() {
-        JOptionPane.showMessageDialog(this.frame, "Game Over!\nPunteggio: " + this.scoreLabel.getScore());
+        JOptionPane.showMessageDialog(
+                this.frame, "Game Over!\nPunteggio: " + this.scoreLabel.getScore()
+                + "\nRecord: " + this.getCurrentBestScore());
         this.frame.dispose();
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNewBestScore(final int record) {
+
+        if (record < scoreLabel.getScore()) {
+            try {
+                final BufferedWriter recordWriter = new BufferedWriter(new FileWriter("record.txt"));
+                recordWriter.write(Integer.toString(scoreLabel.getScore()));
+                recordWriter.close();
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentBestScore() {
+        try {
+            final BufferedReader recordReader = new BufferedReader(new FileReader("record.txt"));
+            return Integer.parseInt(recordReader.readLine());
+        } catch (IOException e) {
+            return 0;
+        }
     }
 }

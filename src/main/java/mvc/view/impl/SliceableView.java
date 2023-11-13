@@ -5,8 +5,7 @@ import javax.swing.ImageIcon;
 import mvc.model.SliceableTypeEnum;
 
 /**
- * SliceableView interface implementation.
- * Read the relative javadoc for the documentation.
+ * Utility class for the correct visualization of Sliceables.
  */
 public final class SliceableView {
     private static final String TRIANGLE_PATH = "src/main/java/mvc/view/GraphicElements/triangle.png";
@@ -25,8 +24,8 @@ public final class SliceableView {
     private static final int TRIANGLE_HEIGHT = 88;
     private static final int BOMB_HEIGHT = 98;
 
-
     private SliceableView() {
+
     }
 
     /**

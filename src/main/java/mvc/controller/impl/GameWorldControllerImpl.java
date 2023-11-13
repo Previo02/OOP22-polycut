@@ -7,7 +7,7 @@ import mvc.controller.GameWorldController;
 import mvc.model.SliceableModel;
 import mvc.model.SliceableFactory;
 import mvc.model.impl.SliceableFactoryImpl;
-import mvc.view.impl.GameScreen;
+import mvc.view.impl.GameScreenImpl;
 
 /**
  * Implementation class of the GameWorld controller.
@@ -85,7 +85,7 @@ public class GameWorldControllerImpl implements GameWorldController {
      */
     @Override
     public void startLoop() {
-        final GameScreen screen = new GameScreen();
+        final GameScreenImpl screen = new GameScreenImpl();
         new GameLoopImpl(this, screen);
     }
 

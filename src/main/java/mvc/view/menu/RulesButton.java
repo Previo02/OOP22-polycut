@@ -12,7 +12,7 @@ public class RulesButton extends MenuDecorator {
 
     private static final String RULES = "REGOLE\n"
             + "Taglia i poligoni muovendo il mouse per ottenere punti\n"
-            + "Attenzione alle bombe però!\n"
+            + "Attento a non far cadere i poligoni e a non tagliare le bombe!\n"
             + "Hai 3 vite a disposizione, non perderle tutte...\n"
             + "Buona fortuna!";
 
