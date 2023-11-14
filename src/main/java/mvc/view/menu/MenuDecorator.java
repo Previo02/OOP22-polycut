@@ -1,5 +1,7 @@
 package mvc.view.menu;
 
+import mvc.view.Menu;
+
 import java.awt.Font;
 
 import javax.swing.JButton;

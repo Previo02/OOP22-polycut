@@ -25,7 +25,7 @@ public class GameLoopImpl implements GameLoop {
     private static final Integer ONE_S = 1000;
     private static final Integer HALF_S = 500;
     private static final Double DT = 0.3;
-    private static Integer spawnTime = TWO_S;
+    private Integer spawnTime;
     private static final Integer REDRAW_DELAY = 20;
     private static final double PERCENTAGE = 0.35;
     private static final Random RANDOM = new Random();
@@ -47,6 +47,7 @@ public class GameLoopImpl implements GameLoop {
         this.lives = screen.getCurrentLives();
         this.screen = screen;
         this.world = world;
+        this.spawnTime = TWO_S;
         this.physics = new PhysicControllerImpl(DT, world);
         final GameArea area = screen.createAndShowGui();
 

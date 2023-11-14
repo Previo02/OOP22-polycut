@@ -1,4 +1,4 @@
-package mvc.view.menu;
+package mvc.view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

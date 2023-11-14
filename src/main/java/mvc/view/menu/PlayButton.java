@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import mvc.controller.impl.GameWorldControllerImpl;
+import mvc.view.Menu;
 
 /**
  * Creates the play button and adds it to the menu.

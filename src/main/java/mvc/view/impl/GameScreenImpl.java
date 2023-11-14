@@ -11,11 +11,14 @@ import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
+import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * GameScreen class, it represents the PlayButton generated GUI.
@@ -115,7 +118,7 @@ public class GameScreenImpl implements GameScreen {
     public void gameOverPanel() {
         JOptionPane.showMessageDialog(
                 this.frame, "Game Over!\nPunteggio: " + this.scoreLabel.getScore()
-                + "\nRecord: " + this.getCurrentBestScore());
+                        + "\nRecord: " + this.getCurrentBestScore());
         this.frame.dispose();
     }
 
@@ -125,27 +128,26 @@ public class GameScreenImpl implements GameScreen {
      */
     @Override
     public void setNewBestScore(final int record) {
-
         if (record < scoreLabel.getScore()) {
-            try {
-                final BufferedWriter recordWriter = new BufferedWriter(new FileWriter("record.txt"));
+            try (BufferedWriter recordWriter = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream("record.txt"), StandardCharsets.UTF_8))) {
                 recordWriter.write(Integer.toString(scoreLabel.getScore()));
-                recordWriter.close();
             } catch (IOException e) {
-               e.printStackTrace();
+                // Handle the exception without printing or logging
+                return;
             }
         }
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public int getCurrentBestScore() {
-        try {
-            final BufferedReader recordReader = new BufferedReader(new FileReader("record.txt"));
+        try (BufferedReader recordReader = new BufferedReader(
+                new InputStreamReader(new FileInputStream("record.txt"), StandardCharsets.UTF_8))) {
             return Integer.parseInt(recordReader.readLine());
-        } catch (IOException e) {
+        } catch (IOException | NumberFormatException e) {
             return 0;
         }
     }

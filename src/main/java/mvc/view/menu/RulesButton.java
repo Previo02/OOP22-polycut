@@ -1,5 +1,7 @@
 package mvc.view.menu;
 
+import mvc.view.Menu;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

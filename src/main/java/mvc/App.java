@@ -1,7 +1,7 @@
 package mvc;
 
 import mvc.view.menu.ExitButton;
-import mvc.view.menu.Menu;
+import mvc.view.Menu;
 import mvc.view.menu.PlayButton;
 import mvc.view.menu.RulesButton;
 import mvc.view.menu.SimpleMenu;
@@ -28,11 +28,10 @@ public final class App {
     }
 
     /**
-    * Main method of the program.
-    * @param args main arguments.
-    */
+     * Main method of the program.
+     * @param args main arguments.
+     */
     public static void main(final String[] args) {
         initializeGame();
     }
-
 }

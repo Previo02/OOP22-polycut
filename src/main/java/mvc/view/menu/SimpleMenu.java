@@ -1,5 +1,7 @@
 package mvc.view.menu;
 
+import mvc.view.Menu;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
