@@ -2,27 +2,26 @@ package mvc.model.impl;
 
 import java.awt.geom.Point2D;
 import java.util.List;
-
 import mvc.model.Physics;
 import mvc.model.SliceableModel;
 
 /**
- * {@inheritDoc}.
+ * Physics Implementation.
  */
 public class PhysicsImpl implements Physics {
     static final Point2D GRAVITY = new Point2D.Double(0, 9.81);
     private final double dt;
 
     /**
-     * {@inheritDoc}.
-     * @param dt
+     * Constructor.
+     * @param dt delta time
      */
     public PhysicsImpl(final double dt) {
         this.dt = dt;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}.
      * @param listPolygon
      */
     @Override
@@ -43,5 +42,4 @@ public class PhysicsImpl implements Physics {
             poly.setVelocity(newVel);
         }
     }
-
 }

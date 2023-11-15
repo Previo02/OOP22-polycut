@@ -33,24 +33,6 @@ public interface SliceableModel {
     void setVelocity(Point2D velocity);
 
     /**
-     * isSliced getter.
-     * @return isSliced
-     */
-    boolean isSliced();
-
-    /**
-     * isSliced setter, used when the sliceable object is cut.
-     */
-    void setSliced();
-
-    /**
-     * Cut method of the class. It sets the isSliced to true, it loses a life if called on a Bomb, it gains
-     * points if it is called on a Polygon.
-     * @return boolean, if the sliceable was cut or not.
-     */
-    boolean cut();
-
-    /**
      * Sides getter.
      *
      * @return sides

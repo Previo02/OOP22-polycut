@@ -3,7 +3,7 @@ package mvc.model.impl;
 import java.awt.geom.Point2D;
 
 /**
- * {@inheritDoc}.
+ * Bomb implementation.
  */
 public class BombImpl extends SliceableModelImpl {
     /**
@@ -18,18 +18,4 @@ public class BombImpl extends SliceableModelImpl {
                     final Point2D velocity, final int sliceableId) {
         super(nsides, position, velocity, sliceableId);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean cut() {
-        if (!this.isSliced()) {
-            this.setSliced();
-            /*TODO loseLife()*/
-            return true;
-        }
-        return false;
-    }
-
 }

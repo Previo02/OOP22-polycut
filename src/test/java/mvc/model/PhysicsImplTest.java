@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class PhysicsImplTest {
-
     static final double DT = 0.1;
 
     /**
@@ -31,7 +30,7 @@ class PhysicsImplTest {
 
         /*Asserting the result obtained with the correct result polygon created*/
         final SliceableModel result = new SliceableModelImpl(3, new Point2D.Double(101, 99), new Point2D.Double(10, 9.019), 0);
-        assertEquals(result.getPosition(),  test.getPosition());
-        assertEquals(result.getVelocity(),  test.getVelocity());
+        assertEquals(result.getPosition(), test.getPosition());
+        assertEquals(result.getVelocity(), test.getVelocity());
     }
 }

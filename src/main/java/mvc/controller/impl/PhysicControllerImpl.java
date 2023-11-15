@@ -1,7 +1,6 @@
 package mvc.controller.impl;
 
 import java.util.List;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import mvc.controller.GameWorldController;
 import mvc.controller.PhysicController;
@@ -13,7 +12,6 @@ import mvc.model.impl.PhysicsImpl;
  * Implementation class of the physics controller.
  */
 public class PhysicControllerImpl implements PhysicController {
-
     private final Physics physicsModel;
     private final GameWorldController gameController;
 
@@ -35,10 +33,11 @@ public class PhysicControllerImpl implements PhysicController {
     public void updateSliceablesPosition() {
         final List<SliceableModel> currentPolygons = this.gameController.getPolygons();
         final List<SliceableModel> currentBombs = this.gameController.getBombs();
+
         this.physicsModel.doMaths(currentPolygons);
         this.physicsModel.doMaths(currentBombs);
+
         this.gameController.setPolygons(currentPolygons);
         this.gameController.setBombs(currentBombs);
     }
-
 }

@@ -3,14 +3,11 @@ package mvc.model;
 import org.junit.jupiter.api.Test;
 
 import mvc.model.impl.SliceableModelImpl;
-
 import java.awt.geom.Point2D;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PolygonTest {
-    private final SliceableModelImpl test = new SliceableModelImpl(4, new Point2D.Double(0, 0), new Point2D.Double(10, 10), 0);
+    private final SliceableModelImpl test = new SliceableModelImpl(4, new Point2D.Double(0, 0), new Point2D.Double(10, 10), 1);
     static final double TEST_VALUE = 15;
 
     /**
@@ -45,26 +42,15 @@ class PolygonTest {
     @Test
     void setVelocityTest() {
         final Point2D testVel = new Point2D.Double(TEST_VALUE, TEST_VALUE);
-        test.setPosition(testVel);
-        assertEquals(test.getPosition(), testVel);
+        test.setVelocity(testVel);
+        assertEquals(test.getVelocity(), testVel);
     }
 
     /**
-     * isSliced tester, controls the getter.
+     * ID getter tester.
      */
     @Test
-    void isSlicedTest() {
-        assertFalse(test.isSliced());
-        test.setSliced();
-        assertTrue(test.isSliced());
-    }
-
-    /**
-     * isSliced tester, controls the setter.
-     */
-    @Test
-    void setSlicedTest() {
-        test.setSliced();
-        assertTrue(test.isSliced());
+    void testGetID() {
+        assertEquals(test.getSliceableId(), 1);
     }
 }

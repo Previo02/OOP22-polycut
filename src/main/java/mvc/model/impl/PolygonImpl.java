@@ -3,13 +3,12 @@ package mvc.model.impl;
 import java.awt.geom.Point2D;
 
 /**
- * {@inheritDoc}.
+ * Polygon Implementation.
  */
 public class PolygonImpl extends SliceableModelImpl {
 
     /**
      * Constructor of a polygon.
-     *
      * @param nsides number of sides of the sliceable polygon.
      * @param position Point2D position of the sliceable, to update every timestep.
      * @param velocity Point2D vector of the new velocity of the object.
@@ -19,18 +18,4 @@ public class PolygonImpl extends SliceableModelImpl {
                        final Point2D velocity, final int sliceableId) {
         super(nsides, position, velocity, sliceableId);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean cut() {
-        if (!this.isSliced()) {
-            this.setSliced();
-            /*TODO increasePoint()*/
-            return true;
-        }
-        return false;
-    }
-
 }

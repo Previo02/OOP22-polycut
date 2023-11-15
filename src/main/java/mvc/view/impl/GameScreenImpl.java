@@ -69,7 +69,7 @@ public class GameScreenImpl implements GameScreen {
         });
 
         //Background
-        frame.setContentPane(new JLabel(new ImageIcon("src/main/java/mvc/view/GraphicElements/background.jpg")));
+        frame.setContentPane(new JLabel(new ImageIcon("src/main/resources/GraphicElements/background.jpg")));
 
         // Setting the main Layout of the Frame
         frame.setLayout(new BorderLayout());
@@ -133,7 +133,6 @@ public class GameScreenImpl implements GameScreen {
                     new OutputStreamWriter(new FileOutputStream("record.txt"), StandardCharsets.UTF_8))) {
                 recordWriter.write(Integer.toString(scoreLabel.getScore()));
             } catch (IOException e) {
-                // Handle the exception without printing or logging
                 return;
             }
         }

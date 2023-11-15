@@ -2,6 +2,8 @@ package mvc.controller.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import mvc.controller.GameWorldController;
 import mvc.model.SliceableModel;
@@ -132,8 +134,7 @@ public class GameWorldControllerImpl implements GameWorldController {
      */
     @Override
     public List<SliceableModel> getSliceables() {
-        final List<SliceableModel> sliceableList = new ArrayList<>(getPolygons());
-        sliceableList.addAll(getBombs());
-        return sliceableList;
+        return Stream.concat(getPolygons().stream(), getBombs().stream())
+                .collect(Collectors.toList());
     }
 }

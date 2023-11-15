@@ -67,20 +67,15 @@ public class GameLoopImpl implements GameLoop {
     public void loop(final GameArea area) {
         final double choice = RANDOM.nextDouble();
         this.setDifficulty(area);
+        final int id = RANDOM.nextInt();
+        SliceableModel sliceable;
 
         if (choice < PERCENTAGE) {
-            int id;
-            SliceableModel bomb;
-            id = RANDOM.nextInt();
-            bomb = this.world.createBomb(id);
-            area.drawSliceable(bomb.getSliceableId(), bomb.getPosition(), bomb.getSides());
+            sliceable = this.world.createBomb(id);
         } else {
-            int id;
-            SliceableModel polygon;
-            id = RANDOM.nextInt();
-            polygon = this.world.createPolygon(id);
-            area.drawSliceable(polygon.getSliceableId(), polygon.getPosition(), polygon.getSides());
+            sliceable = this.world.createPolygon(id);
         }
+        area.drawSliceable(sliceable.getSliceableId(), sliceable.getPosition(), sliceable.getSides());
     }
 
     /**

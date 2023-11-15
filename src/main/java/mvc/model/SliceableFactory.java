@@ -11,7 +11,7 @@ public interface SliceableFactory {
      * @param bombId
      * @return new Sliceable.
      */
-     SliceableModel createBomb(int bombId);
+    SliceableModel createBomb(int bombId);
 
     /**
      * The principal method of the class, the one called by the game world when in need to create

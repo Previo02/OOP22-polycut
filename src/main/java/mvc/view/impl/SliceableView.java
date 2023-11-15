@@ -8,11 +8,11 @@ import mvc.model.SliceableTypeEnum;
  * Utility class for the correct visualization of Sliceables.
  */
 public final class SliceableView {
-    private static final String TRIANGLE_PATH = "src/main/java/mvc/view/GraphicElements/triangle.png";
-    private static final String SQUARE_PATH = "src/main/java/mvc/view/GraphicElements/square.png";
-    private static final String PENTAGON_PATH = "src/main/java/mvc/view/GraphicElements/pentagon.png";
-    private static final String HEXAGON_PATH = "src/main/java/mvc/view/GraphicElements/hexagon.png";
-    private static final String BOMB_PATH = "src/main/java/mvc/view/GraphicElements/bomb.png";
+    private static final String TRIANGLE_PATH = "src/main/resources/GraphicElements/triangle.png";
+    private static final String SQUARE_PATH = "src/main/resources/GraphicElements/square.png";
+    private static final String PENTAGON_PATH = "src/main/resources/GraphicElements/pentagon.png";
+    private static final String HEXAGON_PATH = "src/main/resources/GraphicElements/hexagon.png";
+    private static final String BOMB_PATH = "src/main/resources/GraphicElements/bomb.png";
 
     /**
      * Public width, same for every sliceable.

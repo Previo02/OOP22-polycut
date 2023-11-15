@@ -18,7 +18,7 @@ public class LiveImpl extends JLabel implements Live {
      * Constructor sets the image of 3 lives.
      */
     public LiveImpl() {
-        heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
+        heartPath = "src/main/resources/GraphicElements/3hearts.png";
         final ImageIcon livesImage = new ImageIcon(heartPath);
         this.setIcon(livesImage);
     }
@@ -33,13 +33,13 @@ public class LiveImpl extends JLabel implements Live {
                 heartPath = "";
                 break;
             case 1:
-                heartPath = "src/main/java/mvc/view/GraphicElements/heart.png";
+                heartPath = "src/main/resources/GraphicElements/heart.png";
                 break;
             case 2:
-                heartPath = "src/main/java/mvc/view/GraphicElements/2hearts.png";
+                heartPath = "src/main/resources/GraphicElements/2hearts.png";
                 break;
             case 3:
-                heartPath = "src/main/java/mvc/view/GraphicElements/3hearts.png";
+                heartPath = "src/main/resources/GraphicElements/3hearts.png";
                 break;
             default:
                 throw new FileSystemNotFoundException();
