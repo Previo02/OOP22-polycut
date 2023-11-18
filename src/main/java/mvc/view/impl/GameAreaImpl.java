@@ -85,12 +85,10 @@ public class GameAreaImpl extends JPanel implements GameArea {
         final int sliceableHeight = SliceableView.getSliceableHeight(type);
         final int sliceableWidth = SliceableView.SLICEABLE_WIDTH;
 
-        for (final var entry : labelMap.entrySet()) {
-            if (entry.getKey().equals(sliceableID)) {
-                final JLabel label = entry.getValue();
-                label.setBounds((int) newPosition.getX(), (int) newPosition.getY(), sliceableWidth, sliceableHeight);
-            }
-        }
+        labelMap.computeIfPresent(sliceableID, (key, label) -> {
+            label.setBounds((int) newPosition.getX(), (int) newPosition.getY(), sliceableWidth, sliceableHeight);
+            return label;
+        });
         /* Repaint the game area, otherwise the labels remain attached to the panel */
         this.revalidate();
         this.repaint();

@@ -8,11 +8,12 @@ import mvc.model.SliceableTypeEnum;
  * Utility class for the correct visualization of Sliceables.
  */
 public final class SliceableView {
-    private static final String TRIANGLE_PATH = "src/main/resources/GraphicElements/triangle.png";
-    private static final String SQUARE_PATH = "src/main/resources/GraphicElements/square.png";
-    private static final String PENTAGON_PATH = "src/main/resources/GraphicElements/pentagon.png";
-    private static final String HEXAGON_PATH = "src/main/resources/GraphicElements/hexagon.png";
-    private static final String BOMB_PATH = "src/main/resources/GraphicElements/bomb.png";
+    private static final String GRAPHIC_ELEMENTS_PATH = "/GraphicElements/";
+    private static final String TRIANGLE_PATH = "triangle.png";
+    private static final String SQUARE_PATH = "square.png";
+    private static final String PENTAGON_PATH = "pentagon.png";
+    private static final String HEXAGON_PATH = "hexagon.png";
+    private static final String BOMB_PATH = "bomb.png";
 
     /**
      * Public width, same for every sliceable.
@@ -24,30 +25,35 @@ public final class SliceableView {
     private static final int TRIANGLE_HEIGHT = 88;
     private static final int BOMB_HEIGHT = 98;
 
-    private SliceableView() {
-
-    }
+    private SliceableView() { }
 
     /**
-     * Getting the imageIcon.
+     * Getting the ImageIcon.
      * @param sliceableType number of sides
-     * @return the image associated with the polygon
+     * @return the ImageIcon associated with the polygon
      */
     public static ImageIcon getImage(final SliceableTypeEnum sliceableType) {
+        final StringBuilder imagePathBuilder = new StringBuilder(GRAPHIC_ELEMENTS_PATH);
         switch (sliceableType) {
             case TRIANGLE:
-                return new ImageIcon(TRIANGLE_PATH);
+                imagePathBuilder.append(TRIANGLE_PATH);
+                break;
             case SQUARE:
-                return new ImageIcon(SQUARE_PATH);
+                imagePathBuilder.append(SQUARE_PATH);
+                break;
             case PENTAGON:
-                return new ImageIcon(PENTAGON_PATH);
+                imagePathBuilder.append(PENTAGON_PATH);
+                break;
             case HEXAGON:
-                return new ImageIcon(HEXAGON_PATH);
+                imagePathBuilder.append(HEXAGON_PATH);
+                break;
             case BOMB:
-                return new ImageIcon(BOMB_PATH);
+                imagePathBuilder.append(BOMB_PATH);
+                break;
             default:
                 return null;
         }
+        return new ImageIcon(SliceableView.class.getResource(imagePathBuilder.toString()));
     }
 
     /**
@@ -64,7 +70,7 @@ public final class SliceableView {
                 return PENTAGON_HEIGHT;
             case HEXAGON:
                 return HEXAGON_HEIGHT;
-            case BOMB :
+            case BOMB:
                 return BOMB_HEIGHT;
             default:
                 return -1;

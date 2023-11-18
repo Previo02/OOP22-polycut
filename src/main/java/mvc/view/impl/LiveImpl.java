@@ -1,6 +1,7 @@
 package mvc.view.impl;
 
 import mvc.view.Live;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.nio.file.FileSystemNotFoundException;
@@ -18,8 +19,8 @@ public class LiveImpl extends JLabel implements Live {
      * Constructor sets the image of 3 lives.
      */
     public LiveImpl() {
-        heartPath = "src/main/resources/GraphicElements/3hearts.png";
-        final ImageIcon livesImage = new ImageIcon(heartPath);
+        heartPath = "/GraphicElements/3hearts.png";
+        final ImageIcon livesImage = new ImageIcon(LiveImpl.class.getResource(heartPath));
         this.setIcon(livesImage);
     }
 
@@ -33,13 +34,13 @@ public class LiveImpl extends JLabel implements Live {
                 heartPath = "";
                 break;
             case 1:
-                heartPath = "src/main/resources/GraphicElements/heart.png";
+                heartPath = "/GraphicElements/heart.png";
                 break;
             case 2:
-                heartPath = "src/main/resources/GraphicElements/2hearts.png";
+                heartPath = "/GraphicElements/2hearts.png";
                 break;
             case 3:
-                heartPath = "src/main/resources/GraphicElements/3hearts.png";
+                heartPath = "/GraphicElements/3hearts.png";
                 break;
             default:
                 throw new FileSystemNotFoundException();
@@ -51,7 +52,7 @@ public class LiveImpl extends JLabel implements Live {
      */
     private void drawLives() {
         setCorrectPath(this.livesCounter);
-        this.setIcon(new ImageIcon(heartPath));
+        this.setIcon(new ImageIcon(LiveImpl.class.getResource(heartPath)));
         revalidate();
         repaint();
     }

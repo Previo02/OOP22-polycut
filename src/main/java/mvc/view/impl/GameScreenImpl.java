@@ -69,7 +69,7 @@ public class GameScreenImpl implements GameScreen {
         });
 
         //Background
-        frame.setContentPane(new JLabel(new ImageIcon("src/main/resources/GraphicElements/background.jpg")));
+        frame.setContentPane(new JLabel(new ImageIcon(GameScreenImpl.class.getResource("/GraphicElements/background.jpg"))));
 
         // Setting the main Layout of the Frame
         frame.setLayout(new BorderLayout());

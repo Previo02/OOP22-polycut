@@ -78,13 +78,18 @@ public class SliceableModelImpl implements SliceableModel {
      */
     @Override
     public SliceableTypeEnum getSides() {
-        return switch (this.sides) {
-            case BOMB -> SliceableTypeEnum.BOMB;
-            case THREE -> SliceableTypeEnum.TRIANGLE;
-            case FOUR -> SliceableTypeEnum.SQUARE;
-            case FIVE -> SliceableTypeEnum.PENTAGON;
-            default -> SliceableTypeEnum.HEXAGON;
-        };
+         switch (this.sides) {
+            case BOMB:
+                return SliceableTypeEnum.BOMB;
+            case THREE:
+                return SliceableTypeEnum.TRIANGLE;
+            case FOUR:
+                return SliceableTypeEnum.SQUARE;
+            case FIVE:
+                return SliceableTypeEnum.PENTAGON;
+            default:
+                return SliceableTypeEnum.HEXAGON;
+        }
     }
 
 
