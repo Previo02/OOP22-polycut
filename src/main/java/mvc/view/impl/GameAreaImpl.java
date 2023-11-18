@@ -100,9 +100,7 @@ public class GameAreaImpl extends JPanel implements GameArea {
     @Override
     public void clean(final Integer sliceableID) {
         final var currLabel = labelMap.get(sliceableID);
-        if (Objects.nonNull(currLabel)) {
-            this.remove(currLabel);
-        }
+        this.remove(Objects.requireNonNull(currLabel));
         labelMap.remove(sliceableID);
     }
 

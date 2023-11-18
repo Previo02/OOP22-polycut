@@ -92,25 +92,23 @@ public class GameWorldControllerImpl implements GameWorldController {
     }
 
     /**
+     * Delete the sliceable object from the list by its ID.
+     * @param <T> extends SliceableModel class
+     * @param sliceables the list of sliceables
+     * @param sliceableId the ID of the sliceable
+     */
+    private <T extends SliceableModel> void deleteSliceableById(final List<SliceableModel> sliceables,
+                                                                final Integer sliceableId) {
+        sliceables.removeIf(sliceable -> sliceable.getSliceableId() == sliceableId);
+    }
+
+    /**
      * {@inheritDoc}.
      */
     @Override
     public void outOfBoundDelete(final int sliceableId) {
-        for (int i = 0; i < getPolygons().size(); i++) {
-            final var poly = getPolygons().get(i);
-            if (poly.getSliceableId() == sliceableId) {
-                polygons.remove(i);
-                break;
-            }
-        }
-
-        for (int i = 0; i < getBombs().size(); i++) {
-            final var bomb = getBombs().get(i);
-            if (bomb.getSliceableId() == sliceableId) {
-                bombs.remove(i);
-                break;
-            }
-        }
+        deleteSliceableById(this.polygons, sliceableId);
+        deleteSliceableById(this.bombs, sliceableId);
     }
 
     /**

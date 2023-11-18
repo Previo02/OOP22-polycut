@@ -26,7 +26,7 @@ public class GameLoopImpl implements GameLoop {
     private static final Integer HALF_S = 500;
     private static final Double DT = 0.3;
     private Integer spawnTime;
-    private static final Integer REDRAW_DELAY = 20;
+    private static final Integer REDRAW_DELAY = 10;
     private static final double PERCENTAGE = 0.35;
     private static final Random RANDOM = new Random();
 
@@ -68,13 +68,7 @@ public class GameLoopImpl implements GameLoop {
         final double choice = RANDOM.nextDouble();
         this.setDifficulty(area);
         final int id = RANDOM.nextInt();
-        SliceableModel sliceable;
-
-        if (choice < PERCENTAGE) {
-            sliceable = this.world.createBomb(id);
-        } else {
-            sliceable = this.world.createPolygon(id);
-        }
+        final SliceableModel sliceable = choice < PERCENTAGE ? world.createBomb(id) : this.world.createPolygon(id);
         area.drawSliceable(sliceable.getSliceableId(), sliceable.getPosition(), sliceable.getSides());
     }
 
@@ -86,16 +80,18 @@ public class GameLoopImpl implements GameLoop {
         gameOver();
         area.getSliced().stream().forEach(i -> world.outOfBoundDelete(i));
         physics.updateSliceablesPosition();
-        for (final var sliceable : this.world.getSliceables()) {
-            if (sliceable.isOutOfBound()) {
-                area.clean(sliceable.getSliceableId());
-                world.outOfBoundDelete(sliceable.getSliceableId());
-                if (sliceable instanceof PolygonImpl) {
-                    this.lives.decreaseLives();
-                }
-            }
-            area.updatePosition(sliceable.getSliceableId(), sliceable.getPosition(), sliceable.getSides());
-        }
+        this.world.getSliceables().stream()
+                                .filter(SliceableModel::isOutOfBound)
+                                .findFirst()
+                                .ifPresent(sliceable -> {
+                                    area.clean(sliceable.getSliceableId());
+                                    world.outOfBoundDelete(sliceable.getSliceableId());
+                                    if (sliceable instanceof PolygonImpl) {
+                                        this.lives.decreaseLives();
+                                    }
+                                });
+        this.world.getSliceables()
+                    .forEach(s -> area.updatePosition(s.getSliceableId(), s.getPosition(), s.getSides()));
     }
 
     /**
