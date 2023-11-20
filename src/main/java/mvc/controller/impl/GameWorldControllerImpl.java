@@ -97,7 +97,7 @@ public class GameWorldControllerImpl implements GameWorldController {
      * @param sliceables the list of sliceables
      * @param sliceableId the ID of the sliceable
      */
-    private <T extends SliceableModel> void deleteSliceableById(final List<SliceableModel> sliceables,
+    private <T extends SliceableModel> void deleteSliceableById(final List<T> sliceables,
                                                                 final Integer sliceableId) {
         sliceables.removeIf(sliceable -> sliceable.getSliceableId() == sliceableId);
     }

@@ -24,7 +24,7 @@ public class GameLoopImpl implements GameLoop {
     private static final Integer ONE_HALF_S = 1500;
     private static final Integer ONE_S = 1000;
     private static final Integer HALF_S = 500;
-    private static final Double DT = 0.3;
+    private static final Double DT = 0.2;
     private Integer spawnTime;
     private static final Integer REDRAW_DELAY = 10;
     private static final double PERCENTAGE = 0.35;
