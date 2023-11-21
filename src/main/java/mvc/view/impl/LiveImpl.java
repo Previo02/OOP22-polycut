@@ -13,7 +13,7 @@ import java.nio.file.FileSystemNotFoundException;
 public class LiveImpl extends JLabel implements Live {
 
     private static final double serialVersionUID = 0L;
-    private static final String DEAFULT_PATH = "/GraphicElements/";
+    private static final String DEAFULT_PATH = "GraphicElements/";
     private String heartPath;
     private Integer livesCounter = 3;
 
@@ -22,7 +22,7 @@ public class LiveImpl extends JLabel implements Live {
      */
     public LiveImpl() {
         heartPath = DEAFULT_PATH + "3hearts.png";
-        final ImageIcon livesImage = new ImageIcon(LiveImpl.class.getResource(heartPath));
+        final ImageIcon livesImage = new ImageIcon(LiveImpl.class.getClassLoader().getResource(heartPath));
         this.setIcon(livesImage);
     }
 
@@ -54,7 +54,11 @@ public class LiveImpl extends JLabel implements Live {
      */
     private void drawLives() {
         setCorrectPath(this.livesCounter);
-        this.setIcon(new ImageIcon(LiveImpl.class.getResource(heartPath)));
+        if (heartPath.length() > 0) {
+            this.setIcon(new ImageIcon(LiveImpl.class.getClassLoader().getResource(heartPath)));
+        } else {
+            this.setIcon(new ImageIcon());
+        }
         revalidate();
         repaint();
     }
@@ -82,5 +86,12 @@ public class LiveImpl extends JLabel implements Live {
     @Override
     public LiveImpl getCurrLiveImpl() {
         return this;
+    }
+
+    /**
+     * @return the path where the images of lives are stored.
+     */
+    public static String getDeafultPath() {
+        return DEAFULT_PATH;
     }
 }

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.FileInputStream;
 import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -45,7 +46,7 @@ public class GameScreenImpl implements GameScreen {
         frame.setLocationRelativeTo(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
-        frame.setResizable(false);
+        frame.setResizable(true);
 
         // Adding control to close the frame
         frame.addKeyListener(new KeyListener() {
@@ -69,7 +70,11 @@ public class GameScreenImpl implements GameScreen {
         });
 
         //Background
-        frame.setContentPane(new JLabel(new ImageIcon(GameScreenImpl.class.getResource("/GraphicElements/background.jpg"))));
+        final var path = LiveImpl.getDeafultPath() + "background.jpg";
+        final URL url = GameScreenImpl.class.getClassLoader().getResource(path);
+        if (url != null) {
+            frame.setContentPane(new JLabel(new ImageIcon(url)));
+        }
 
         // Setting the main Layout of the Frame
         frame.setLayout(new BorderLayout());
@@ -92,6 +97,7 @@ public class GameScreenImpl implements GameScreen {
         middleArea.setOpaque(false);
 
         frame.setVisible(true);
+
         return middleArea;
     }
 

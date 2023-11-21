@@ -12,6 +12,7 @@ import mvc.view.GameArea;
 import javax.swing.Timer;
 import java.util.Random;
 
+
 /**
  *Implementation class of GameLoop interface.
  *Check the relative interface for the documentation.
@@ -51,13 +52,18 @@ public class GameLoopImpl implements GameLoop {
         this.physics = new PhysicControllerImpl(DT, world);
         final GameArea area = screen.createAndShowGui();
 
-        /*settings up the 2 timers, 1 for the object spawn and the other for the redrawing process*/
-        this.gameTimer = new Timer(spawnTime, e -> this.loop(area));
-        this.redrawTimer = new Timer(REDRAW_DELAY, e -> this.redraw(area));
-        redrawTimer.setRepeats(true);
-        redrawTimer.start();
-        gameTimer.setRepeats(true);
-        gameTimer.start();
+        if (area != null) {
+            /*settings up the 2 timers, 1 for the object spawn and the other for the redrawing process*/
+            this.gameTimer = new Timer(spawnTime, e -> this.loop(area));
+            this.redrawTimer = new Timer(REDRAW_DELAY, e -> this.redraw(area));
+            redrawTimer.setRepeats(true);
+            redrawTimer.start();
+            gameTimer.setRepeats(true);
+            gameTimer.start();
+        } else {
+            this.gameTimer = null;
+            this.redrawTimer = null;
+        }
     }
 
     /**
@@ -103,8 +109,8 @@ public class GameLoopImpl implements GameLoop {
         }
         gameTimer.stop();
         redrawTimer.stop();
-        screen.gameOverPanel();
         screen.setNewBestScore(screen.getCurrentBestScore());
+        screen.gameOverPanel();
         App.initializeGame();
     }
 
